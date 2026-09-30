@@ -1,5 +1,7 @@
 # Market & technology research
 
+> **Corrections (fact check, see [faktencheck.md](faktencheck.md)):** (1) Kotlin 2.1.0 is *not* enough for Flutter 3.47.5 — the Flutter Gradle plugin fails below Gradle 8.14 / AGP 8.11.1 / KGP 2.2.20 (`DependencyVersionChecker.kt`); code-audit.md is right. (2) `sqlite3` 3.x downloads prebuilt binaries by default instead of compiling with the NDK. (3) The plan drops go_router and Riverpod codegen for v2.0 and uses the system font instead of a bundled one.
+
 > Raw research output from the Chronos analysis on 2026-09-30 (English). Line numbers refer to commit 9a52779 (v1.0.0). Summary and plan: [../UMBAUPLAN.md](../UMBAUPLAN.md).
 
 
