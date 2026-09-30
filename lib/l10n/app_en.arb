@@ -139,5 +139,243 @@
   "@timeFieldLater": {
     "description": "Tooltip of the stepper button that moves a time forward.",
     "placeholders": {"minutes": {"type": "int"}}
-  }
+  },
+
+  "shiftsAddShift": "Shift",
+  "@shiftsAddShift": {"description": "Label of the extended floating action button on the Shifts screen that adds a shift. One short word (German: Schicht)."},
+  "shiftsAddShiftTooltip": "Add shift",
+  "@shiftsAddShiftTooltip": {"description": "Tooltip / screen-reader label of the add-shift floating action button."},
+  "shiftsFilterLabel": "Show shifts",
+  "@shiftsFilterLabel": {"description": "Screen-reader label of the filter chip group (All / Unpaid / Paid) on the Shifts screen."},
+  "shiftsRunningSince": "Running since {time}",
+  "@shiftsRunningSince": {
+    "description": "Title of the running-shift tile at the top of the Shifts list. {time} is the start time, e.g. '08:02'.",
+    "placeholders": {"time": {"type": "String", "example": "08:02"}}
+  },
+  "shiftsPausedSince": "Paused since {time}",
+  "@shiftsPausedSince": {
+    "description": "Title of the running-shift tile while the shift is paused. {time} is when the break started.",
+    "placeholders": {"time": {"type": "String", "example": "14:32"}}
+  },
+  "shiftsRunningOpenToday": "Open on Today",
+  "@shiftsRunningOpenToday": {"description": "Screen-reader hint / tooltip of the running-shift tile: tapping switches to the Today tab."},
+  "shiftsMonthOpen": "{amount} unpaid",
+  "@shiftsMonthOpen": {
+    "description": "Part of a month header summary: the unpaid wage of that month, e.g. '42.5 h · €637.50 · €318.75 unpaid'.",
+    "placeholders": {"amount": {"type": "String", "example": "€318.75"}}
+  },
+  "shiftsBreak": "Break {duration}",
+  "@shiftsBreak": {
+    "description": "Part of a shift row subtitle: the break length, e.g. 'Break 30 min'.",
+    "placeholders": {"duration": {"type": "String", "example": "30 min"}}
+  },
+  "shiftsTips": "Tips {amount}",
+  "@shiftsTips": {
+    "description": "Part of a shift row subtitle: tips received during the shift.",
+    "placeholders": {"amount": {"type": "String", "example": "€5.00"}}
+  },
+  "shiftsTimeRangeSpoken": "{start} to {end}",
+  "@shiftsTimeRangeSpoken": {
+    "description": "Screen-reader form of a shift's time range.",
+    "placeholders": {
+      "start": {"type": "String", "example": "8:00 AM"},
+      "end": {"type": "String", "example": "4:15 PM"}
+    }
+  },
+  "shiftsTimeRangeSpokenNextDay": "{start} to {end} the next day",
+  "@shiftsTimeRangeSpokenNextDay": {
+    "description": "Screen-reader form of a time range that ends on the following day.",
+    "placeholders": {
+      "start": {"type": "String", "example": "6:00 PM"},
+      "end": {"type": "String", "example": "2:00 AM"}
+    }
+  },
+  "shiftsEmptyTitle": "No shifts yet",
+  "@shiftsEmptyTitle": {"description": "Title of the empty Shifts screen."},
+  "shiftsEmptyMessage": "Start a shift on Today, or add one you have already worked.",
+  "@shiftsEmptyMessage": {"description": "Explanation on the empty Shifts screen."},
+  "shiftsStartShift": "Start shift",
+  "@shiftsStartShift": {"description": "Button on the empty Shifts screen that switches to Today to start the timer."},
+  "shiftsAddPastShift": "Add past shift",
+  "@shiftsAddPastShift": {"description": "Button on the empty Shifts screen that opens the shift editor for a shift that was already worked (German: Schicht nachtragen)."},
+  "shiftsEmptyOpenTitle": "No unpaid shifts",
+  "@shiftsEmptyOpenTitle": {"description": "Title shown when the 'Unpaid' filter matches nothing."},
+  "shiftsEmptyOpenMessage": "Everything has been paid.",
+  "@shiftsEmptyOpenMessage": {"description": "Message shown when the 'Unpaid' filter matches nothing."},
+  "shiftsEmptyPaidTitle": "No paid shifts yet",
+  "@shiftsEmptyPaidTitle": {"description": "Title shown when the 'Paid' filter matches nothing."},
+  "shiftsEmptyPaidMessage": "Mark shifts as paid or record a payout.",
+  "@shiftsEmptyPaidMessage": {"description": "Message shown when the 'Paid' filter matches nothing."},
+  "shiftsShowAll": "Show all shifts",
+  "@shiftsShowAll": {"description": "Button that resets the Shifts filter to 'All'."},
+  "shiftsMarkPaid": "Mark as paid",
+  "@shiftsMarkPaid": {"description": "Menu item, swipe label and screen-reader action that marks an unpaid shift as paid."},
+  "shiftsMarkOpen": "Mark as unpaid",
+  "@shiftsMarkOpen": {"description": "Menu item, swipe label and screen-reader action that marks a paid shift as unpaid again (German: Als offen markieren)."},
+  "shiftsMarkedPaid": "Marked as paid",
+  "@shiftsMarkedPaid": {"description": "Snackbar after a shift was marked as paid (has an Undo action)."},
+  "shiftsMarkedOpen": "Marked as unpaid",
+  "@shiftsMarkedOpen": {"description": "Snackbar after a shift was marked as unpaid (has an Undo action)."},
+  "shiftsDeleted": "Shift deleted",
+  "@shiftsDeleted": {"description": "Snackbar after a shift was deleted (has an Undo action)."},
+  "shiftsSaved": "Shift saved · {duration} · {amount}",
+  "@shiftsSaved": {
+    "description": "Snackbar after a new shift was added in the editor (has an Undo action).",
+    "placeholders": {
+      "duration": {"type": "String", "example": "7:45 h"},
+      "amount": {"type": "String", "example": "€116.25"}
+    }
+  },
+  "shiftsErrorNotFound": "This shift no longer exists.",
+  "@shiftsErrorNotFound": {"description": "Error when a shift was deleted in the meantime."},
+  "shiftsErrorRunning": "The running shift can be changed on Today.",
+  "@shiftsErrorRunning": {"description": "Error when trying to edit or duplicate the running shift like a finished one."},
+  "shiftsErrorAlreadyRunning": "Another shift is already running.",
+  "@shiftsErrorAlreadyRunning": {"description": "Error when restoring a shift would create a second running shift."},
+  "shiftsErrorJobNotFound": "This job no longer exists.",
+  "@shiftsErrorJobNotFound": {"description": "Error when the selected job was removed."},
+  "shiftsErrorNoWage": "This job has no hourly wage yet.",
+  "@shiftsErrorNoWage": {"description": "Error when the selected job has no wage rate."},
+  "shiftsErrorInvalid": "Please check your input.",
+  "@shiftsErrorInvalid": {"description": "Generic validation error for shift input."},
+
+  "editorTitleNew": "New shift",
+  "@editorTitleNew": {"description": "Title of the shift editor when adding a shift."},
+  "editorTitleEdit": "Edit shift",
+  "@editorTitleEdit": {"description": "Title of the shift editor when changing an existing shift."},
+  "editorJob": "Job",
+  "@editorJob": {"description": "Label of the job selector (employer) in the shift editor and payout sheet."},
+  "editorDate": "Date",
+  "@editorDate": {"description": "Label of the date field in the shift editor."},
+  "editorPickDate": "Choose date",
+  "@editorPickDate": {"description": "Tooltip / hint of a date field that opens the date picker."},
+  "editorStart": "Start",
+  "@editorStart": {"description": "Label of the start time field."},
+  "editorEnd": "End",
+  "@editorEnd": {"description": "Label of the end time field."},
+  "editorEndsNextDay": "Ends the next day",
+  "@editorEndsNextDay": {"description": "Switch in the shift editor for shifts that end after midnight."},
+  "editorEndsNextDayAuto": "Turned on because the end is before the start",
+  "@editorEndsNextDayAuto": {"description": "Highlighted note below the 'Ends the next day' switch when it was switched on automatically."},
+  "editorBreak": "Break",
+  "@editorBreak": {"description": "Label of the break field (minutes) in the shift editor."},
+  "editorBreakLess": "{minutes} minutes less break",
+  "@editorBreakLess": {
+    "description": "Tooltip of the button that shortens the break.",
+    "placeholders": {"minutes": {"type": "int"}}
+  },
+  "editorBreakMore": "{minutes} minutes more break",
+  "@editorBreakMore": {
+    "description": "Tooltip of the button that lengthens the break.",
+    "placeholders": {"minutes": {"type": "int"}}
+  },
+  "editorBreakInvalid": "Enter the break in whole minutes",
+  "@editorBreakInvalid": {"description": "Validation error of the break field."},
+  "editorTips": "Tips",
+  "@editorTips": {"description": "Label of the tips amount field."},
+  "editorNote": "Note",
+  "@editorNote": {"description": "Label of the optional note field."},
+  "editorStatus": "Status",
+  "@editorStatus": {"description": "Label of the Unpaid | Paid selector in the shift editor."},
+  "editorPreview": "{duration} × {rate} = {amount}",
+  "@editorPreview": {
+    "description": "Live earnings preview in the shift editor, e.g. '7:45 h × €15.00/h = €116.25'.",
+    "placeholders": {
+      "duration": {"type": "String", "example": "7:45 h"},
+      "rate": {"type": "String", "example": "€15.00/h"},
+      "amount": {"type": "String", "example": "€116.25"}
+    }
+  },
+  "editorPreviewSpoken": "{duration} at {rate} makes {amount}",
+  "@editorPreviewSpoken": {
+    "description": "Screen-reader form of the earnings preview.",
+    "placeholders": {
+      "duration": {"type": "String", "example": "7 hours 45 minutes"},
+      "rate": {"type": "String", "example": "€15.00/h"},
+      "amount": {"type": "String", "example": "€116.25"}
+    }
+  },
+  "editorPreviewTips": "plus {amount} tips",
+  "@editorPreviewTips": {
+    "description": "Second preview line when tips were entered.",
+    "placeholders": {"amount": {"type": "String", "example": "€5.50"}}
+  },
+  "editorErrorEndNotAfterStart": "The end must be after the start.",
+  "@editorErrorEndNotAfterStart": {"description": "Inline error in the shift editor."},
+  "editorErrorBreakTooLong": "The break must be shorter than the shift.",
+  "@editorErrorBreakTooLong": {"description": "Inline error in the shift editor."},
+  "editorWarningLong": "Longer than 16 hours ({duration})",
+  "@editorWarningLong": {
+    "description": "Warning in the shift editor for very long shifts.",
+    "placeholders": {"duration": {"type": "String", "example": "17:00 h"}}
+  },
+  "editorWarningOverlap": "Overlaps {date} · {time}",
+  "@editorWarningOverlap": {
+    "description": "Warning in the shift editor naming the other shift, e.g. 'Overlaps Mon 28 Sep · 08:00–16:00'.",
+    "placeholders": {
+      "date": {"type": "String", "example": "Mon 28 Sep"},
+      "time": {"type": "String", "example": "08:00–16:00"}
+    }
+  },
+  "editorWarningOverlapRunning": "Overlaps the running shift (since {time})",
+  "@editorWarningOverlapRunning": {
+    "description": "Warning in the shift editor when the input overlaps the running shift.",
+    "placeholders": {"time": {"type": "String", "example": "08:02"}}
+  },
+  "editorWarningFuture": "Starts in the future",
+  "@editorWarningFuture": {"description": "Warning in the shift editor."},
+  "editorConfirmTitle": "Save anyway?",
+  "@editorConfirmTitle": {"description": "Title of the dialog that lists warnings before saving a shift."},
+  "editorConfirmSave": "Save anyway",
+  "@editorConfirmSave": {"description": "Confirm button of the warnings dialog."},
+  "editorDiscardTitle": "Discard changes?",
+  "@editorDiscardTitle": {"description": "Title of the dialog shown when closing the shift editor with unsaved changes."},
+  "editorDiscardMessage": "Your changes to this shift will be lost.",
+  "@editorDiscardMessage": {"description": "Message of the discard-changes dialog."},
+  "editorKeepEditing": "Keep editing",
+  "@editorKeepEditing": {"description": "Cancel button of the discard-changes dialog."},
+  "editorCopyNotice": "Copy created for today. Adjust it or delete it.",
+  "@editorCopyNotice": {"description": "Hint at the top of the editor after a shift was duplicated to today."},
+
+  "payoutTitle": "Record payout",
+  "@payoutTitle": {"description": "Title of the payout sheet and menu item that opens it (German: Auszahlung erfassen)."},
+  "payoutAllJobs": "All jobs",
+  "@payoutAllJobs": {"description": "Job selector option in the payout sheet that includes every job."},
+  "payoutUntil": "Up to and including",
+  "@payoutUntil": {"description": "Label of the date up to which unpaid shifts are included in the payout."},
+  "payoutSummary": "{count, plural, =1{1 shift} other{{count} shifts}} · {hours}",
+  "@payoutSummary": {
+    "description": "Summary of the shifts a payout settles, e.g. '23 shifts · 172.5 h'.",
+    "placeholders": {
+      "count": {"type": "int"},
+      "hours": {"type": "String", "example": "172.5 h"}
+    }
+  },
+  "payoutExpected": "Expected",
+  "@payoutExpected": {"description": "Label of the expected payout amount (sum of the wages)."},
+  "payoutReceived": "Received",
+  "@payoutReceived": {"description": "Label of the field for the amount actually received."},
+  "payoutDifference": "Difference",
+  "@payoutDifference": {"description": "Label of received minus expected."},
+  "payoutDifferencePositive": "+{amount}",
+  "@payoutDifferencePositive": {
+    "description": "A positive difference with an explicit plus sign.",
+    "placeholders": {"amount": {"type": "String", "example": "€12.50"}}
+  },
+  "payoutPaidOn": "Paid on",
+  "@payoutPaidOn": {"description": "Label of the date the money was received."},
+  "payoutSubmit": "{count, plural, =1{Mark 1 shift as paid} other{Mark {count} shifts as paid}}",
+  "@payoutSubmit": {
+    "description": "Primary button of the payout sheet.",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "payoutNothingOpen": "There are no unpaid shifts up to this date.",
+  "@payoutNothingOpen": {"description": "Shown instead of the button when nothing can be paid out."},
+  "payoutRecorded": "{count, plural, =1{1 shift marked as paid} other{{count} shifts marked as paid}}",
+  "@payoutRecorded": {
+    "description": "Snackbar after a payout was recorded (has an Undo action).",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "payoutErrorAmount": "The received amount is not valid.",
+  "@payoutErrorAmount": {"description": "Error when the received amount was refused."}
 }
