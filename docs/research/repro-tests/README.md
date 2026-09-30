@@ -6,7 +6,7 @@ Diese Tests wurden bei der Analyse am 30.09.2026 geschrieben, um die Bugs von v1
 
 1. Flutter 3.47.5, dazu im alten Code `lib/theme/app_theme.dart:61` `CardTheme` durch `CardThemeData` ersetzen und in `pubspec.yaml` `intl: ^0.20.2` setzen.
 2. Dateien nach `test/` kopieren.
-3. `TZ=Europe/Berlin flutter test` (ohne `perf_live_test.dart`, der läuft allein ca. 80 s).
+3. `TZ=Europe/Berlin flutter test` (ohne `perf_live_test.dart`, der läuft allein ca. 80 s). Die `verify_*`-Tests laufen auch unverändert mit Flutter 3.24.5 gegen den Original-Code.
 
 **Weiterverwendung in 2.0:** `helpers.dart` (App-Boot, Benachrichtigungs-Stub, echte Schriften, Fehler-Capture, Bildschirmgrößen) und die Matrix aus `layout_overflow_test.dart` / `localization_leftovers_test.dart` sind gute Vorlagen für die neue Test-Suite. Die „BUG…“-Erwartungen werden dort umgedreht.
 
@@ -20,3 +20,8 @@ Diese Tests wurden bei der Analyse am 30.09.2026 geschrieben, um die Bugs von v1
 | `logic_probes_test.dart` | Lohn-/Cent-Rundung, Viertelstunden-Rundung, Nachtschicht, Ende < Start, Lohnänderung, Neustart, Zeitumstellung, kaputte Daten, Kommaeingabe |
 | `perf_fake_time_test.dart` | Rebuilds pro Tick, Verhalten im Hintergrund |
 | `perf_live_test.dart` | Echtzeit-Messung: Frames, Builds, Benachrichtigungs-Takt |
+| `verify_delete_common.dart` | Harness für die Lösch-Tests, inkl. `SlowStore` (simuliert langsamen Speicher) |
+| `verify_delete_single_test.dart` / `verify_delete_all_test.dart` / `verify_delete_flows_test.dart` | Löschen über die echte Oberfläche in allen Varianten |
+| `verify_delete_slowstore_test.dart` | Race Conditions bei langsamem Speicher (Zombie-Zeile, doppeltes Speichern, verschluckte Fehler) |
+| `verify_deleteall_keyboard_test.dart` | „Alles löschen“-Dialog mit offener Tastatur |
+| `verify_claims_test.dart` | Verifikation weiterer Audit-Befunde (Datenverlust beim Stoppen, Sprache, Berechtigung, Zurück-Taste, …) |

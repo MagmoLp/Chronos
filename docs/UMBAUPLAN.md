@@ -26,7 +26,7 @@
 |---|---|---|
 | `flutter pub get` schlägt fehl | `pubspec.yaml:14` `intl: ^0.19.0`, aktuelles `flutter_localizations` verlangt `^0.20.3` | Projekt lässt sich mit Flutter 3.47 nicht auflösen |
 | Compile-Fehler | `lib/theme/app_theme.dart:61` `CardTheme` statt `CardThemeData` | Build bricht ab |
-| Gradle / AGP / Kotlin veraltet | Gradle 8.9, AGP 8.7.0, Kotlin 2.1.0 | aktuelles Flutter verweigert den Build (Mindestversionen siehe Anhang) |
+| Gradle / AGP / Kotlin veraltet | Gradle 8.9, AGP 8.7.0, Kotlin 2.1.0 | Flutter 3.47.5 bricht den Build unter **Gradle 8.14 / AGP 8.11.1 / Kotlin 2.2.20** ab (`flutter_tools/gradle/.../DependencyVersionChecker.kt`) |
 | Java 1.8, fest verdrahtetes NDK 27 | `android/app/build.gradle:36-46` | 16-KB-Page-Size-Pflicht, Plugin-Anforderungen (Java 17) |
 | Ziel-API | erbt von Flutter ~3.24 | **seit 31.08.2026 muss jedes Update API 36 anpeilen** |
 | `proguard-rules.pro` referenziert, fehlt; Signing unbedingt | `android/app/build.gradle:52-76` | frischer Clone/CI baut nicht |
@@ -49,9 +49,11 @@ Alle mit ✅ markierten Punkte wurden **mit echten Widget-/Unit-Tests reproduzie
 | D6 ✅ | **Zeitumstellung:** gerundete Zeiten ±1 h daneben; Nachtschicht über die Umstellung 1 h zu kurz; laufende Sitzung nach Neustart 1 h versetzt | `home_screen.dart:204`, `work_log_screen.dart:552,751`, `storage_service.dart:76` | Rechnen mit `Duration(days: 1)` auf lokaler Zeit, Speichern ohne Zeitzonen-Offset. **Nächste Umstellung: 25.10.2026** |
 | D7 ✅ | Ende vor Start (Tippfehler) → still gespeicherte **23-h-Schicht**; Ende = Start → 24 h | `work_log_screen.dart:551-553, 750-752` | Stillschweigende „über Nacht“-Annahme, Text `endAfterStart` existiert, wird nie benutzt |
 | D8 ✅ | Summen stimmen nicht: 11,5 % aller Lohn/Dauer-Kombinationen zeigen einen falschen Cent; drei Einträge à 92,52 € ergeben „277,55 €“ | `work_entry.dart:18-20`, `work_entries_provider.dart:12-14` | Geld als `double`, Runden erst bei der Anzeige |
-| D9 | Doppeltipp auf „Speichern“ legt Eintrag doppelt an | `work_log_screen.dart:535-577` | kein Sperren während des Speicherns |
-| D10 | Keine Überlappungsprüfung – dieselben Stunden können doppelt gezählt werden | `work_entries_provider.dart:24-27` | – |
-| D11 | Vergessener Stopp → mehrtägige Einträge, keine Erinnerung; Bearbeiten kürzt >24-h-Einträge still | `timer_provider.dart:32-37`, `work_log_screen.dart:624-626` | – |
+| D9 ✅ | Doppeltipp auf „Speichern“ bei langsamem Speicher: doppelter Eintrag **und leerer Bildschirm** (nur Neustart hilft) | `work_log_screen.dart:535-577, 734-776` | Button wird während des Speicherns nicht gesperrt; zweites `Navigator.pop` schließt den Hauptbildschirm |
+| D10 ✅ | Keine Überlappungsprüfung – dieselben Stunden können doppelt gezählt werden | `work_entries_provider.dart:24-27` | – |
+| D11 ✅ | Vergessener Stopp → mehrtägige Einträge, keine Erinnerung; Bearbeiten und Speichern eines 30-h-Eintrags macht daraus **6 h** | `timer_provider.dart:32-37`, `work_log_screen.dart:743-752` | Enddatum wird aus Startdatum + Uhrzeit neu gebaut |
+| D12 ✅ | Gelöschter Eintrag kann wieder auftauchen; bei doppelten IDs überschreibt „bezahlt“ einen fremden Eintrag | `storage_service.dart:21-30`, `work_entries_provider.dart:39-47` | Speichern ist immer „Einfügen oder Ersetzen“, Liste im Speicher hinkt hinterher |
+| D13 ✅ | Stoppen + schneller Tabwechsel bei langsamem Speicher → Schicht verloren | `timer_provider.dart:44`, `home_screen.dart:255, 281` | Sitzung wird vor dem Eintrag gelöscht, Speichern hängt an `context.mounted` |
 
 **Bekannte Bugs aus dem internen Test**
 
@@ -61,11 +63,37 @@ Alle mit ✅ markierten Punkte wurden **mit echten Widget-/Unit-Tests reproduzie
 | K2 ✅ | Querformat: „BOTTOM OVERFLOWED BY 284 PIXELS“ | Startbildschirm ist eine nicht scrollbare Spalte mit ~500 dp fester Höhe. Gemessen 222–318 px Überlauf je nach Gerät. **START/STOP liegen dann unter der Navigationsleiste und sind nicht mehr drückbar.** Bei großer Systemschrift passiert das auch im Hochformat auf kleinen Handys; bei 200 % Schrift ist der Protokoll-Tab nicht mehr erreichbar. Auch Hinzufügen-/Bearbeiten-Dialog und Lösch-Dialog laufen über. |
 | K3 ✅ | Dark/Light-Darstellungsproblem | **Light Mode wurde nie implementiert.** `MaterialApp` bekommt nur ein dunkles Theme, es gibt keinen Umschalter, die Einstellung wird nirgends gelesen, und >100 Farben sind fest im Code verdrahtet. Ein Umschalten ändert nichts; ein halbherziger Fix ergäbe eine Mischung aus hell und dunkel. |
 | K4 | Tablet ungetestet | Es gibt **keinerlei** adaptiven Layout-Code. Auf Tablets: gestrecktes Handy-Layout, winzige Inseln in großer Fläche. Android 16 ignoriert auf Tablets ab API 36 die Orientierungssperre – „nur Hochformat“ ist also keine Lösung. |
-| K5 | Löschen zeigt Änderung erst nach Neustart | *Wird gerade reproduziert – siehe [2.2a](#22a-löschen-braucht-neustart).* |
+| K5 ✅ | Löschen funktioniert nicht richtig / erst nach Neustart sichtbar | Im Normalfall **nicht** reproduzierbar, auf einem langsamen Handy aber schon. Details in [2.2a](#22a-löschen-braucht-neustart). |
 
 #### 2.2a Löschen braucht Neustart
 
-_Platzhalter – Ergebnis der Verifikation folgt._
+Getestet wurden rund 50 Szenarien über die echte Oberfläche, sowohl mit Flutter 3.47.5 als auch mit Flutter 3.24.5, mit dem du v1.0.0 gebaut hast:
+- Einzeln löschen per Tippen und Lange-Drücken, erste, mittlere und letzte Zeile, bezahlt und offen
+- „Alles löschen“ auf Deutsch und Englisch, aus beiden Tabs aufgerufen
+- mit ausgeschalteten Animationen, sehr schnellen Taps und laufendem Timer
+- direkt nach Hinzufügen, Bearbeiten oder Bezahlt-Markieren
+
+**Bei normal schnellem Speicher wird die Zeile sofort entfernt.**
+
+Sobald das Speichern länger als ~120 ms dauert, entstehen aber drei Race Conditions, die **genau dein Symptom** erzeugen. Solche Speicherzeiten sind auf einem Handy realistisch, das durch die App selbst schon ausgelastet ist ([2.3](#23-warum-das-handy-laggt)):
+
+1. **Doppelter Eintrag statt gelöschtem Eintrag.** Wer im Hinzufügen-Dialog zweimal auf „Speichern“ tippt, während noch gespeichert wird, bekommt zwei identische Einträge. Außerdem wird der Hauptbildschirm mit weggeschlossen, und es bleibt ein **leerer Bildschirm, der nur durch einen Neustart verschwindet** (`work_log_screen.dart:535-577`; beim Bearbeiten-Dialog ebenso, `:734-776`). Löscht man danach einen der Doppelgänger, steht der Zwilling noch da. Das sieht aus wie „Löschen hat nicht funktioniert“.
+2. **Zombie-Zeile.** Die gelöschte Zeile bleibt so lange sichtbar und bedienbar, bis das Speichern fertig ist (`work_entries_provider.dart:29-32`). Tippt man in dieser Zeit auf ihre Bezahlt-Checkbox oder bearbeitet sie, **wird der gelöschte Eintrag wieder angelegt**, weil jedes Speichern ein „Einfügen oder Ersetzen“ ist (`storage_service.dart:21-30`).
+3. **Verschluckte Fehler.** Das Löschen läuft ohne Fehlerbehandlung (`work_log_screen.dart:351`). Schlägt das Speichern fehl oder kommt die Antwort nicht zurück, bleibt die Zeile sichtbar, obwohl sie im Speicher schon fehlt. Erst ein Neustart zeigt den wahren Stand.
+
+Dazu kommen Bedienfehler rund ums Löschen:
+- **„Alles löschen“ auf Englisch:** Dort akzeptiert der Dialog nur das deutsche „Löschen“, mit großem L. „Delete“, „löschen“ und „LÖSCHEN“ lassen den Button deaktiviert, ohne Hinweis.
+- **Doppeltipp auf eine Zeile:** Das Menü öffnet sich und schließt sich sofort wieder.
+- **Nicht zugeordnete Zeilen:** Die Zeilen haben keine Schlüssel. Deshalb wandert die blaue „bezahlt“-Hervorhebung einer gelöschten Zeile kurz auf die Nachbarzeile.
+
+**In 2.0 verschwindet diese ganze Fehlerklasse:**
+- Die Oberfläche hört direkt auf die Datenbank (reaktive Abfragen).
+- Löschen entfernt die Zeile sofort und bietet Rückgängig an.
+- Speichern-Buttons sperren sich während des Speicherns.
+- Bearbeiten legt nie neue Einträge an.
+- Fehler werden angezeigt statt verschluckt.
+
+Die Tests dazu liegen in `docs/research/repro-tests/verify_delete_*`.
 
 **Weitere Fehler (Auswahl)**
 
@@ -80,7 +108,7 @@ _Platzhalter – Ergebnis der Verifikation folgt._
 - `RobotoMono` wird verwendet, ist aber nicht eingebunden; die START/STOP-Beschriftung verliert die Theme-Schrift.
 - Android Auto Backup ist implizit aktiv – die Datenschutzerklärung sagt aber, die Daten „verlassen [das Gerät] niemals“.
 
-Vollständiger Katalog (41 Einträge aus dem Audit + Testergebnisse): [`docs/research/code-audit.md`](research/code-audit.md), [`docs/research/bug-reproduktion.md`](research/bug-reproduktion.md).
+Vollständiger Katalog (41 Einträge aus dem Audit + Testergebnisse + Verifikation): [`docs/research/code-audit.md`](research/code-audit.md), [`docs/research/bug-reproduktion.md`](research/bug-reproduktion.md), [`docs/research/verifikation.md`](research/verifikation.md).
 
 ### 2.3 Warum das Handy laggt
 
@@ -315,7 +343,7 @@ Regeln: Geld nur als `int` Cent; Zeit nur als UTC; höchstens eine laufende Schi
 - **Performance-Budget-Test:** kein Rebuild von „Heute“ pro Tick, keine Timer im pausierten Zustand.
 - **Lokalisierungs-Test:** alle Bildschirme auf Englisch durchlaufen, kein deutsches Wort erlaubt (und umgekehrt).
 - **CI (GitHub Actions):** Format, `flutter analyze` (Warnungen = Fehler), `flutter test`, `flutter build appbundle`.
-- Die 72 Reproduktions-Tests aus dieser Analyse liegen in [`docs/research/repro-tests/`](research/repro-tests/) und dienen als Startpunkt.
+- Die Reproduktions- und Verifikations-Tests aus dieser Analyse liegen in [`docs/research/repro-tests/`](research/repro-tests/) und dienen als Startpunkt.
 
 ---
 
@@ -386,6 +414,7 @@ Umfang: **S** = klein, **M** = mittel, **L** = groß. Jede Phase endet mit einem
 
 - [`docs/research/code-audit.md`](research/code-audit.md) – vollständiger Bug-Katalog (41), Performance, Architektur, Android-Build, Datenmodell & Migration (englisch)
 - [`docs/research/bug-reproduktion.md`](research/bug-reproduktion.md) – Testergebnisse mit Messwerten (englisch)
+- [`docs/research/verifikation.md`](research/verifikation.md) – Suche nach dem Lösch-Bug, Gegenprüfung der Audit-Befunde (englisch)
 - [`docs/research/ux-audit.md`](research/ux-audit.md) – UX-Probleme, Abläufe, Lokalisierungslücken, Designsystem, alle Wireframes, Barrierefreiheit (englisch)
 - [`docs/research/recherche.md`](research/recherche.md) – Konkurrenzanalyse, Feature-Ideen, Hintergrund-Best-Practice mit Code, Architektur, Pakete, Play-Anforderungen, Rechtliches DE/AT, Quellen (englisch)
 - [`docs/research/repro-tests/`](research/repro-tests/) – die Reproduktions-Tests
