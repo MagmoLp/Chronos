@@ -10,6 +10,12 @@
 >
 > Die Rohdaten liegen in [`docs/research/`](research/).
 
+> **Update 30.09.2026 – Entscheidung:** Der Umfang von 2.0 wurde vereinfacht und steht verbindlich in
+> [`docs/SPEC_2_0.md`](SPEC_2_0.md). Ohne Länderregeln (DE/AT), ohne gesetzliche Pausenregeln, ohne Zuschläge.
+> Statt der Minijob-Grenze gibt es ein frei einstellbares Monatsziel bzw. eine Monatsgrenze.
+> Das Sicherheits-Update v1.0.1 entfällt, es wird direkt 2.0 umgesetzt.
+> Wo dieser Plan davon abweicht, gilt die Spezifikation.
+
 ---
 
 ## 1. Kurzfassung
