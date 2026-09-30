@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- API 27+ additions to values/styles.xml (OS Dark Mode off). Attributes newer than API 27
+     are marked with tools:targetApi; older platforms ignore them. -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="LaunchTheme" parent="Base.LaunchTheme">
+        <item name="android:navigationBarColor">@color/splash_background</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode" tools:targetApi="28">shortEdges</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+        <!-- Android 12+ system splash screen: background color; the icon is the launcher icon. -->
+        <item name="android:windowSplashScreenBackground" tools:targetApi="31">@color/splash_background</item>
+    </style>
+
+    <style name="NormalTheme" parent="Base.NormalTheme">
+        <item name="android:navigationBarColor">@color/splash_background</item>
+        <item name="android:windowLightNavigationBar">true</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="29">false</item>
+    </style>
+</resources>

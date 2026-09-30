@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Backup rules for Android 12+ (API 31+), referenced by android:dataExtractionRules.
+     Keep in sync with backup_rules.xml (API 24-30).
+     Cache directories (share/export temp files, file picker copies) are never backed up. -->
+<data-extraction-rules>
+    <cloud-backup>
+        <!-- drift database chronos.sqlite incl. -wal/-shm and legacy_backup_v1.json:
+             getApplicationDocumentsDirectory() is <app data>/app_flutter. -->
+        <include domain="root" path="app_flutter/" />
+        <!-- getApplicationSupportDirectory() is files/ (e.g. local error log, DataStore settings). -->
+        <include domain="file" path="." />
+        <!-- SharedPreferences: app settings and the untouched v1 keys. -->
+        <include domain="sharedpref" path="." />
+        <!-- Databases in the platform database directory (none today, kept for safety). -->
+        <include domain="database" path="." />
+        <!-- flutter_local_notifications bookkeeping (pending reminder, background callback handles)
+             is device-specific; the app re-creates it on start. -->
+        <exclude domain="sharedpref" path="scheduled_notifications.xml" />
+        <exclude domain="sharedpref" path="flutter_local_notifications_plugin.xml" />
+        <exclude domain="sharedpref" path="notification_plugin_cache.xml" />
+    </cloud-backup>
+    <device-transfer>
+        <!-- drift database chronos.sqlite incl. -wal/-shm and legacy_backup_v1.json:
+             getApplicationDocumentsDirectory() is <app data>/app_flutter. -->
+        <include domain="root" path="app_flutter/" />
+        <!-- getApplicationSupportDirectory() is files/ (e.g. local error log, DataStore settings). -->
+        <include domain="file" path="." />
+        <!-- SharedPreferences: app settings and the untouched v1 keys. -->
+        <include domain="sharedpref" path="." />
+        <!-- Databases in the platform database directory (none today, kept for safety). -->
+        <include domain="database" path="." />
+        <!-- flutter_local_notifications bookkeeping (pending reminder, background callback handles)
+             is device-specific; the app re-creates it on start. -->
+        <exclude domain="sharedpref" path="scheduled_notifications.xml" />
+        <exclude domain="sharedpref" path="flutter_local_notifications_plugin.xml" />
+        <exclude domain="sharedpref" path="notification_plugin_cache.xml" />
+    </device-transfer>
+</data-extraction-rules>

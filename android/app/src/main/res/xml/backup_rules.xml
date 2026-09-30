@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Auto Backup rules for Android 7-11 (API 24-30), referenced by android:fullBackupContent.
+     Keep in sync with data_extraction_rules.xml (API 31+). -->
+<full-backup-content>
+    <!-- drift database chronos.sqlite incl. -wal/-shm and legacy_backup_v1.json:
+         getApplicationDocumentsDirectory() is <app data>/app_flutter. -->
+    <include domain="root" path="app_flutter/" />
+    <!-- getApplicationSupportDirectory() is files/ (e.g. local error log, DataStore settings). -->
+    <include domain="file" path="." />
+    <!-- SharedPreferences: app settings and the untouched v1 keys. -->
+    <include domain="sharedpref" path="." />
+    <!-- Databases in the platform database directory (none today, kept for safety). -->
+    <include domain="database" path="." />
+    <!-- flutter_local_notifications bookkeeping (pending reminder, background callback handles)
+         is device-specific; the app re-creates it on start. -->
+    <exclude domain="sharedpref" path="scheduled_notifications.xml" />
+    <exclude domain="sharedpref" path="flutter_local_notifications_plugin.xml" />
+    <exclude domain="sharedpref" path="notification_plugin_cache.xml" />
+</full-backup-content>
