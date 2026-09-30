@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="splash_background">#121212</color>
+    <!-- Launch and window background, "Sky Day" (light). Night variant: values-night/colors.xml. -->
+    <color name="splash_background">#F6F9FC</color>
+    <!-- Solid background layer of the adaptive launcher icon (brand navy). -->
+    <color name="ic_launcher_background">#001F3F</color>
 </resources>

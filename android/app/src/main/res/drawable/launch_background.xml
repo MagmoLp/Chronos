@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Launch screen up to Android 11: brand background with the app mark in the centre.
+     Android 12+ uses the system splash screen instead, see drawable-v31. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/splash_background" />
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@mipmap/ic_launcher_foreground" />
+    </item>
 </layer-list>

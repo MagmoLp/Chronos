@@ -3,45 +3,145 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Datenschutzerklärung – Chronos</title>
+  <title>Datenschutzerklärung / Privacy Policy – Chronos</title>
   <style>
+    :root {
+      color-scheme: light dark;
+      --text: #1a1a1a;
+      --muted: #555;
+      --faint: #888;
+      --link: #14548c;
+      --rule: #dde3ea;
+      --bg: #f6f9fc;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text: #e6edf5;
+        --muted: #b8c4d2;
+        --faint: #8a99ab;
+        --link: #9ccff5;
+        --rule: #233142;
+        --bg: #0b1320;
+      }
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       max-width: 680px;
-      margin: 60px auto;
-      padding: 0 24px;
-      color: #1a1a1a;
+      margin: 48px auto;
+      padding: 0 20px;
+      color: var(--text);
+      background: var(--bg);
       line-height: 1.7;
     }
     h1 { font-size: 1.8rem; margin-bottom: 0.25rem; }
     h2 { font-size: 1.1rem; margin-top: 2rem; }
-    p, li { font-size: 0.97rem; color: #333; }
-    .updated { color: #888; font-size: 0.85rem; margin-bottom: 2.5rem; }
-    a { color: #1a73e8; }
+    p, li { font-size: 0.97rem; color: var(--muted); }
+    strong { color: var(--text); }
+    .updated { color: var(--faint); font-size: 0.85rem; margin-bottom: 2rem; }
+    .lang { font-size: 0.9rem; margin-bottom: 1.5rem; }
+    a { color: var(--link); }
+    hr { border: 0; border-top: 1px solid var(--rule); margin: 3.5rem 0; }
   </style>
 </head>
 <body>
 
-  <h1>Datenschutzerklärung</h1>
-  <p class="updated">Zuletzt aktualisiert: Mai 2026</p>
+  <p class="lang"><a href="#de">Deutsch</a> · <a href="#en">English</a></p>
 
-  <p>Diese Datenschutzerklärung gilt für die Android-App <strong>Chronos – Stundenlohn Tracker</strong>, entwickelt von Paul Hübner.</p>
+  <!-- ============================== DEUTSCH ============================== -->
+  <section id="de" lang="de">
+    <h1>Datenschutzerklärung</h1>
+    <p class="updated">Zuletzt aktualisiert: 30. September 2026 (gilt ab Version 2.0)</p>
 
-  <h2>Keine Datenerhebung</h2>
-  <p>Chronos erhebt, speichert oder überträgt keinerlei personenbezogene Daten. Alle Informationen die du in der App eingibst – Arbeitsstunden, Stundenlohn, Einträge – werden ausschließlich lokal auf deinem Gerät gespeichert und verlassen dieses niemals.</p>
+    <p>Diese Datenschutzerklärung gilt für die Android-App <strong>Chronos – Stundenlohn Tracker</strong>, entwickelt von Paul Hübner.</p>
 
-  <h2>Keine Weitergabe an Dritte</h2>
-  <p>Da keine Daten erhoben werden, werden auch keine Daten an Dritte weitergegeben, verkauft oder verarbeitet.</p>
+    <h2>Kurz gesagt</h2>
+    <p>Alles, was du in Chronos eingibst, bleibt auf deinem Gerät. Es gibt kein Konto, keine Werbung, keine Analyse und kein Tracking. Die App hat keine Internet-Berechtigung und sendet nichts an den Entwickler oder an Dritte.</p>
 
-  <h2>Keine Werbung, kein Tracking</h2>
-  <p>Die App enthält keinerlei Werbung, Analytics-Tools, Tracking-SDKs oder ähnliche Dienste.</p>
+    <h2>Welche Daten die App speichert</h2>
+    <p>Chronos speichert ausschließlich im privaten Speicherbereich der App auf deinem Gerät:</p>
+    <ul>
+      <li>Schichten mit Start, Ende, Pausen, Trinkgeld, Notizen und dem Status „offen/bezahlt“,</li>
+      <li>Jobs mit Namen, Farbe, Stundenlohn und Lohnhistorie,</li>
+      <li>erfasste Auszahlungen,</li>
+      <li>Einstellungen (z. B. Sprache, Design, Monatsziel, Erinnerung),</li>
+      <li>ein lokales Fehlerprotokoll mit technischen Fehlermeldungen zur Fehlersuche.</li>
+    </ul>
+    <p>Der Entwickler hat auf diese Daten keinen Zugriff.</p>
 
-  <h2>Internetverbindung</h2>
-  <p>Chronos benötigt keine Internetverbindung und stellt keine Verbindung zu externen Servern her.</p>
+    <h2>Ausnahmen, die du selbst steuerst</h2>
+    <p><strong>Android-Sicherung (Auto Backup).</strong> Ist in den Android-Einstellungen deines Geräts die Sicherung eingeschaltet, sichert Android die Daten von Chronos (Datenbank und Einstellungen) automatisch in <strong>deinem eigenen Google-Konto</strong> und stellt sie bei einer Neuinstallation oder beim Umzug auf ein neues Gerät wieder her. Das ist eine Funktion des Betriebssystems, die Google für dich bereitstellt; der Entwickler kann diese Sicherungen nicht einsehen. Ab Android 9 sind sie mit deiner Displaysperre Ende-zu-Ende verschlüsselt. Du kannst die Sicherung in den Android-Einstellungen (meist unter „System“ bzw. „Google“ → „Sicherung“) ausschalten und bestehende Sicherungen in deinem Google-Konto löschen. Beim direkten Übertragen auf ein neues Gerät (Kabel oder WLAN) werden dieselben Daten mitgenommen.</p>
+    <p><strong>Export, Backup-Datei und Fehlerbericht.</strong> Nur wenn du es ausdrücklich auslöst, erstellt Chronos eine Datei (PDF-Stundenzettel, CSV, Backup als JSON oder das Fehlerprotokoll) und öffnet das Android-Teilen-Menü. Du entscheidest, an welche App oder welchen Empfänger die Datei geht (z. B. E-Mail, Messenger, Cloud-Speicher). Für die weitere Verarbeitung gelten dann die Bestimmungen dieses Dienstes.</p>
+    <p><strong>Backup wiederherstellen.</strong> Über die Dateiauswahl von Android liest Chronos nur die eine Datei, die du auswählst.</p>
 
-  <h2>Kontakt</h2>
-  <p>Bei Fragen zur Datenschutzerklärung kannst du mich unter folgender Adresse erreichen:<br>
-  <a href="mailto:paulvincent.huebner@gmail.com">paulvincent.huebner@gmail.com</a></p>
+    <h2>Benachrichtigungen und Berechtigungen</h2>
+    <ul>
+      <li><strong>Benachrichtigungen anzeigen</strong> (optional): für die laufende Schicht mit Stoppuhr und die Erinnerung „Arbeitest du noch?“. Die Benachrichtigungen werden auf dem Gerät erzeugt; es wird kein Push-Dienst verwendet. Ohne diese Berechtigung funktioniert die App normal weiter.</li>
+      <li><strong>Nach dem Gerätestart ausführen</strong>: damit eine geplante Erinnerung nach einem Neustart erneut geplant wird.</li>
+    </ul>
+    <p>Chronos fordert keine Berechtigungen für Internet, Standort, Kontakte, Kamera oder den gemeinsamen Speicher an.</p>
+
+    <h2>Keine Weitergabe, keine Werbung, kein Tracking</h2>
+    <p>Chronos enthält keine Werbung, keine Analyse-Tools, keine Tracking-SDKs und keine Absturzberichte an externe Server. Es werden keine Daten verkauft oder an Dritte weitergegeben.</p>
+
+    <h2>Daten löschen</h2>
+    <p>In der App unter „Einstellungen → Daten → Alle Daten löschen“, oder indem du die App deinstallierst bzw. in den Android-Einstellungen ihren Speicher löschst. Sicherungen in deinem Google-Konto verwaltest du in den Google- bzw. Android-Einstellungen.</p>
+
+    <h2>Änderungen</h2>
+    <p>Wenn sich an dieser Erklärung etwas ändert, wird diese Seite aktualisiert. Maßgeblich ist das Datum oben.</p>
+
+    <h2>Kontakt</h2>
+    <p>Bei Fragen zum Datenschutz erreichst du mich unter:<br>
+    <a href="mailto:paulvincent.huebner@gmail.com">paulvincent.huebner@gmail.com</a></p>
+  </section>
+
+  <hr>
+
+  <!-- ============================== ENGLISH ============================== -->
+  <section id="en" lang="en">
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: 30 September 2026 (applies from version 2.0)</p>
+
+    <p>This privacy policy applies to the Android app <strong>Chronos – Stundenlohn Tracker</strong>, developed by Paul Hübner.</p>
+
+    <h2>In short</h2>
+    <p>Everything you enter in Chronos stays on your device. There is no account, no advertising, no analytics and no tracking. The app has no internet permission and sends nothing to the developer or to third parties.</p>
+
+    <h2>What the app stores</h2>
+    <p>Chronos stores data only in the app's private storage on your device:</p>
+    <ul>
+      <li>shifts with start, end, breaks, tips, notes and their “open/paid” status,</li>
+      <li>jobs with name, colour, hourly wage and wage history,</li>
+      <li>recorded payouts,</li>
+      <li>settings (e.g. language, theme, monthly goal, reminder),</li>
+      <li>a local error log with technical error messages for troubleshooting.</li>
+    </ul>
+    <p>The developer has no access to this data.</p>
+
+    <h2>Exceptions you control</h2>
+    <p><strong>Android backup (Auto Backup).</strong> If backup is switched on in your device's Android settings, Android automatically backs up Chronos' data (database and settings) to <strong>your own Google account</strong> and restores it when you reinstall the app or move to a new device. This is an operating-system feature provided to you by Google; the developer cannot see these backups. On Android 9 and later they are end-to-end encrypted with your screen lock. You can switch backup off in the Android settings (usually under “System” or “Google” → “Backup”) and delete existing backups from your Google account. A direct transfer to a new device (cable or Wi-Fi) takes the same data along.</p>
+    <p><strong>Export, backup file and error report.</strong> Only when you explicitly ask for it, Chronos creates a file (PDF timesheet, CSV, JSON backup or the error log) and opens the Android share sheet. You decide which app or recipient receives the file (e.g. e-mail, messenger, cloud storage). From then on, that service's terms apply.</p>
+    <p><strong>Restoring a backup.</strong> Using the Android file picker, Chronos reads only the single file you select.</p>
+
+    <h2>Notifications and permissions</h2>
+    <ul>
+      <li><strong>Show notifications</strong> (optional): for the running shift with a stopwatch and the “Still working?” reminder. Notifications are created on the device; no push service is used. Without this permission the app keeps working normally.</li>
+      <li><strong>Run at startup</strong>: so that a scheduled reminder is scheduled again after a restart.</li>
+    </ul>
+    <p>Chronos does not request permissions for the internet, location, contacts, camera or shared storage.</p>
+
+    <h2>No sharing, no advertising, no tracking</h2>
+    <p>Chronos contains no advertising, no analytics tools, no tracking SDKs and no crash reporting to external servers. No data is sold or passed on to third parties.</p>
+
+    <h2>Deleting your data</h2>
+    <p>In the app via “Settings → Data → Delete all data”, or by uninstalling the app or clearing its storage in the Android settings. Backups in your Google account are managed in your Google or Android settings.</p>
+
+    <h2>Changes</h2>
+    <p>If this policy changes, this page will be updated. The date at the top applies.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions about privacy, you can reach me at:<br>
+    <a href="mailto:paulvincent.huebner@gmail.com">paulvincent.huebner@gmail.com</a></p>
+  </section>
 
 </body>
 </html>
