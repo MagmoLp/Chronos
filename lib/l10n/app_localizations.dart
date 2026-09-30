@@ -391,6 +391,408 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{minutes} minutes later'**
   String timeFieldLater(int minutes);
+
+  /// Label of the big amount on the Today card: wage of today's shifts including the running one (without tips).
+  ///
+  /// In en, this message translates to:
+  /// **'Earned today'**
+  String get todayEarnedToday;
+
+  /// Label of the big amount on the Today card when nothing was worked today: all wages not paid yet.
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaid'**
+  String get todayOpenLabel;
+
+  /// Line below the Today card: all wages not paid yet (including the running shift).
+  ///
+  /// In en, this message translates to:
+  /// **'Unpaid total'**
+  String get todayOpenTotal;
+
+  /// Line below the Today card while a shift runs and other shifts were finished today: the running shift's wage so far.
+  ///
+  /// In en, this message translates to:
+  /// **'Of which this shift'**
+  String get todayThisShift;
+
+  /// Number of shifts and their hours, e.g. '11 shifts · 82.5 h'.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 shift · {hours}} other{{count} shifts · {hours}}}'**
+  String todayShiftsHours(int count, String hours);
+
+  /// Shown on the Today card when no finished shift is waiting for payment.
+  ///
+  /// In en, this message translates to:
+  /// **'No unpaid shifts'**
+  String get todayNothingOpen;
+
+  /// Button on the Today card that opens the sheet to record a received payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Record payout'**
+  String get todayRecordPayout;
+
+  /// Header of the running-shift card when there is more than one job, e.g. 'Running · Catering'.
+  ///
+  /// In en, this message translates to:
+  /// **'{status} · {job}'**
+  String todayStatusWithJob(String status, String job);
+
+  /// Header of the Today card while the running shift is paused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused since {time}'**
+  String todayPausedSince(String time);
+
+  /// Start time of the running shift; tapping it changes the start.
+  ///
+  /// In en, this message translates to:
+  /// **'since {time}'**
+  String todaySince(String time);
+
+  /// Tooltip / screen-reader hint of the start time button on the running-shift card.
+  ///
+  /// In en, this message translates to:
+  /// **'Change start time'**
+  String get todayAdjustStart;
+
+  /// Screen-reader label of the running stopwatch. {duration} is spoken, e.g. '3 hours 11 minutes'.
+  ///
+  /// In en, this message translates to:
+  /// **'Worked {duration}'**
+  String todayWorkedSemantics(String duration);
+
+  /// Break time of the running shift, e.g. 'Break 0:30'.
+  ///
+  /// In en, this message translates to:
+  /// **'Break {duration}'**
+  String todayBreak(String duration);
+
+  /// Main button on Today that starts recording a shift now.
+  ///
+  /// In en, this message translates to:
+  /// **'Start shift'**
+  String get todayStartShift;
+
+  /// Text button below 'Start shift': start a shift with an earlier start time.
+  ///
+  /// In en, this message translates to:
+  /// **'Started earlier?'**
+  String get todayStartedEarlier;
+
+  /// Title of the time picker for an earlier or changed start time.
+  ///
+  /// In en, this message translates to:
+  /// **'When did you start?'**
+  String get todayStartTimeHelp;
+
+  /// Tooltip of the job chip on Today (only with more than one job).
+  ///
+  /// In en, this message translates to:
+  /// **'Choose job'**
+  String get todayChooseJob;
+
+  /// Screen-reader label of the job chip on Today.
+  ///
+  /// In en, this message translates to:
+  /// **'Job: {job}'**
+  String todayJobSemantics(String job);
+
+  /// Button that pauses the running shift (starts a break).
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get todayPause;
+
+  /// Button that resumes a paused shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get todayResume;
+
+  /// Button that opens the 'Finish shift' sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get todayFinish;
+
+  /// Label of the weekly totals line on Today.
+  ///
+  /// In en, this message translates to:
+  /// **'This week'**
+  String get todayThisWeek;
+
+  /// Weekly totals on Today, e.g. '18.5 h · €256.75'.
+  ///
+  /// In en, this message translates to:
+  /// **'{hours} · {amount}'**
+  String todayWeekFigures(String hours, String amount);
+
+  /// Label of the row showing the most recent finished shift; tapping opens the editor.
+  ///
+  /// In en, this message translates to:
+  /// **'Last shift'**
+  String get todayLastShift;
+
+  /// Details of the most recent shift, e.g. 'Mon 28 Sep, 8:00 AM–4:15 PM · 8:15 h'.
+  ///
+  /// In en, this message translates to:
+  /// **'{date}, {times} · {duration}'**
+  String todayLastShiftDetails(String date, String times, String duration);
+
+  /// Heading of the side pane on tablets that lists today's finished shifts.
+  ///
+  /// In en, this message translates to:
+  /// **'Today\'s shifts'**
+  String get todayShiftsTodayTitle;
+
+  /// Shown in the tablet side pane when no shift was finished today.
+  ///
+  /// In en, this message translates to:
+  /// **'No finished shifts today yet.'**
+  String get todayNoShiftsToday;
+
+  /// Hint card on Today after importing data from version 1: entries that look unusual.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Check 1 imported entry} other{Check {count} imported entries}}'**
+  String todayReviewHint(int count);
+
+  /// Action of the import review hint card.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get todayReviewAction;
+
+  /// Hint card on Today when the notification permission is denied.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications are off, so the running shift doesn\'t appear on your lock screen.'**
+  String get todayNotificationsOff;
+
+  /// Title of the sheet shown before asking for the notification permission (first shift start).
+  ///
+  /// In en, this message translates to:
+  /// **'Your shift on the lock screen'**
+  String get todayPrimerTitle;
+
+  /// Explanation before the notification permission request.
+  ///
+  /// In en, this message translates to:
+  /// **'While a shift is running, Chronos shows it in a quiet notification. From there you can pause or finish it without opening the app. Nothing runs in the background.'**
+  String get todayPrimerBody;
+
+  /// Button in the permission explanation sheet: shows the system permission dialog.
+  ///
+  /// In en, this message translates to:
+  /// **'Allow notifications'**
+  String get todayPrimerAllow;
+
+  /// Button in the permission explanation sheet: continue without asking.
+  ///
+  /// In en, this message translates to:
+  /// **'Not now'**
+  String get todayPrimerLater;
+
+  /// Title of the dialog when an earlier start time overlaps a recorded shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Overlaps another shift'**
+  String get todayOverlapTitle;
+
+  /// Body of the overlap dialog. {shifts} lists the shifts, e.g. 'Mon 28 Sep, 8:00 AM–4:15 PM'.
+  ///
+  /// In en, this message translates to:
+  /// **'This start time overlaps: {shifts}'**
+  String todayOverlapMessage(String shifts);
+
+  /// Confirm button of the overlap dialog when starting a shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Start anyway'**
+  String get todayOverlapStartAnyway;
+
+  /// Confirm button of the overlap dialog when changing the start of the running shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Change anyway'**
+  String get todayOverlapChangeAnyway;
+
+  /// Snackbar after changing the start of the running shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Start changed to {time}'**
+  String todayStartChanged(String time);
+
+  /// Error when a chosen start time lies in the future.
+  ///
+  /// In en, this message translates to:
+  /// **'The start time can\'t be in the future.'**
+  String get todayErrorStartInFuture;
+
+  /// Error when the start of a paused shift is moved after the start of the break.
+  ///
+  /// In en, this message translates to:
+  /// **'The start must be before the current break began.'**
+  String get todayErrorStartAfterBreak;
+
+  /// Error when starting (or undoing) while another shift runs.
+  ///
+  /// In en, this message translates to:
+  /// **'A shift is already running.'**
+  String get todayErrorAlreadyRunning;
+
+  /// Error when an action needs a running shift but none runs.
+  ///
+  /// In en, this message translates to:
+  /// **'No shift is running.'**
+  String get todayErrorNoRunningShift;
+
+  /// Error when starting a shift for a job without wage.
+  ///
+  /// In en, this message translates to:
+  /// **'This job has no hourly rate yet. Add one in Settings.'**
+  String get todayErrorNoWage;
+
+  /// Error when the selected job was deleted meanwhile.
+  ///
+  /// In en, this message translates to:
+  /// **'This job no longer exists.'**
+  String get todayErrorJobNotFound;
+
+  /// Error when undoing a change to a shift that was removed meanwhile.
+  ///
+  /// In en, this message translates to:
+  /// **'This shift no longer exists.'**
+  String get todayErrorShiftNotFound;
+
+  /// Snackbar after finishing a shift (with Undo).
+  ///
+  /// In en, this message translates to:
+  /// **'Shift saved · {duration} · {amount}'**
+  String todayShiftSaved(String duration, String amount);
+
+  /// Snackbar after discarding the running shift (with Undo).
+  ///
+  /// In en, this message translates to:
+  /// **'Shift discarded'**
+  String get todayShiftDiscarded;
+
+  /// Title of the sheet that finishes the running shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish shift'**
+  String get todayFinishSheetTitle;
+
+  /// Label of the start time in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get todayFinishStart;
+
+  /// Label of the editable end time in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'End'**
+  String get todayFinishEnd;
+
+  /// Screen-reader text for the start row of the finish sheet when rounding moved the start (shown visually as '8:02 AM → 8:00 AM').
+  ///
+  /// In en, this message translates to:
+  /// **'Recorded {recorded}, billed {billed}'**
+  String todayFinishRoundedTimes(String recorded, String billed);
+
+  /// Explains that start and end are rounded by the job's rounding rule.
+  ///
+  /// In en, this message translates to:
+  /// **'Rounded to the nearest {minutes} minutes (job setting)'**
+  String todayFinishRoundingNote(int minutes);
+
+  /// Helper below the end time when rounding changes it.
+  ///
+  /// In en, this message translates to:
+  /// **'Billed: {time}'**
+  String todayFinishBilledEnd(String time);
+
+  /// Helper below the end time when the shift ends on another day than today.
+  ///
+  /// In en, this message translates to:
+  /// **'on {date}'**
+  String todayFinishEndDate(String date);
+
+  /// Label of the break field (minutes) in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Break'**
+  String get todayFinishBreak;
+
+  /// Unit suffix of a minutes input field.
+  ///
+  /// In en, this message translates to:
+  /// **'min'**
+  String get todayMinutesUnit;
+
+  /// Label of the worked time (duration minus break) in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Worked'**
+  String get todayFinishWorked;
+
+  /// Calculation line in the finish sheet, e.g. '7:45 h × €15.00/h'.
+  ///
+  /// In en, this message translates to:
+  /// **'{duration} × {rate}'**
+  String todayFinishCalculation(String duration, String rate);
+
+  /// Optional tips field in the finish sheet (kept separate from the wage).
+  ///
+  /// In en, this message translates to:
+  /// **'Tips (optional)'**
+  String get todayFinishTips;
+
+  /// Optional note field in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'Note (optional)'**
+  String get todayFinishNote;
+
+  /// Closes the finish sheet; the shift keeps running.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep running'**
+  String get todayFinishKeepRunning;
+
+  /// Error in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'The end must be after the start.'**
+  String get todayFinishErrorEndNotAfterStart;
+
+  /// Error in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'The break must be shorter than the shift.'**
+  String get todayFinishErrorBreakTooLong;
+
+  /// Error in the finish sheet.
+  ///
+  /// In en, this message translates to:
+  /// **'The end can\'t be in the future.'**
+  String get todayFinishErrorEndInFuture;
+
+  /// Title of the confirmation before discarding the running shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Discard this shift?'**
+  String get todayDiscardTitle;
+
+  /// Body of the discard confirmation.
+  ///
+  /// In en, this message translates to:
+  /// **'The running shift won\'t be saved. You can undo this right afterwards.'**
+  String get todayDiscardMessage;
 }
 
 class _AppLocalizationsDelegate
