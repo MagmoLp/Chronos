@@ -6,12 +6,14 @@ library;
 
 export '../../core/clock.dart' show ClockX, clockProvider;
 export '../error_log.dart' show ErrorLog, errorLogProvider;
+export 'app_requests.dart';
 export 'async_utils.dart';
 export 'bootstrap_provider.dart';
 export 'core_providers.dart';
 export 'data_providers.dart';
 export 'job_providers.dart';
 export 'payout_providers.dart';
+export 'platform_providers.dart';
 export 'review_providers.dart';
 export 'settings_providers.dart';
 export 'shift_providers.dart';
