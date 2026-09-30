@@ -1,5 +1,143 @@
 {
   "@@locale": "en",
   "appTitle": "Chronos",
-  "@appTitle": {"description": "App name"}
+  "@appTitle": {"description": "App name. Brand, not translated."},
+
+  "navToday": "Today",
+  "@navToday": {"description": "Bottom navigation / rail label for the Today destination (live shift and balance). One short word."},
+  "navShifts": "Shifts",
+  "@navShifts": {"description": "Navigation label for the list of recorded shifts. One short word."},
+  "navInsights": "Insights",
+  "@navInsights": {"description": "Navigation label for statistics (week/month/year). One short word."},
+
+  "commonSave": "Save",
+  "@commonSave": {"description": "Generic button: save the current form."},
+  "commonCancel": "Cancel",
+  "@commonCancel": {"description": "Generic button: dismiss a dialog or sheet without changes."},
+  "commonDelete": "Delete",
+  "@commonDelete": {"description": "Generic button or menu item: delete an item."},
+  "commonUndo": "Undo",
+  "@commonUndo": {"description": "Snackbar action that reverts the last change."},
+  "commonEdit": "Edit",
+  "@commonEdit": {"description": "Generic menu item: edit an item."},
+  "commonDuplicate": "Duplicate",
+  "@commonDuplicate": {"description": "Generic menu item: create a copy of an item."},
+  "commonRetry": "Try again",
+  "@commonRetry": {"description": "Button shown after an error to repeat the failed action."},
+  "commonClose": "Close",
+  "@commonClose": {"description": "Tooltip/button that closes a sheet, dialog or screen."},
+  "commonDone": "Done",
+  "@commonDone": {"description": "Button that finishes a flow."},
+  "commonNext": "Next",
+  "@commonNext": {"description": "Button that moves to the next step of a flow."},
+  "commonBack": "Back",
+  "@commonBack": {"description": "Button that moves to the previous step of a flow."},
+  "commonShare": "Share",
+  "@commonShare": {"description": "Button that opens the system share sheet."},
+  "commonSettings": "Settings",
+  "@commonSettings": {"description": "Tooltip of the gear icon in every top app bar; also the settings screen title."},
+  "commonOk": "OK",
+  "@commonOk": {"description": "Acknowledge button in simple dialogs."},
+  "commonDiscard": "Discard",
+  "@commonDiscard": {"description": "Destructive button that throws away unsaved input."},
+  "commonAdd": "Add",
+  "@commonAdd": {"description": "Generic button: add a new item."},
+  "commonExport": "Export",
+  "@commonExport": {"description": "Generic button or menu item: export data (PDF/CSV)."},
+  "commonDismiss": "Dismiss",
+  "@commonDismiss": {"description": "Tooltip of the close icon on a hint card."},
+  "commonMoreOptions": "More options",
+  "@commonMoreOptions": {"description": "Tooltip of the overflow (three dots) menu button."},
+  "commonOpenSettings": "Open settings",
+  "@commonOpenSettings": {"description": "Button that opens the Android system settings (e.g. notification permission)."},
+  "commonLoading": "Loading…",
+  "@commonLoading": {"description": "Shown while data is loading."},
+  "commonAll": "All",
+  "@commonAll": {"description": "Filter option that shows every item (all shifts, all jobs)."},
+
+  "statusPaid": "Paid",
+  "@statusPaid": {"description": "Status of a shift whose wage has been paid out."},
+  "statusOpen": "Unpaid",
+  "@statusOpen": {"description": "Status of a finished shift that has not been paid yet (German: Offen)."},
+  "statusRunning": "Running",
+  "@statusRunning": {"description": "Status of the shift that is currently being recorded."},
+  "statusPaused": "Paused",
+  "@statusPaused": {"description": "Status of a running shift that is on a break."},
+
+  "dateToday": "Today",
+  "@dateToday": {"description": "Relative day name for the current day."},
+  "dateYesterday": "Yesterday",
+  "@dateYesterday": {"description": "Relative day name for the previous day."},
+  "formatToday": "Today, {date}",
+  "@formatToday": {
+    "description": "Title of the Today screen. {date} is a short date such as 'Wed 30 Sep'.",
+    "placeholders": {"date": {"type": "String", "example": "Wed 30 Sep"}}
+  },
+  "formatHours": "{value} h",
+  "@formatHours": {
+    "description": "A duration or number of hours with the hour unit symbol. {value} is pre-formatted, e.g. '7:45' or '18.5'.",
+    "placeholders": {"value": {"type": "String", "example": "7:45"}}
+  },
+  "formatMinutes": "{value} min",
+  "@formatMinutes": {
+    "description": "A number of minutes with the minute unit symbol, e.g. a break of '30 min'.",
+    "placeholders": {"value": {"type": "String", "example": "30"}}
+  },
+  "formatRatePerHour": "{amount}/h",
+  "@formatRatePerHour": {
+    "description": "An hourly rate. {amount} is a formatted money amount such as '€15.00'.",
+    "placeholders": {"amount": {"type": "String", "example": "€15.00"}}
+  },
+  "durationSpokenHours": "{count, plural, =1{1 hour} other{{count} hours}}",
+  "@durationSpokenHours": {
+    "description": "Spoken form of whole hours for screen readers.",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "durationSpokenMinutes": "{count, plural, =1{1 minute} other{{count} minutes}}",
+  "@durationSpokenMinutes": {
+    "description": "Spoken form of whole minutes for screen readers.",
+    "placeholders": {"count": {"type": "int"}}
+  },
+  "durationSpokenHoursMinutes": "{hours} {minutes}",
+  "@durationSpokenHoursMinutes": {
+    "description": "Joins the spoken hours and minutes, e.g. '7 hours 45 minutes'.",
+    "placeholders": {
+      "hours": {"type": "String", "example": "7 hours"},
+      "minutes": {"type": "String", "example": "45 minutes"}
+    }
+  },
+
+  "errorGeneric": "Something went wrong. Please try again.",
+  "@errorGeneric": {"description": "Fallback error message."},
+  "errorLoadFailed": "Couldn't load your data.",
+  "@errorLoadFailed": {"description": "Error shown when stored data could not be read."},
+  "errorSaveFailed": "Couldn't save. Please try again.",
+  "@errorSaveFailed": {"description": "Error shown when saving failed."},
+  "errorRequired": "Please enter a value",
+  "@errorRequired": {"description": "Validation error for an empty required field."},
+  "errorInvalidAmount": "Enter an amount like {example}",
+  "@errorInvalidAmount": {
+    "description": "Validation error for a money field that could not be read. {example} is a correctly formatted amount.",
+    "placeholders": {"example": {"type": "String", "example": "15.50"}}
+  },
+  "errorAmountNotPositive": "The amount must be greater than 0",
+  "@errorAmountNotPositive": {"description": "Validation error when a money value (e.g. hourly rate) is zero."},
+  "errorInvalidTime": "Enter a time like {example}",
+  "@errorInvalidTime": {
+    "description": "Validation error for a time field that could not be read. {example} is a correctly formatted time.",
+    "placeholders": {"example": {"type": "String", "example": "08:15"}}
+  },
+
+  "timeFieldPick": "Choose time",
+  "@timeFieldPick": {"description": "Tooltip of the clock button next to a time field that opens the time picker."},
+  "timeFieldEarlier": "{minutes} minutes earlier",
+  "@timeFieldEarlier": {
+    "description": "Tooltip of the stepper button that moves a time back.",
+    "placeholders": {"minutes": {"type": "int"}}
+  },
+  "timeFieldLater": "{minutes} minutes later",
+  "@timeFieldLater": {
+    "description": "Tooltip of the stepper button that moves a time forward.",
+    "placeholders": {"minutes": {"type": "int"}}
+  }
 }
