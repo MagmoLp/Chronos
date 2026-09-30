@@ -63,12 +63,12 @@ import 'app_localizations_en.dart';
 /// property.
 abstract class AppLocalizations {
   AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static AppLocalizations of(BuildContext context) {
+    return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate =
@@ -86,257 +86,23 @@ abstract class AppLocalizations {
   /// of delegates is preferred or required.
   static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
       <LocalizationsDelegate<dynamic>>[
-    delegate,
-    GlobalMaterialLocalizations.delegate,
-    GlobalCupertinoLocalizations.delegate,
-    GlobalWidgetsLocalizations.delegate,
-  ];
+        delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ];
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
     Locale('de'),
-    Locale('en')
+    Locale('en'),
   ];
 
-  /// No description provided for @appTitle.
+  /// App name
   ///
-  /// In de, this message translates to:
+  /// In en, this message translates to:
   /// **'Chronos'**
   String get appTitle;
-
-  /// No description provided for @currentEarnings.
-  ///
-  /// In de, this message translates to:
-  /// **'Aktueller Verdienst'**
-  String get currentEarnings;
-
-  /// No description provided for @totalOpenEarnings.
-  ///
-  /// In de, this message translates to:
-  /// **'Gesamter offener Betrag'**
-  String get totalOpenEarnings;
-
-  /// No description provided for @start.
-  ///
-  /// In de, this message translates to:
-  /// **'START'**
-  String get start;
-
-  /// No description provided for @stop.
-  ///
-  /// In de, this message translates to:
-  /// **'STOPP'**
-  String get stop;
-
-  /// No description provided for @confirmStopTitle.
-  ///
-  /// In de, this message translates to:
-  /// **'Timer stoppen?'**
-  String get confirmStopTitle;
-
-  /// No description provided for @confirmStop.
-  ///
-  /// In de, this message translates to:
-  /// **'Sind Sie sicher, dass Sie stoppen möchten?'**
-  String get confirmStop;
-
-  /// No description provided for @cancel.
-  ///
-  /// In de, this message translates to:
-  /// **'Abbrechen'**
-  String get cancel;
-
-  /// No description provided for @confirm.
-  ///
-  /// In de, this message translates to:
-  /// **'Bestätigen'**
-  String get confirm;
-
-  /// No description provided for @workTimeLog.
-  ///
-  /// In de, this message translates to:
-  /// **'Arbeitszeit-Protokoll'**
-  String get workTimeLog;
-
-  /// No description provided for @settings.
-  ///
-  /// In de, this message translates to:
-  /// **'Einstellungen'**
-  String get settings;
-
-  /// No description provided for @language.
-  ///
-  /// In de, this message translates to:
-  /// **'Sprache'**
-  String get language;
-
-  /// No description provided for @theme.
-  ///
-  /// In de, this message translates to:
-  /// **'Erscheinungsbild'**
-  String get theme;
-
-  /// No description provided for @darkMode.
-  ///
-  /// In de, this message translates to:
-  /// **'Dunkelmodus'**
-  String get darkMode;
-
-  /// No description provided for @lightMode.
-  ///
-  /// In de, this message translates to:
-  /// **'Hellmodus'**
-  String get lightMode;
-
-  /// No description provided for @hourlyWage.
-  ///
-  /// In de, this message translates to:
-  /// **'Stundenlohn (€)'**
-  String get hourlyWage;
-
-  /// No description provided for @enterWage.
-  ///
-  /// In de, this message translates to:
-  /// **'Lohn eingeben'**
-  String get enterWage;
-
-  /// No description provided for @workEntries.
-  ///
-  /// In de, this message translates to:
-  /// **'Arbeitseinträge'**
-  String get workEntries;
-
-  /// No description provided for @addEntry.
-  ///
-  /// In de, this message translates to:
-  /// **'Eintrag hinzufügen'**
-  String get addEntry;
-
-  /// No description provided for @editEntry.
-  ///
-  /// In de, this message translates to:
-  /// **'Eintrag bearbeiten'**
-  String get editEntry;
-
-  /// No description provided for @delete.
-  ///
-  /// In de, this message translates to:
-  /// **'Löschen'**
-  String get delete;
-
-  /// No description provided for @date.
-  ///
-  /// In de, this message translates to:
-  /// **'Datum'**
-  String get date;
-
-  /// No description provided for @startTime.
-  ///
-  /// In de, this message translates to:
-  /// **'Startzeit'**
-  String get startTime;
-
-  /// No description provided for @endTime.
-  ///
-  /// In de, this message translates to:
-  /// **'Endzeit'**
-  String get endTime;
-
-  /// No description provided for @totalTime.
-  ///
-  /// In de, this message translates to:
-  /// **'Gesamtzeit'**
-  String get totalTime;
-
-  /// No description provided for @paid.
-  ///
-  /// In de, this message translates to:
-  /// **'Abgerechnet'**
-  String get paid;
-
-  /// No description provided for @save.
-  ///
-  /// In de, this message translates to:
-  /// **'Speichern'**
-  String get save;
-
-  /// No description provided for @noEntries.
-  ///
-  /// In de, this message translates to:
-  /// **'Keine Einträge vorhanden'**
-  String get noEntries;
-
-  /// No description provided for @hours.
-  ///
-  /// In de, this message translates to:
-  /// **'h'**
-  String get hours;
-
-  /// No description provided for @minutes.
-  ///
-  /// In de, this message translates to:
-  /// **'min'**
-  String get minutes;
-
-  /// No description provided for @earned.
-  ///
-  /// In de, this message translates to:
-  /// **'Verdient'**
-  String get earned;
-
-  /// No description provided for @entryDeleted.
-  ///
-  /// In de, this message translates to:
-  /// **'Eintrag gelöscht'**
-  String get entryDeleted;
-
-  /// No description provided for @entrySaved.
-  ///
-  /// In de, this message translates to:
-  /// **'Eintrag gespeichert'**
-  String get entrySaved;
-
-  /// No description provided for @tooShortEntry.
-  ///
-  /// In de, this message translates to:
-  /// **'Zeit zu kurz (unter 15 Min). Es wurde nicht gespeichert.'**
-  String get tooShortEntry;
-
-  /// No description provided for @workSaved.
-  ///
-  /// In de, this message translates to:
-  /// **'Arbeitszeit gespeichert'**
-  String get workSaved;
-
-  /// No description provided for @endAfterStart.
-  ///
-  /// In de, this message translates to:
-  /// **'Endzeit muss nach Startzeit liegen'**
-  String get endAfterStart;
-
-  /// No description provided for @wageExample.
-  ///
-  /// In de, this message translates to:
-  /// **'Beispiel: 15 oder 15.50'**
-  String get wageExample;
-
-  /// No description provided for @confirmDelete.
-  ///
-  /// In de, this message translates to:
-  /// **'Diesen Eintrag wirklich löschen?'**
-  String get confirmDelete;
-
-  /// No description provided for @unmarkPaidTitle.
-  ///
-  /// In de, this message translates to:
-  /// **'Abrechnung aufheben?'**
-  String get unmarkPaidTitle;
-
-  /// No description provided for @unmarkPaidContent.
-  ///
-  /// In de, this message translates to:
-  /// **'Diesen Eintrag wirklich als nicht abgerechnet markieren?'**
-  String get unmarkPaidContent;
 }
 
 class _AppLocalizationsDelegate
@@ -366,8 +132,9 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   }
 
   throw FlutterError(
-      'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.',
+  );
 }
