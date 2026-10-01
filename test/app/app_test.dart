@@ -169,8 +169,10 @@ void main() {
     testWidgets('a cold start from "Beenden" opens Today for the sheet', (
       tester,
     ) async {
+      _deviceLocales(tester, const [Locale('de', 'DE')]);
       final h = AppHarness();
-      await h.job();
+      final job = await h.job();
+      await h.read(shiftRepositoryProvider).start(job.id);
       h.notifications.launch = const NotificationTap(
         notificationId: NotificationIds.runningShift,
         actionId: NotificationActionIds.finish,
@@ -178,13 +180,16 @@ void main() {
       await pumpChronosApp(tester, h);
       expect(find.byType(HomeShell), findsOneWidget);
       expect(_selectedTab(tester), ShellTab.today.index);
-      expect(h.read(appRequestProvider)?.kind, AppRequestKind.openFinishSheet);
+      // TodayPage handled the request: the finish sheet is open.
+      expect(find.text('Schicht beenden'), findsOneWidget);
+      expect(h.read(appRequestProvider), isNull);
     });
 
     testWidgets('taps while the app runs route to Today', (tester) async {
       _deviceLocales(tester, const [Locale('de', 'DE')]);
       final h = AppHarness();
-      await h.job();
+      final job = await h.job();
+      await h.read(shiftRepositoryProvider).start(job.id);
       await pumpChronosApp(tester, h);
       for (final tap in const [
         NotificationTap(notificationId: NotificationIds.runningShift),
@@ -200,8 +205,16 @@ void main() {
         h.notifications.onTap!(tap);
         await tester.pumpAndSettle();
         expect(_selectedTab(tester), ShellTab.today.index);
+        expect(
+          find.text('Schicht beenden'),
+          tap.isFinish ? findsOneWidget : findsNothing,
+        );
+        if (tap.isFinish) {
+          await tester.tap(find.text('Weiterlaufen lassen'));
+          await tester.pumpAndSettle();
+        }
       }
-      expect(h.read(appRequestProvider)?.kind, AppRequestKind.openFinishSheet);
+      expect(h.read(appRequestProvider), isNull);
     });
 
     testWidgets('the channel names follow the language setting', (

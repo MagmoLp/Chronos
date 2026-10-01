@@ -222,7 +222,13 @@ void main() {
         find.text('${LegacyV1.importable} Einträge aus Chronos 1 übernommen'),
         findsOneWidget,
       );
-      await tester.tap(find.text('Prüfen'));
+      // Today shows its own review hint as well; use the snackbar action.
+      await tester.tap(
+        find.descendant(
+          of: find.byType(SnackBar),
+          matching: find.text('Prüfen'),
+        ),
+      );
       await settleApp(tester);
       expect(find.byType(ReviewPage), findsOneWidget);
       expect(find.text('Einträge prüfen'), findsOneWidget);
@@ -231,7 +237,7 @@ void main() {
 
     testWidgets('the notice is shown only once per session', (tester) async {
       final h = await _pumpGate(tester, legacy: legacyGerman);
-      expect(find.textContaining('übernommen'), findsOneWidget);
+      expect(find.textContaining('aus Chronos 1 übernommen'), findsOneWidget);
       expect(h.read(migrationNoticeProvider), isTrue);
       expect(h.read(migrationNoticeProvider.notifier).claim(), isFalse);
     });
@@ -248,13 +254,9 @@ void main() {
         h.read(appRequestProvider.notifier).request(kind);
         await tester.pumpAndSettle();
         expect(_selectedTab(tester), ShellTab.today.index);
-        // Today consumes the finish-sheet request itself.
-        final pending = h.read(appRequestProvider);
-        if (kind == AppRequestKind.showToday) {
-          expect(pending, isNull);
-        } else {
-          expect(pending?.kind, AppRequestKind.openFinishSheet);
-        }
+        // The shell consumes showToday; TodayPage consumes openFinishSheet
+        // (without a running shift it just drops it).
+        expect(h.read(appRequestProvider), isNull);
       });
     }
 
