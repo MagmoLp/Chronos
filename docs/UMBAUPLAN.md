@@ -15,6 +15,12 @@
 > Statt der Minijob-Grenze gibt es ein frei einstellbares Monatsziel bzw. eine Monatsgrenze.
 > Das Sicherheits-Update v1.0.1 entfällt, es wird direkt 2.0 umgesetzt.
 > Wo dieser Plan davon abweicht, gilt die Spezifikation.
+>
+> **Stand 01.10.2026:** Chronos 2.0 ist auf dem Branch `claude/optimistic-brown-56sgj7` vollständig umgesetzt:
+> neuer Code in `lib/`, über 1500 Tests, Screenshots in `docs/screenshots/`.
+> Offen ist noch der Android-Build auf einem echten Rechner (Checkliste in `docs/ANDROID_BUILD.md`).
+> In der Cloud-Sitzung war `dl.google.com` gesperrt, deshalb fehlt dort das Android-SDK.
+> Danach folgt der geschlossene Test im Play Store.
 
 ---
 
