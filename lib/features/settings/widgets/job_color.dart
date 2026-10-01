@@ -23,7 +23,9 @@ abstract final class JobColors {
   /// The colour to paint for the stored [argb] in the current theme.
   static Color resolve(BuildContext context, int argb) {
     final index = indexOf(argb);
-    return index == null ? Color(argb) : ChronosColors.of(context).jobColor(index);
+    return index == null
+        ? Color(argb)
+        : ChronosColors.of(context).jobColor(index);
   }
 }
 

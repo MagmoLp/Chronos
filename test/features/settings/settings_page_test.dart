@@ -38,7 +38,8 @@ Future<FeatureHarness> _pump(
   TestConfig config = const TestConfig(size: TestScreens.phoneLarge),
 }) => pumpFeature(tester, const SettingsPage(), seed: seed, config: config);
 
-AppSettings _stored(FeatureHarness f) => SettingsRepository(f.data.store).load();
+AppSettings _stored(FeatureHarness f) =>
+    SettingsRepository(f.data.store).load();
 
 void _expectSnack(String text) => expect(
   find.descendant(of: find.byType(SnackBar), matching: find.text(text)),
@@ -178,9 +179,7 @@ void main() {
   });
 
   group('notifications', () {
-    testWidgets('shows allowed; tap opens the system settings', (
-      tester,
-    ) async {
+    testWidgets('shows allowed; tap opens the system settings', (tester) async {
       final f = await _pump(tester);
       expect(find.text(_de.settingsNotificationsOn), findsOneWidget);
       await tester.tap(find.text(_de.settingsNotificationsOn));
@@ -356,7 +355,10 @@ void main() {
       expect(find.text(_de.dataDeleteMessage), findsOneWidget);
       await tester.tap(find.text(_de.commonDelete));
       await pumpUntil(tester, () => !f.read(dataControllerProvider));
-      await pumpUntil(tester, () => find.byType(SnackBar).evaluate().isNotEmpty);
+      await pumpUntil(
+        tester,
+        () => find.byType(SnackBar).evaluate().isNotEmpty,
+      );
       _expectSnack(_de.dataDeleted);
       var counts = await f.data.read(dataControllerProvider.notifier).counts();
       expect(counts.isEmpty, isTrue);
@@ -374,7 +376,9 @@ void main() {
       await settleData(tester);
       await tester.tap(find.text(_de.commonCancel));
       await settleData(tester);
-      final counts = await f.data.read(dataControllerProvider.notifier).counts();
+      final counts = await f.data
+          .read(dataControllerProvider.notifier)
+          .counts();
       expect(counts.shifts, 2);
     });
 

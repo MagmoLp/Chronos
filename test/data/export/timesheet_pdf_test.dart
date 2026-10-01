@@ -88,81 +88,85 @@ void main() {
     }
   });
 
-  test('builds an A4 timesheet with header, table, sums and signatures', () async {
-    final bytes = await buildTimesheetPdf(
-      data: _data(
-        [_row(28, note: 'Aufbau'), _row(29, startHour: 18)],
-        name: 'Jörg Weiß',
-        notes: true,
-      ),
-      labels: _labels,
-      format: _format,
-      fonts: _fonts,
-      compress: false,
-    );
-    expect(String.fromCharCodes(bytes.take(5)), '%PDF-');
-    expect(pdfPageCount(bytes), 1);
-    // A4 in points.
-    expect(String.fromCharCodes(bytes), contains('595.27'));
+  test(
+    'builds an A4 timesheet with header, table, sums and signatures',
+    () async {
+      final bytes = await buildTimesheetPdf(
+        data: _data(
+          [_row(28, note: 'Aufbau'), _row(29, startHour: 18)],
+          name: 'Jörg Weiß',
+          notes: true,
+        ),
+        labels: _labels,
+        format: _format,
+        fonts: _fonts,
+        compress: false,
+      );
+      expect(String.fromCharCodes(bytes.take(5)), '%PDF-');
+      expect(pdfPageCount(bytes), 1);
+      // A4 in points.
+      expect(String.fromCharCodes(bytes), contains('595.27'));
 
-    final text = pdfTextRuns(bytes);
-    for (final word in [
-      'Stundenzettel',
-      'Jörg',
-      'Weiß',
-      'Café',
-      'Müller',
-      '01.09.2026',
-      '30.09.2026',
-      'Datum',
-      'Start',
-      'Ende',
-      'Pause',
-      'Stunden',
-      'Lohn',
-      'Betrag',
-      'Notiz',
-      'Aufbau',
-      '28.09.',
-      '08:00',
-      '16:00',
-      '02:00',
-      '+1',
-      '7,50',
-      '15,50',
-      '116,25',
-      '€',
-      'Summe',
-      '15,00',
-      '232,50',
-      'Unterschrift',
-      'Arbeitgeber',
-      'Seite',
-    ]) {
-      expect(text, contains(word), reason: word);
-    }
-  });
+      final text = pdfTextRuns(bytes);
+      for (final word in [
+        'Stundenzettel',
+        'Jörg',
+        'Weiß',
+        'Café',
+        'Müller',
+        '01.09.2026',
+        '30.09.2026',
+        'Datum',
+        'Start',
+        'Ende',
+        'Pause',
+        'Stunden',
+        'Lohn',
+        'Betrag',
+        'Notiz',
+        'Aufbau',
+        '28.09.',
+        '08:00',
+        '16:00',
+        '02:00',
+        '+1',
+        '7,50',
+        '15,50',
+        '116,25',
+        '€',
+        'Summe',
+        '15,00',
+        '232,50',
+        'Unterschrift',
+        'Arbeitgeber',
+        'Seite',
+      ]) {
+        expect(text, contains(word), reason: word);
+      }
+    },
+  );
 
-  test('without a name leaves a line to fill in; long lists get more pages', () async {
-    final rows = [
-      for (var i = 0; i < 90; i++) _row(1 + i % 28),
-    ];
-    final bytes = await buildTimesheetPdf(
-      data: _data(rows),
-      labels: _labels,
-      format: _format,
-      fonts: _fonts,
-      compress: false,
-    );
-    expect(pdfPageCount(bytes), greaterThan(1));
-    final text = pdfTextRuns(bytes);
-    expect(text, isNot(contains('Notiz')));
-    // Header row repeats on every page.
-    expect(
-      text.where((t) => t == 'Betrag').length,
-      greaterThanOrEqualTo(pdfPageCount(bytes)),
-    );
-  });
+  test(
+    'without a name leaves a line to fill in; long lists get more pages',
+    () async {
+      final rows = [for (var i = 0; i < 90; i++) _row(1 + i % 28)];
+      final bytes = await buildTimesheetPdf(
+        data: _data(rows),
+        labels: _labels,
+        format: _format,
+        fonts: _fonts,
+        compress: false,
+      );
+      expect(pdfPageCount(bytes), greaterThan(1));
+      final text = pdfTextRuns(bytes);
+      expect(text, isNot(contains('Notiz')));
+      // Header row repeats on every page.
+      expect(
+        text.where((t) => t == 'Betrag').length,
+        greaterThanOrEqualTo(pdfPageCount(bytes)),
+      );
+    },
+  );
 
   test('compressed output is produced and smaller', () async {
     final data = _data([_row(28)]);

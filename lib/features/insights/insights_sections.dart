@@ -67,10 +67,10 @@ class StatsGrid extends StatelessWidget {
     final scale = MediaQuery.textScalerOf(context).scale(16) / 16;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final fit = ((constraints.maxWidth + gap) /
-                (_minCardWidth * scale + gap))
-            .floor()
-            .clamp(1, cards.length);
+        final fit =
+            ((constraints.maxWidth + gap) / (_minCardWidth * scale + gap))
+                .floor()
+                .clamp(1, cards.length);
         final perRow = fit >= cards.length ? cards.length : fit.clamp(1, 3);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,16 +101,20 @@ class StatsGrid extends StatelessWidget {
 }
 
 /// Progress of the current month towards the monthly goal/limit, or a link
-/// to set one.
+/// to set one (nothing while the progress is still loading).
 class MonthlyGoalSection extends ConsumerWidget {
   /// Creates the section.
-  const MonthlyGoalSection({super.key});
+  const MonthlyGoalSection({super.key, required this.goal});
+
+  /// The progress (`null` value = no goal configured).
+  final AsyncValue<GoalProgress?> goal;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = AppLocalizations.of(context);
-    final goal = ref.watch(monthlyGoalProvider).value;
-    if (goal == null) {
+    if (!goal.hasValue) return const SizedBox.shrink();
+    final progress = goal.value;
+    if (progress == null) {
       return Align(
         alignment: AlignmentDirectional.centerStart,
         child: TextButton.icon(
@@ -121,7 +125,7 @@ class MonthlyGoalSection extends ConsumerWidget {
       );
     }
     return MonthlyGoalCard(
-      goal: goal,
+      goal: progress,
       month: ref.watch(currentDateProvider).toLocalDateTime(),
     );
   }
@@ -293,9 +297,9 @@ class JobBreakdownCard extends StatelessWidget {
                                 fmt.money(entry.earnedCents),
                               ),
                               style: context.chronosText.bodyNumbers.copyWith(
-                                color: Theme.of(
-                                  context,
-                                ).colorScheme.onSurfaceVariant,
+                                color: Theme.of(context)
+                                    .colorScheme
+                                    .onSurfaceVariant,
                               ),
                             ),
                           ],
@@ -313,9 +317,15 @@ class JobBreakdownCard extends StatelessWidget {
 }
 
 /// Payouts received in the period (date, job, received, difference).
-class PayoutsSection extends ConsumerWidget {
+/// Hidden while no payout was ever recorded.
+class PayoutsSection extends StatelessWidget {
   /// Creates the section.
-  const PayoutsSection({super.key, required this.period, required this.jobs});
+  const PayoutsSection({
+    super.key,
+    required this.period,
+    required this.jobs,
+    required this.all,
+  });
 
   /// The shown period.
   final StatsPeriod period;
@@ -323,13 +333,15 @@ class PayoutsSection extends ConsumerWidget {
   /// All jobs (names).
   final List<Job> jobs;
 
+  /// All payouts (filtered to [period] here).
+  final List<Payout> all;
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final fmt = Fmt.of(context);
     final scheme = Theme.of(context).colorScheme;
     final text = Theme.of(context).textTheme;
-    final all = ref.watch(payoutsProvider).value ?? const <Payout>[];
     if (all.isEmpty) return const SizedBox.shrink();
     final range = period.range;
     final payouts = [

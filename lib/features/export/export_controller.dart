@@ -103,11 +103,7 @@ class ExportController extends BusyNotifier {
         .read(shiftRepositoryProvider)
         .getRange(request.range, jobId: request.jobId);
     final jobs = await ref.read(jobRepositoryProvider).getJobs();
-    final rows = exportRowsFromShifts(
-      shifts,
-      jobs: jobs,
-      jobId: request.jobId,
-    );
+    final rows = exportRowsFromShifts(shifts, jobs: jobs, jobId: request.jobId);
     if (rows.isEmpty) return const ExportResult(shiftCount: 0);
 
     final share = ref.read(shareServiceProvider);

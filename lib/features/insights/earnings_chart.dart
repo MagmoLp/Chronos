@@ -88,14 +88,15 @@ class _EarningsChartCardState extends State<EarningsChartCard> {
                 liveRegion: selected != null,
                 child: Text(
                   caption,
-                  style: (selected == null
-                          ? text.bodySmall
-                          : context.chronosText.bodyNumbers)
-                      ?.copyWith(
-                        color: selected == null
-                            ? scheme.onSurfaceVariant
-                            : scheme.onSurface,
-                      ),
+                  style:
+                      (selected == null
+                              ? text.bodySmall
+                              : context.chronosText.bodyNumbers)
+                          ?.copyWith(
+                            color: selected == null
+                                ? scheme.onSurfaceVariant
+                                : scheme.onSurface,
+                          ),
                 ),
               ),
             const SizedBox(height: ChronosSpace.s16),
@@ -192,7 +193,8 @@ class _BarChart extends StatelessWidget {
       return size;
     }
 
-    String euroLabel(num value) => l10n.insightsAxisEuros(fmt.integer(value.round()));
+    String euroLabel(num value) =>
+        l10n.insightsAxisEuros(fmt.integer(value.round()));
     final leftReserved = measure(euroLabel(maxEuros)).width + ChronosSpace.s8;
     var widest = 0.0;
     var labelHeight = 0.0;
@@ -293,9 +295,7 @@ class _BarChart extends StatelessWidget {
                 child: ExcludeSemantics(
                   child: BarChart(
                     data,
-                    duration: animate
-                        ? ChronosMotion.short
-                        : Duration.zero,
+                    duration: animate ? ChronosMotion.short : Duration.zero,
                   ),
                 ),
               ),

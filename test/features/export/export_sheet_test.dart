@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:chronos/app/providers/providers.dart';
 import 'package:chronos/core/format.dart';
 import 'package:chronos/core/local_date.dart';
 import 'package:chronos/core/time.dart';
@@ -93,9 +92,7 @@ void main() {
     );
     expect(chip.selected, isTrue);
     expect(
-      find.text(
-        _de.exportSummary(2, _fmt.hours(41400000), _fmt.money(17250)),
-      ),
+      find.text(_de.exportSummary(2, _fmt.hours(41400000), _fmt.money(17250))),
       findsOneWidget,
     );
     // One job: no job selector.
@@ -113,9 +110,14 @@ void main() {
 
     final shared = f.share.sharedFiles.single;
     expect(shared.mimeType, ShareMimeTypes.csv);
-    expect(shared.path, endsWith('chronos_stundenzettel_2026-09-01_2026-09-30.csv'));
+    expect(
+      shared.path,
+      endsWith('chronos_stundenzettel_2026-09-01_2026-09-30.csv'),
+    );
     expect(shared.subject, _de.exportSubject('01.09.2026 – 30.09.2026'));
-    final bytes = (await tester.runAsync(() => File(shared.path).readAsBytes()))!;
+    final bytes = (await tester.runAsync(
+      () => File(shared.path).readAsBytes(),
+    ))!;
     expect(bytes.take(3), [0xEF, 0xBB, 0xBF]);
     final csv = utf8.decode(bytes.skip(3).toList());
     expect(
@@ -153,7 +155,10 @@ void main() {
       csv.split('\r\n').first,
       'Date,Start,End,Break (min),Hours,Hourly rate,Amount,Tips,Status,Job',
     );
-    expect(csv, contains('2026-09-28,08:00,16:00,30,7.50,15.00,112.50,5.00,Unpaid,'));
+    expect(
+      csv,
+      contains('2026-09-28,08:00,16:00,30,7.50,15.00,112.50,5.00,Unpaid,'),
+    );
   });
 
   testWidgets('shares a PDF timesheet with name, job and totals', (
@@ -170,7 +175,9 @@ void main() {
     final shared = f.share.sharedFiles.single;
     expect(shared.mimeType, ShareMimeTypes.pdf);
     expect(shared.path, endsWith('.pdf'));
-    final bytes = (await tester.runAsync(() => File(shared.path).readAsBytes()))!;
+    final bytes = (await tester.runAsync(
+      () => File(shared.path).readAsBytes(),
+    ))!;
     expect(latin1.decode(bytes.take(5).toList()), '%PDF-');
     expect(bytes.length, greaterThan(5000));
     expect(find.byType(ExportSheet), findsNothing);
@@ -258,9 +265,12 @@ void main() {
   });
 
   testWidgets('no shifts: friendly message, share disabled', (tester) async {
-    await _open(tester, seed: (h) async {
-      await h.job();
-    });
+    await _open(
+      tester,
+      seed: (h) async {
+        await h.job();
+      },
+    );
     expect(find.text(_de.exportEmpty), findsOneWidget);
     final button = tester.widget<FilledButton>(
       find.ancestor(
@@ -294,7 +304,9 @@ void main() {
     await tester.tap(find.text('Bar').last);
     await tester.pumpAndSettle();
     expect(
-      find.text(_de.exportSummary(1, _fmt.hours(4 * 3600000), _fmt.money(4800))),
+      find.text(
+        _de.exportSummary(1, _fmt.hours(4 * 3600000), _fmt.money(4800)),
+      ),
       findsOneWidget,
     );
     await tester.tap(find.text(_de.exportFormatCsv));
@@ -344,7 +356,9 @@ void main() {
     await settleData(tester);
     expect(find.text('29.09.2026 – 30.09.2026'), findsOneWidget);
     expect(
-      find.text(_de.exportSummary(1, _fmt.hours(4 * 3600000), _fmt.money(6000))),
+      find.text(
+        _de.exportSummary(1, _fmt.hours(4 * 3600000), _fmt.money(6000)),
+      ),
       findsOneWidget,
     );
   });
@@ -359,7 +373,9 @@ void main() {
       wrapInScaffold: true,
       seed: _seed,
       config: const TestConfig(size: TestScreens.phoneLarge),
-      overrides: [timesheetFontLoaderProvider.overrideWithValue(() => fonts.future)],
+      overrides: [
+        timesheetFontLoaderProvider.overrideWithValue(() => fonts.future),
+      ],
     );
     await tester.tap(find.text('open'));
     await settleData(tester);
@@ -394,7 +410,11 @@ void main() {
             await h.job(name: 'Eventhalle am Stadtpark');
           },
         );
-        await scrollThrough(tester, within: find.byType(ExportSheet), context: config);
+        await scrollThrough(
+          tester,
+          within: find.byType(ExportSheet),
+          context: config,
+        );
         expectNoLayoutErrors(tester, config);
       });
     }
@@ -405,7 +425,10 @@ void main() {
       testWidgets('meets guidelines (${brightness.name})', (tester) async {
         await _open(
           tester,
-          config: TestConfig(brightness: brightness, size: TestScreens.phoneLarge),
+          config: TestConfig(
+            brightness: brightness,
+            size: TestScreens.phoneLarge,
+          ),
         );
         await expectMeetsAccessibilityGuidelines(tester);
       });

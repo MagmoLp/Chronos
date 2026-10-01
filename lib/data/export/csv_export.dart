@@ -217,7 +217,8 @@ String csvField(String value, CsvDialect dialect) {
 String _two(int n) => n.toString().padLeft(2, '0');
 
 String _date(LocalDate date, CsvDialect dialect) => switch (dialect) {
-  CsvDialect.excelGerman => '${_two(date.day)}.${_two(date.month)}.${date.year}',
+  CsvDialect.excelGerman =>
+    '${_two(date.day)}.${_two(date.month)}.${date.year}',
   CsvDialect.international => date.toIso8601String(),
 };
 

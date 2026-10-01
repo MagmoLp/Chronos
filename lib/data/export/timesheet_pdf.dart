@@ -222,7 +222,10 @@ Future<Uint8List> buildTimesheetPdf({
       build: (context) => [
         pw.Text(
           labels.title,
-          style: const pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold),
+          style: const pw.TextStyle(
+            fontSize: 20,
+            fontWeight: pw.FontWeight.bold,
+          ),
         ),
         pw.SizedBox(height: 12),
         _header(labels, data, period),
@@ -253,10 +256,7 @@ pw.Widget _header(TimesheetLabels labels, TimesheetData data, String period) {
   );
   const valueStyle = pw.TextStyle(fontSize: 11);
   return pw.Table(
-    columnWidths: const {
-      0: pw.IntrinsicColumnWidth(),
-      1: pw.FlexColumnWidth(),
-    },
+    columnWidths: const {0: pw.IntrinsicColumnWidth(), 1: pw.FlexColumnWidth()},
     children: [
       row(
         labels.name,
@@ -330,7 +330,8 @@ pw.Widget _table(
     _Col.date => format.rowDate(r.date),
     _Col.start => format.time(r.start),
     _Col.end => '${format.time(r.end)}${r.endsNextDay ? ' +1' : ''}',
-    _Col.breakTime => r.breakMinutes == 0 ? '–' : format.minutes(r.breakMinutes),
+    _Col.breakTime =>
+      r.breakMinutes == 0 ? '–' : format.minutes(r.breakMinutes),
     _Col.hours => format.hours(r.workedMs),
     _Col.rate => format.money(r.rateCentsPerHour),
     _Col.amount => format.money(r.amountCents),
@@ -375,7 +376,9 @@ pw.Widget _table(
         ],
       ),
       for (final row in data.rows)
-        pw.TableRow(children: [for (final c in columns) cell(value(c, row), c)]),
+        pw.TableRow(
+          children: [for (final c in columns) cell(value(c, row), c)],
+        ),
       pw.TableRow(
         decoration: const pw.BoxDecoration(
           border: pw.Border(

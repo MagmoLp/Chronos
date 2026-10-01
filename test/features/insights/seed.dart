@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chronos/app/providers/providers.dart';
 import 'package:chronos/core/local_date.dart';
 import 'package:chronos/domain/job.dart';
@@ -76,7 +78,13 @@ Future<void> scrollThrough(
   for (var i = 0; i < 40; i++) {
     final state = tester.state<ScrollableState>(scrollable);
     final position = state.position;
-    if (position.pixels >= position.maxScrollExtent) break;
+    if (position.pixels >= position.maxScrollExtent) {
+      // Content built at the end may still grow (lazy rows, data arriving):
+      // settle and only stop if the end is still reached.
+      await tester.pumpAndSettle();
+      expectNoLayoutErrors(tester, context);
+      if (position.pixels >= position.maxScrollExtent) break;
+    }
     position.jumpTo(
       (position.pixels + position.viewportDimension * 0.8).clamp(
         0,
@@ -100,11 +108,7 @@ Future<void> tapVisible(
   double delta = 200,
 }) async {
   if (finder.evaluate().isEmpty) {
-    await tester.scrollUntilVisible(
-      finder,
-      delta,
-      scrollable: topScrollable(),
-    );
+    await tester.scrollUntilVisible(finder, delta, scrollable: topScrollable());
   }
   await tester.ensureVisible(finder);
   await tester.pumpAndSettle();
@@ -118,15 +122,17 @@ Future<T> runInApp<T>(WidgetTester tester, Future<T> Function() action) async {
   var done = false;
   late T result;
   Object? error;
-  action().then(
-    (value) {
-      result = value;
-      done = true;
-    },
-    onError: (Object e) {
-      error = e;
-      done = true;
-    },
+  unawaited(
+    action().then(
+      (value) {
+        result = value;
+        done = true;
+      },
+      onError: (Object e) {
+        error = e;
+        done = true;
+      },
+    ),
   );
   await pumpUntil(tester, () => done);
   if (error != null) throw error!;

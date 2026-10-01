@@ -44,7 +44,8 @@ class _MonthlyGoalDialogState extends ConsumerState<MonthlyGoalDialog> {
   }
 
   Future<void> _save() async {
-    if (_choice != _GoalChoice.off && !(_form.currentState?.validate() ?? false)) {
+    if (_choice != _GoalChoice.off &&
+        !(_form.currentState?.validate() ?? false)) {
       return;
     }
     setState(() => _saving = true);
@@ -154,10 +155,8 @@ class _MonthlyGoalDialogState extends ConsumerState<MonthlyGoalDialog> {
 }
 
 /// Opens the "Arbeitest du noch?" reminder choice (Aus / 6 / 8 / 10 / 12 h).
-Future<void> showReminderDialog(BuildContext context) => showDialog<void>(
-  context: context,
-  builder: (_) => const ReminderDialog(),
-);
+Future<void> showReminderDialog(BuildContext context) =>
+    showDialog<void>(context: context, builder: (_) => const ReminderDialog());
 
 /// Reminder delay choice; selecting an option saves it and closes.
 class ReminderDialog extends ConsumerWidget {

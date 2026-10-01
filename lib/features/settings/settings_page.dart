@@ -7,6 +7,7 @@ import '../../app/providers/providers.dart';
 import '../../core/format.dart';
 import '../../domain/app_settings.dart';
 import '../../domain/job.dart';
+import '../../domain/wage_rate.dart';
 import '../../l10n/app_localizations.dart';
 import '../../platform/app_info.dart';
 import '../export/export_sheet.dart';
@@ -18,9 +19,9 @@ import 'widgets/choice_segments.dart';
 import 'widgets/settings_group.dart';
 
 /// Opens the settings screen.
-Future<void> openSettings(BuildContext context) => Navigator.of(
-  context,
-).push(MaterialPageRoute<void>(builder: (_) => const SettingsPage()));
+Future<void> openSettings(BuildContext context) =>
+    Navigator.of(context)
+        .push(MaterialPageRoute<void>(builder: (_) => const SettingsPage()));
 
 /// Settings: general (language, theme), work (jobs, monthly goal, reminder),
 /// notifications, data (export, backup, restore, delete) and about.
@@ -59,17 +60,18 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
   }
 
   Future<void> _loadAppInfo() async {
+    final log = ref.read(errorLogProvider);
     try {
       final info = await ref.read(appInfoServiceProvider).load();
       if (mounted) setState(() => _appInfo = info);
     } on Object catch (e, st) {
-      await ref.read(errorLogProvider).record(e, st, context: 'appInfo');
+      await log.record(e, st, context: 'appInfo');
     }
   }
 
   Future<void> _openNotificationSettings() async {
     await ref.read(notificationServiceProvider).openNotificationSettings();
-    await _checkNotifications();
+    if (mounted) await _checkNotifications();
   }
 
   @override
@@ -191,9 +193,7 @@ class _SettingsPageState extends ConsumerState<SettingsPage> {
                     _notificationsEnabled == false
                         ? Icons.notifications_off_outlined
                         : Icons.notifications_outlined,
-                    color: _notificationsEnabled == false
-                        ? scheme.error
-                        : null,
+                    color: _notificationsEnabled == false ? scheme.error : null,
                   ),
                   title: Text(switch (_notificationsEnabled) {
                     null => l10n.commonLoading,
@@ -305,7 +305,7 @@ class _JobsSummary extends ConsumerWidget {
     final rates = ref.watch(jobRatesProvider(job.id)).value;
     final rate = rates == null
         ? null
-        : currentRate(rates, ref.watch(currentDateProvider));
+        : wageRateForDate(rates, ref.watch(currentDateProvider));
     if (rate == null) return Text(job.name);
     return Text(
       l10n.settingsJobsOne(job.name, Fmt.of(context).rate(rate.centsPerHour)),

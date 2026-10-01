@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app/providers/providers.dart';
 import '../../app/theme/theme.dart';
 import '../../core/format.dart';
-import '../../core/local_date.dart';
 import '../../domain/errors.dart';
 import '../../domain/job.dart';
 import '../../domain/wage_rate.dart';
@@ -14,23 +13,6 @@ import 'error_text.dart';
 import 'job_editor_page.dart';
 import 'widgets/job_color.dart';
 import 'widgets/settings_group.dart';
-
-/// The wage that applies on [date] from a job's history (any order):
-/// the latest rate starting on or before [date], else the earliest one.
-WageRate? currentRate(List<WageRate> rates, LocalDate date) {
-  WageRate? best;
-  WageRate? earliest;
-  for (final rate in rates) {
-    if (earliest == null || rate.validFrom.isBefore(earliest.validFrom)) {
-      earliest = rate;
-    }
-    if (rate.validFrom.isOnOrBefore(date) &&
-        (best == null || rate.validFrom.isAfter(best.validFrom))) {
-      best = rate;
-    }
-  }
-  return best ?? earliest;
-}
 
 /// "Jobs & Stundenlohn": active and archived jobs with their current wage.
 class JobsPage extends ConsumerWidget {
@@ -106,7 +88,10 @@ class JobsPage extends ConsumerWidget {
                     title: archived.isEmpty ? null : l10n.jobsActiveSection,
                     children: [
                       for (final job in active)
-                        JobTile(job: job, onTap: () => _open(context, ref, job)),
+                        JobTile(
+                          job: job,
+                          onTap: () => _open(context, ref, job),
+                        ),
                     ],
                   ),
                 if (archived.isNotEmpty)
@@ -114,7 +99,10 @@ class JobsPage extends ConsumerWidget {
                     title: l10n.jobsArchivedSection,
                     children: [
                       for (final job in archived)
-                        JobTile(job: job, onTap: () => _open(context, ref, job)),
+                        JobTile(
+                          job: job,
+                          onTap: () => _open(context, ref, job),
+                        ),
                     ],
                   ),
               ],
@@ -140,7 +128,7 @@ class JobTile extends ConsumerWidget {
     final fmt = Fmt.of(context);
     final today = ref.watch(currentDateProvider);
     final rates = ref.watch(jobRatesProvider(job.id)).value;
-    final rate = rates == null ? null : currentRate(rates, today);
+    final rate = rates == null ? null : wageRateForDate(rates, today);
     return ListTile(
       onTap: onTap,
       leading: SizedBox.square(

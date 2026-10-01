@@ -48,11 +48,19 @@ void main() {
         final job = await h.job();
         await h
             .read(jobRepositoryProvider)
-            .addRate(job.id, validFrom: LocalDate(2026, 7, 1), centsPerHour: 1600);
+            .addRate(
+              job.id,
+              validFrom: LocalDate(2026, 7, 1),
+              centsPerHour: 1600,
+            );
         // A future raise does not count yet.
         await h
             .read(jobRepositoryProvider)
-            .addRate(job.id, validFrom: LocalDate(2026, 12, 1), centsPerHour: 1700);
+            .addRate(
+              job.id,
+              validFrom: LocalDate(2026, 12, 1),
+              centsPerHour: 1700,
+            );
       },
     );
     expect(find.text('Catering'), findsOneWidget);
@@ -108,11 +116,11 @@ void main() {
     await settleData(tester);
     expect(
       tester.getSemantics(find.bySemanticsLabel(_de.jobsColorTeal)),
-      containsSemantics(isSelected: true, isButton: true),
+      isSemantics(isSelected: true, isButton: true),
     );
     expect(
       tester.getSemantics(find.bySemanticsLabel(_de.jobsColorBlue)),
-      containsSemantics(isSelected: false),
+      isSemantics(isSelected: false),
     );
   });
 
@@ -195,10 +203,7 @@ void main() {
       await tester.tap(find.text('28'));
       await tester.tap(find.text('OK'));
       await tester.pumpAndSettle();
-      expect(
-        find.text(_fmt.dateMedium(DateTime(2026, 9, 28))),
-        findsOneWidget,
-      );
+      expect(find.text(_fmt.dateMedium(DateTime(2026, 9, 28))), findsOneWidget);
       await tester.tap(find.text(_de.jobsRateRecalc));
       await tester.pumpAndSettle();
       await tester.tap(
@@ -232,8 +237,12 @@ void main() {
         tester,
         seed: (h) async {
           final job = await h.job();
-          openId = (await addShift(h, job, LocalDate(2026, 9, 30), start: 6))
-              .id;
+          openId = (await addShift(
+            h,
+            job,
+            LocalDate(2026, 9, 30),
+            start: 6,
+          )).id;
         },
       );
       await _openEditor(tester, 'Catering');
@@ -263,11 +272,13 @@ void main() {
         tester,
         seed: (h) async {
           final job = await h.job();
-          await h.read(jobRepositoryProvider).addRate(
-            job.id,
-            validFrom: LocalDate(2026, 7, 1),
-            centsPerHour: 1600,
-          );
+          await h
+              .read(jobRepositoryProvider)
+              .addRate(
+                job.id,
+                validFrom: LocalDate(2026, 7, 1),
+                centsPerHour: 1600,
+              );
         },
       );
       await _openEditor(tester, 'Catering');
@@ -326,7 +337,10 @@ void main() {
       expect(find.byType(JobEditorPage), findsNothing);
       expect(find.text(_de.jobsArchived('Bar')), findsOneWidget);
       expect(find.text(_de.jobsArchivedSection), findsOneWidget);
-      expect((await _jobs(f)).firstWhere((j) => j.name == 'Bar').archived, isTrue);
+      expect(
+        (await _jobs(f)).firstWhere((j) => j.name == 'Bar').archived,
+        isTrue,
+      );
 
       await tester.tap(find.text(_de.commonUndo));
       await settleData(tester);
@@ -356,11 +370,13 @@ void main() {
   group('layout', () {
     Future<void> seed(ProviderHarness h) async {
       final job = await h.job(name: 'Catering Müller & Söhne Eventservice');
-      await h.read(jobRepositoryProvider).addRate(
-        job.id,
-        validFrom: LocalDate(2026, 7, 1),
-        centsPerHour: 1600,
-      );
+      await h
+          .read(jobRepositoryProvider)
+          .addRate(
+            job.id,
+            validFrom: LocalDate(2026, 7, 1),
+            centsPerHour: 1600,
+          );
       final old = await h.job(name: 'Alter Job');
       await h.job(name: 'Bar');
       await h.read(jobRepositoryProvider).setArchived(old.id, true);
@@ -369,7 +385,11 @@ void main() {
     for (final config in TestConfig.matrix()) {
       testWidgets('jobs list and editor: $config', (tester) async {
         await _pumpJobs(tester, config: config, seed: seed);
-        await scrollThrough(tester, within: find.byType(JobsPage), context: config);
+        await scrollThrough(
+          tester,
+          within: find.byType(JobsPage),
+          context: config,
+        );
         await tapVisible(
           tester,
           find.text('Catering Müller & Söhne Eventservice'),

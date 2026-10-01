@@ -17,8 +17,10 @@ void _snack(ScaffoldMessengerState messenger, String message) {
     ..showSnackBar(SnackBar(content: Text(message)));
 }
 
+/// Shows a refused action ([ChronosException]) as its localized message;
+/// anything else is logged and shown as a generic error. Busy is ignored.
 Future<void> _logAndReport(
-  WidgetRef ref,
+  ErrorLog log,
   ScaffoldMessengerState messenger,
   AppLocalizations l10n,
   Object error,
@@ -30,7 +32,7 @@ Future<void> _logAndReport(
     _snack(messenger, chronosErrorText(l10n, error.code));
     return;
   }
-  await ref.read(errorLogProvider).record(error, stack, context: where);
+  await log.record(error, stack, context: where);
   _snack(messenger, l10n.errorGeneric);
 }
 
@@ -40,18 +42,19 @@ Future<void> createBackup(BuildContext context, WidgetRef ref) async {
   final fmt = Fmt.of(context);
   final messenger = ScaffoldMessenger.of(context);
   final share = ref.read(shareServiceProvider);
+  final log = ref.read(errorLogProvider);
+  final clock = ref.read(clockProvider);
+  final controller = ref.read(dataControllerProvider.notifier);
   try {
-    final backup = await ref.read(dataControllerProvider.notifier).exportBackup();
+    final backup = await controller.exportBackup();
     final file = await share.saveTextToTemp(backup.fileName, backup.json);
     await share.shareFile(
       file.path,
       mimeType: ShareMimeTypes.json,
-      subject: l10n.dataBackupSubject(
-        fmt.dateNumeric(ref.read(clockProvider).now().toLocal()),
-      ),
+      subject: l10n.dataBackupSubject(fmt.dateNumeric(clock.now().toLocal())),
     );
   } on Object catch (e, st) {
-    await _logAndReport(ref, messenger, l10n, e, st, 'backup');
+    await _logAndReport(log, messenger, l10n, e, st, 'backup');
   }
 }
 
@@ -61,12 +64,14 @@ Future<void> restoreBackup(BuildContext context, WidgetRef ref) async {
   final l10n = AppLocalizations.of(context);
   final messenger = ScaffoldMessenger.of(context);
   final controller = ref.read(dataControllerProvider.notifier);
+  final share = ref.read(shareServiceProvider);
+  final log = ref.read(errorLogProvider);
   try {
     final PickedFile? picked;
     try {
-      picked = await ref
-          .read(shareServiceProvider)
-          .pickBackupFile(dialogTitle: l10n.dataBackupPickTitle);
+      picked = await share.pickBackupFile(
+        dialogTitle: l10n.dataBackupPickTitle,
+      );
     } on PickedFileTooLargeException {
       _snack(messenger, l10n.dataRestoreTooLarge);
       return;
@@ -94,7 +99,7 @@ Future<void> restoreBackup(BuildContext context, WidgetRef ref) async {
           : l10n.dataMergeDone(result.shiftsAdded),
     );
   } on Object catch (e, st) {
-    await _logAndReport(ref, messenger, l10n, e, st, 'restore');
+    await _logAndReport(log, messenger, l10n, e, st, 'restore');
   }
 }
 
@@ -104,6 +109,7 @@ Future<void> deleteAllData(BuildContext context, WidgetRef ref) async {
   final l10n = AppLocalizations.of(context);
   final messenger = ScaffoldMessenger.of(context);
   final controller = ref.read(dataControllerProvider.notifier);
+  final log = ref.read(errorLogProvider);
   try {
     final counts = await controller.counts();
     if (!context.mounted) return;
@@ -125,7 +131,6 @@ Future<void> deleteAllData(BuildContext context, WidgetRef ref) async {
     if (!confirmed) return;
     final result = await controller.wipeAll();
     if (!context.mounted) return;
-    final log = ref.read(errorLogProvider);
     showUndoSnackBar(
       context,
       message: l10n.dataDeleted,
@@ -140,7 +145,7 @@ Future<void> deleteAllData(BuildContext context, WidgetRef ref) async {
       },
     );
   } on Object catch (e, st) {
-    await _logAndReport(ref, messenger, l10n, e, st, 'wipe');
+    await _logAndReport(log, messenger, l10n, e, st, 'wipe');
   }
 }
 

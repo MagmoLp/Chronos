@@ -149,9 +149,7 @@ class _ExportSheetState extends ConsumerState<ExportSheet> {
     final empty = totals != null && totals.isEmpty;
 
     return Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.viewInsetsOf(context).bottom,
-      ),
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
       child: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(
           ChronosSpace.s24,
@@ -261,9 +259,7 @@ class _ExportSheetState extends ConsumerState<ExportSheet> {
               contentPadding: EdgeInsets.zero,
               title: Text(l10n.exportIncludeNotes),
               value: _includeNotes,
-              onChanged: busy
-                  ? null
-                  : (v) => setState(() => _includeNotes = v),
+              onChanged: busy ? null : (v) => setState(() => _includeNotes = v),
             ),
             const SizedBox(height: ChronosSpace.s16),
             _Summary(totals: totals, loading: rows.isLoading && totals == null),
@@ -307,9 +303,8 @@ class _Label extends StatelessWidget {
     padding: const EdgeInsets.only(bottom: ChronosSpace.s8),
     child: Text(
       text,
-      style: Theme.of(context).textTheme.titleSmall?.copyWith(
-        color: Theme.of(context).colorScheme.onSurfaceVariant,
-      ),
+      style: Theme.of(context).textTheme.titleSmall
+          ?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
     ),
   );
 }
@@ -348,7 +343,11 @@ class _Summary extends StatelessWidget {
       );
     }
     return Text(
-      l10n.exportSummary(t.count, fmt.hours(t.workedMs), fmt.money(t.amountCents)),
+      l10n.exportSummary(
+        t.count,
+        fmt.hours(t.workedMs),
+        fmt.money(t.amountCents),
+      ),
       style: context.chronosText.bodyNumbers.copyWith(color: scheme.onSurface),
     );
   }

@@ -73,7 +73,11 @@ void main() {
   });
 
   test('totals sum exact values', () {
-    final rows = exportRowsFromShifts([nightShift, early, otherJob], jobs: jobs);
+    final rows = exportRowsFromShifts([
+      nightShift,
+      early,
+      otherJob,
+    ], jobs: jobs);
     final totals = ExportTotals.of(rows);
     expect(totals.count, 3);
     expect(totals.breakMinutes, 30);

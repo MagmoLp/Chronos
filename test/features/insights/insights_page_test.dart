@@ -30,10 +30,8 @@ Future<Job> _seedBasic(ProviderHarness h) async {
   return job;
 }
 
-Finder _card(String label) => find.ancestor(
-  of: find.text(label),
-  matching: find.byType(StatCard),
-);
+Finder _card(String label) =>
+    find.ancestor(of: find.text(label), matching: find.byType(StatCard));
 
 void _expectCard(String label, String value) {
   expect(
@@ -83,10 +81,17 @@ void main() {
       await pumpFeature(tester, const InsightsPage(), seed: _seedBasic);
       final next = find.byTooltip(_de.insightsNext);
       final previous = find.byTooltip(_de.insightsPrevious);
-      expect(tester.widget<IconButton>(find.ancestor(
-        of: find.byIcon(Icons.chevron_right),
-        matching: find.byType(IconButton),
-      )).onPressed, isNull);
+      expect(
+        tester
+            .widget<IconButton>(
+              find.ancestor(
+                of: find.byIcon(Icons.chevron_right),
+                matching: find.byType(IconButton),
+              ),
+            )
+            .onPressed,
+        isNull,
+      );
 
       await tester.tap(previous);
       await settleData(tester);
@@ -139,7 +144,11 @@ void main() {
     });
 
     testWidgets('a new day moves the current period along', (tester) async {
-      final f = await pumpFeature(tester, const InsightsPage(), seed: _seedBasic);
+      final f = await pumpFeature(
+        tester,
+        const InsightsPage(),
+        seed: _seedBasic,
+      );
       f.data.clock.advance(const Duration(days: 2));
       f.read(currentDateProvider.notifier).refresh();
       await settleData(tester);
@@ -176,7 +185,9 @@ void main() {
         findsNWidgets(30),
       );
 
-      await tester.tap(bar);
+      // The bar nodes only carry semantics (their spoken label already says
+      // everything); the tap lands on the chart's gesture detector.
+      await tester.tap(bar, warnIfMissed: false);
       await tester.pumpAndSettle();
       expect(
         find.text(
@@ -199,8 +210,10 @@ void main() {
       expect(rods, hasLength(30));
       expect(rods[27].toY, 120);
       expect(rods[28].toY, 60);
-      expect(rods.every((r) => r.color == Theme.of(context).colorScheme.primary),
-          isTrue);
+      expect(
+        rods.every((r) => r.color == Theme.of(context).colorScheme.primary),
+        isTrue,
+      );
     });
   });
 
@@ -216,7 +229,9 @@ void main() {
         await _seedBasic(h);
         await h.read(settingsStoreProvider.future);
         await h.read(settingsRepositoryProvider.future);
-        await h.read(settingsProvider.notifier).setMonthlyGoal(cents, type: type);
+        await h
+            .read(settingsProvider.notifier)
+            .setMonthlyGoal(cents, type: type);
       },
     );
 
@@ -234,10 +249,15 @@ void main() {
       await tester.scrollUntilVisible(find.byType(MonthlyGoalCard), 200);
       expect(find.text(_de.insightsGoalTitle), findsOneWidget);
       expect(
-        find.text(_de.insightsGoalProgress(_fmt.money(18000), _fmt.money(60300))),
+        find.text(
+          _de.insightsGoalProgress(_fmt.money(18000), _fmt.money(60300)),
+        ),
         findsOneWidget,
       );
-      expect(find.text(_de.insightsGoalRemaining(_fmt.money(42300))), findsOneWidget);
+      expect(
+        find.text(_de.insightsGoalRemaining(_fmt.money(42300))),
+        findsOneWidget,
+      );
       final context = tester.element(find.byType(MonthlyGoalCard));
       expect(barColor(tester), Theme.of(context).colorScheme.primary);
     });
@@ -246,7 +266,10 @@ void main() {
       await pumpWithGoal(tester, 20000, MonthlyGoalType.limit);
       await tester.scrollUntilVisible(find.byType(MonthlyGoalCard), 200);
       expect(find.text(_de.insightsLimitTitle), findsOneWidget);
-      expect(find.text(_de.insightsLimitWarning(_fmt.money(2000))), findsOneWidget);
+      expect(
+        find.text(_de.insightsLimitWarning(_fmt.money(2000))),
+        findsOneWidget,
+      );
       final context = tester.element(find.byType(MonthlyGoalCard));
       expect(barColor(tester), ChronosColors.of(context).warning);
     });
@@ -356,12 +379,14 @@ void main() {
   group('layout', () {
     Future<void> seedFull(ProviderHarness h) async {
       await _seedBasic(h);
-      final bar = await h.job(name: 'Eventhalle am Stadtpark', centsPerHour: 1420);
-      await addShift(h, bar, LocalDate(2026, 9, 26), start: 18, end: 26);
-      await h.read(payoutRepositoryProvider).create(
-        until: LocalDate(2026, 9, 1),
-        receivedCents: 11500,
+      final bar = await h.job(
+        name: 'Eventhalle am Stadtpark',
+        centsPerHour: 1420,
       );
+      await addShift(h, bar, LocalDate(2026, 9, 26), start: 18, end: 26);
+      await h
+          .read(payoutRepositoryProvider)
+          .create(until: LocalDate(2026, 9, 1), receivedCents: 11500);
       await h.read(settingsStoreProvider.future);
       await h.read(settingsRepositoryProvider.future);
       await h

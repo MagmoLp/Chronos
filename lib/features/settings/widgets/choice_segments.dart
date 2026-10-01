@@ -58,9 +58,8 @@ class ChoiceSegments<T> extends StatelessWidget {
   }) {
     if (!maxWidth.isFinite) return true;
     final style =
-        Theme.of(context).segmentedButtonTheme.style?.textStyle?.resolve(
-          const <WidgetState>{},
-        ) ??
+        Theme.of(context).segmentedButtonTheme.style?.textStyle
+            ?.resolve(const <WidgetState>{}) ??
         Theme.of(context).textTheme.labelLarge;
     final scaler = MediaQuery.textScalerOf(context);
     final direction = Directionality.of(context);

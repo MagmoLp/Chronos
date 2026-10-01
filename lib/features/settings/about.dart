@@ -17,10 +17,9 @@ void registerBundledFontLicense() {
   if (_fontLicenseRegistered) return;
   _fontLicenseRegistered = true;
   LicenseRegistry.addLicense(() async* {
-    yield LicenseEntryWithLineBreaks(
-      const ['Roboto'],
-      await rootBundle.loadString('assets/fonts/Roboto_LICENSE.txt'),
-    );
+    yield LicenseEntryWithLineBreaks(const [
+      'Roboto',
+    ], await rootBundle.loadString('assets/fonts/Roboto_LICENSE.txt'));
   });
 }
 
@@ -40,6 +39,9 @@ Future<void> shareErrorReport(BuildContext context, WidgetRef ref) async {
   final l10n = AppLocalizations.of(context);
   final messenger = ScaffoldMessenger.of(context);
   final log = ref.read(errorLogProvider);
+  final appInfo = ref.read(appInfoServiceProvider);
+  final share = ref.read(shareServiceProvider);
+  final clock = ref.read(clockProvider);
   try {
     final content = await log.read();
     if (content.trim().isEmpty) {
@@ -48,9 +50,8 @@ Future<void> shareErrorReport(BuildContext context, WidgetRef ref) async {
         ..showSnackBar(SnackBar(content: Text(l10n.aboutErrorReportEmpty)));
       return;
     }
-    final info = await ref.read(appInfoServiceProvider).load();
-    final share = ref.read(shareServiceProvider);
-    final stamp = ref.read(clockProvider).today().toIso8601String();
+    final info = await appInfo.load();
+    final stamp = clock.today().toIso8601String();
     final file = await share.saveTextToTemp(
       'chronos_${l10n.aboutFileBase}_$stamp.txt',
       'Chronos ${info.fullVersion}\n\n$content',

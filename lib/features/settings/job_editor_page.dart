@@ -13,7 +13,6 @@ import '../../domain/wage_rate.dart';
 import '../../l10n/app_localizations.dart';
 import '../../widgets/widgets.dart';
 import 'error_text.dart';
-import 'jobs_page.dart' show currentRate;
 import 'widgets/choice_segments.dart';
 import 'widgets/job_color.dart';
 import 'widgets/settings_group.dart';
@@ -279,7 +278,9 @@ class _JobEditorPageState extends ConsumerState<JobEditorPage> {
                   ),
                 ],
                 selected: _rounding,
-                onChanged: _saving ? null : (r) => setState(() => _rounding = r),
+                onChanged: _saving
+                    ? null
+                    : (r) => setState(() => _rounding = r),
               ),
               const SizedBox(height: ChronosSpace.s8),
               Text(
@@ -423,7 +424,7 @@ class _RateHistory extends ConsumerWidget {
     final text = Theme.of(context).textTheme;
     final rates = ref.watch(jobRatesProvider(job.id)).value ?? const [];
     final today = ref.watch(currentDateProvider);
-    final current = currentRate(rates, today);
+    final current = wageRateForDate(rates, today);
     final canDelete = rates.length > 1;
 
     return SettingsGroup(

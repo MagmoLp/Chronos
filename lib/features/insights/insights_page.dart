@@ -7,6 +7,7 @@ import '../../app/theme/theme.dart';
 import '../../core/format.dart';
 import '../../core/local_date.dart';
 import '../../domain/job.dart';
+import '../../domain/payout.dart';
 import '../../domain/stats.dart';
 import '../../l10n/app_localizations.dart';
 import '../../widgets/widgets.dart';
@@ -44,8 +45,7 @@ class _InsightsPageState extends ConsumerState<InsightsPage> {
     setState(() => _period = StatsPeriod(kind, anchor));
   }
 
-  void _step(StatsPeriod next, LocalDate today) =>
-      setState(() => _period = next);
+  void _step(StatsPeriod next) => setState(() => _period = next);
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +57,10 @@ class _InsightsPageState extends ConsumerState<InsightsPage> {
     if (stats != null) _lastStats = stats;
     final shown = stats ?? _lastStats;
     final jobs = ref.watch(jobsProvider).value ?? const <Job>[];
+    // Watched here (not in the sections further down) so they are loaded
+    // before their rows scroll into view and the list does not jump.
+    final goalValue = ref.watch(monthlyGoalProvider);
+    final payoutsValue = ref.watch(payoutsProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +82,7 @@ class _InsightsPageState extends ConsumerState<InsightsPage> {
             today: today,
             wide: wide,
             onKind: (kind) => _setKind(kind, today),
-            onStep: (next) => _step(next, today),
+            onStep: _step,
           );
 
           if (shown == null) {
@@ -107,11 +111,15 @@ class _InsightsPageState extends ConsumerState<InsightsPage> {
             key: ValueKey(shown.period),
             stats: shown,
           );
-          const goal = MonthlyGoalSection();
+          final goal = MonthlyGoalSection(goal: goalValue);
           final byJob = jobs.length > 1 && shown.perJob.isNotEmpty
               ? JobBreakdownCard(stats: shown, jobs: jobs)
               : null;
-          final payouts = PayoutsSection(period: shown.period, jobs: jobs);
+          final payouts = PayoutsSection(
+            period: shown.period,
+            jobs: jobs,
+            all: payoutsValue.value ?? const <Payout>[],
+          );
 
           const gap = SizedBox(height: ChronosSpace.s16);
           return ListView(
@@ -140,7 +148,10 @@ class _InsightsPageState extends ConsumerState<InsightsPage> {
                       flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [goal, if (byJob != null) ...[gap, byJob]],
+                        children: [
+                          goal,
+                          if (byJob != null) ...[gap, byJob],
+                        ],
                       ),
                     ),
                   ],

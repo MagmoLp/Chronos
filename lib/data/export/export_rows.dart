@@ -149,13 +149,15 @@ List<ExportRow> exportRowsFromShifts(
   String unknownJobName = '',
 }) {
   final names = {for (final job in jobs) job.id: job.name};
-  final selected = [
-    for (final s in shifts)
-      if (s.isDone && !s.isDeleted && (jobId == null || s.jobId == jobId)) s,
-  ]..sort((a, b) {
-      final byStart = a.startUtc.compareTo(b.startUtc);
-      return byStart != 0 ? byStart : a.id.compareTo(b.id);
-    });
+  final selected =
+      [
+        for (final s in shifts)
+          if (s.isDone && !s.isDeleted && (jobId == null || s.jobId == jobId))
+            s,
+      ]..sort((a, b) {
+        final byStart = a.startUtc.compareTo(b.startUtc);
+        return byStart != 0 ? byStart : a.id.compareTo(b.id);
+      });
   return [
     for (final s in selected)
       ExportRow.fromShift(s, jobName: names[s.jobId] ?? unknownJobName),
