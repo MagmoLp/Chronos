@@ -11,11 +11,24 @@ auf Deutsch und Englisch.
 
 | Heute | Schichten | Übersicht |
 |---|---|---|
-| _Screenshot folgt_ | _Screenshot folgt_ | _Screenshot folgt_ |
+| <img src="docs/screenshots/heute_hell.png" width="260"> | <img src="docs/screenshots/schichten.png" width="260"> | <img src="docs/screenshots/uebersicht.png" width="260"> |
 
-| Schicht beenden | Einstellungen | Dunkles Design |
+| Schicht beenden | Schicht-Editor | Dunkles Design |
 |---|---|---|
-| _Screenshot folgt_ | _Screenshot folgt_ | _Screenshot folgt_ |
+| <img src="docs/screenshots/schicht_beenden.png" width="260"> | <img src="docs/screenshots/schicht_editor.png" width="260"> | <img src="docs/screenshots/heute_dunkel.png" width="260"> |
+
+| Einstellungen | Erster Start |
+|---|---|
+| <img src="docs/screenshots/einstellungen.png" width="260"> | <img src="docs/screenshots/onboarding.png" width="260"> |
+
+**Querformat und Tablet**
+
+<img src="docs/screenshots/heute_quer.png" width="560">
+
+<img src="docs/screenshots/heute_tablet.png" width="560">
+
+Die Bilder werden aus der echten App gerendert:
+`CHRONOS_SCREENSHOTS=1 TZ=Europe/Berlin flutter test --update-goldens test/screenshots`.
 
 ## Funktionen
 
