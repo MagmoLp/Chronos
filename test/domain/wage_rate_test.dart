@@ -29,6 +29,13 @@ void main() {
     expect(rateForDate(history, LocalDate(2025, 12, 31)), 1500);
   });
 
+  test('the entry that applies on a date', () {
+    expect(wageRateForDate(const [], LocalDate(2026, 9, 30)), isNull);
+    expect(wageRateForDate(history, LocalDate(2026, 9, 30)), history[0]);
+    expect(wageRateForDate(history, LocalDate(2026, 10, 1)), history[2]);
+    expect(wageRateForDate(history, LocalDate(2025, 1, 1)), history[1]);
+  });
+
   test('model basics', () {
     final a = rate(1, LocalDate(2026, 1, 1), 1500);
     expect(a, rate(1, LocalDate(2026, 1, 1), 1500));

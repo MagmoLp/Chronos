@@ -56,7 +56,12 @@ final class WageRate {
 ///
 /// Dates before the first rate fall back to the earliest rate, so backdated
 /// shifts still get a wage. Returns `null` only if [rates] is empty.
-int? rateForDate(Iterable<WageRate> rates, LocalDate date) {
+int? rateForDate(Iterable<WageRate> rates, LocalDate date) =>
+    wageRateForDate(rates, date)?.centsPerHour;
+
+/// The [WageRate] entry that applies on [date] (same rule as
+/// [rateForDate]), e.g. to show "15,00 €/h seit 01.01.2026".
+WageRate? wageRateForDate(Iterable<WageRate> rates, LocalDate date) {
   WageRate? best;
   WageRate? earliest;
   for (final rate in rates) {
@@ -68,5 +73,5 @@ int? rateForDate(Iterable<WageRate> rates, LocalDate date) {
       best = rate;
     }
   }
-  return (best ?? earliest)?.centsPerHour;
+  return best ?? earliest;
 }

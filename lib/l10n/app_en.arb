@@ -262,6 +262,1210 @@
       }
     }
   },
+  "exportTitle": "Export",
+  "@exportTitle": {
+    "description": "Title of the export sheet (PDF timesheet / CSV)."
+  },
+  "exportRange": "Period",
+  "@exportRange": {
+    "description": "Label above the date range choices of the export sheet."
+  },
+  "exportRangeThisWeek": "This week",
+  "@exportRangeThisWeek": {
+    "description": "Export range preset: Monday to Sunday of the current week."
+  },
+  "exportRangeThisMonth": "This month",
+  "@exportRangeThisMonth": {
+    "description": "Export range preset: the current calendar month."
+  },
+  "exportRangeLastMonth": "Last month",
+  "@exportRangeLastMonth": {
+    "description": "Export range preset: the previous calendar month."
+  },
+  "exportRangeCustom": "Choose dates",
+  "@exportRangeCustom": {
+    "description": "Export range chip that opens a date range picker."
+  },
+  "exportRangeValue": "{start} – {end}",
+  "@exportRangeValue": {
+    "description": "A date range, e.g. \"01.09.2026 – 30.09.2026\".",
+    "placeholders": {
+      "start": {
+        "type": "String",
+        "example": "01.09.2026"
+      },
+      "end": {
+        "type": "String",
+        "example": "30.09.2026"
+      }
+    }
+  },
+  "exportJob": "Job",
+  "@exportJob": {
+    "description": "Label of the job selector in the export sheet."
+  },
+  "exportAllJobs": "All jobs",
+  "@exportAllJobs": {
+    "description": "Job selector option: export the shifts of every job."
+  },
+  "exportFormat": "Format",
+  "@exportFormat": {
+    "description": "Label above the PDF/CSV format choice."
+  },
+  "exportFormatPdf": "PDF",
+  "@exportFormatPdf": {
+    "description": "Format option: PDF timesheet. Keep short."
+  },
+  "exportFormatCsv": "CSV",
+  "@exportFormatCsv": {
+    "description": "Format option: CSV table. Keep short."
+  },
+  "exportFormatPdfHelp": "Timesheet with totals and signature lines, ready to hand in.",
+  "@exportFormatPdfHelp": {
+    "description": "Explains the PDF format."
+  },
+  "exportFormatCsvHelp": "Table for Excel or Google Sheets.",
+  "@exportFormatCsvHelp": {
+    "description": "Explains the CSV format."
+  },
+  "exportName": "Your name (optional)",
+  "@exportName": {
+    "description": "Text field: name printed on the PDF timesheet."
+  },
+  "exportNameHelp": "Printed at the top of the timesheet",
+  "@exportNameHelp": {
+    "description": "Helper text below the name field."
+  },
+  "exportIncludeNotes": "Include notes",
+  "@exportIncludeNotes": {
+    "description": "Switch: add the shift notes to the export."
+  },
+  "exportSummary": "{count, plural, =1{1 shift · {hours} · {amount}} other{{count} shifts · {hours} · {amount}}}",
+  "@exportSummary": {
+    "description": "What will be exported: number of shifts, worked hours and wage.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "hours": {
+        "type": "String",
+        "example": "82.5 h"
+      },
+      "amount": {
+        "type": "String",
+        "example": "€1,237.50"
+      }
+    }
+  },
+  "exportEmpty": "No shifts in this period.",
+  "@exportEmpty": {
+    "description": "Shown when the chosen range/job has nothing to export."
+  },
+  "exportPreparing": "Preparing…",
+  "@exportPreparing": {
+    "description": "Label of the share button while the file is generated."
+  },
+  "exportFailed": "The export didn't work. Please try again.",
+  "@exportFailed": {
+    "description": "Error shown in the export sheet."
+  },
+  "exportFileBase": "timesheet",
+  "@exportFileBase": {
+    "description": "Part of the export file name. Lowercase, no spaces or special characters."
+  },
+  "exportSubject": "Timesheet {period}",
+  "@exportSubject": {
+    "description": "E-mail subject when sharing an export.",
+    "placeholders": {
+      "period": {
+        "type": "String",
+        "example": "01.09.2026 – 30.09.2026"
+      }
+    }
+  },
+  "exportColDate": "Date",
+  "@exportColDate": {
+    "description": "Export column: date of the shift."
+  },
+  "exportColStart": "Start",
+  "@exportColStart": {
+    "description": "Export column: start time."
+  },
+  "exportColEnd": "End",
+  "@exportColEnd": {
+    "description": "Export column: end time."
+  },
+  "exportColBreak": "Break",
+  "@exportColBreak": {
+    "description": "PDF column: break duration."
+  },
+  "exportColBreakMinutes": "Break (min)",
+  "@exportColBreakMinutes": {
+    "description": "CSV column: break in minutes."
+  },
+  "exportColHours": "Hours",
+  "@exportColHours": {
+    "description": "Export column: worked hours as a decimal number."
+  },
+  "exportColRate": "Hourly rate",
+  "@exportColRate": {
+    "description": "CSV column: hourly wage."
+  },
+  "exportColRateShort": "Rate",
+  "@exportColRateShort": {
+    "description": "PDF column: hourly wage (short)."
+  },
+  "exportColAmount": "Amount",
+  "@exportColAmount": {
+    "description": "Export column: wage earned for the shift."
+  },
+  "exportColTips": "Tips",
+  "@exportColTips": {
+    "description": "CSV column: tips."
+  },
+  "exportColStatus": "Status",
+  "@exportColStatus": {
+    "description": "CSV column: paid or unpaid."
+  },
+  "exportColJob": "Job",
+  "@exportColJob": {
+    "description": "Export column / PDF header: job name."
+  },
+  "exportColNote": "Note",
+  "@exportColNote": {
+    "description": "Export column: note of the shift."
+  },
+  "exportTotal": "Total",
+  "@exportTotal": {
+    "description": "Label of the totals line in CSV and PDF."
+  },
+  "exportPdfTitle": "Timesheet",
+  "@exportPdfTitle": {
+    "description": "Title of the PDF timesheet."
+  },
+  "exportPdfName": "Name",
+  "@exportPdfName": {
+    "description": "PDF header: name of the person."
+  },
+  "exportPdfPeriod": "Period",
+  "@exportPdfPeriod": {
+    "description": "PDF header: exported date range."
+  },
+  "exportPdfRowDate": "{weekday} {date}",
+  "@exportPdfRowDate": {
+    "description": "Date in a PDF table row, e.g. \"Wed 9/30/2026\".",
+    "placeholders": {
+      "weekday": {
+        "type": "String",
+        "example": "Wed"
+      },
+      "date": {
+        "type": "String",
+        "example": "9/30/2026"
+      }
+    }
+  },
+  "exportPdfSignatureEmployee": "Date, employee signature",
+  "@exportPdfSignatureEmployee": {
+    "description": "Caption under the first signature line of the PDF."
+  },
+  "exportPdfSignatureEmployer": "Date, employer signature",
+  "@exportPdfSignatureEmployer": {
+    "description": "Caption under the second signature line of the PDF."
+  },
+  "exportPdfCreatedOn": "Created on {date} with Chronos",
+  "@exportPdfCreatedOn": {
+    "description": "PDF footer with the creation date.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "9/30/2026"
+      }
+    }
+  },
+  "exportPdfPage": "Page {page} of {count}",
+  "@exportPdfPage": {
+    "description": "PDF footer: page number.",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      },
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "insightsPeriodWeek": "Week",
+  "@insightsPeriodWeek": {
+    "description": "Insights period switch: one week. One short word."
+  },
+  "insightsPeriodMonth": "Month",
+  "@insightsPeriodMonth": {
+    "description": "Insights period switch: one month. One short word."
+  },
+  "insightsPeriodYear": "Year",
+  "@insightsPeriodYear": {
+    "description": "Insights period switch: one year. One short word."
+  },
+  "insightsPeriodChoice": "Period length",
+  "@insightsPeriodChoice": {
+    "description": "Screen-reader label of the week/month/year switch."
+  },
+  "insightsPrevious": "Previous period",
+  "@insightsPrevious": {
+    "description": "Tooltip of the \"<\" button of the period stepper."
+  },
+  "insightsNext": "Next period",
+  "@insightsNext": {
+    "description": "Tooltip of the \">\" button of the period stepper."
+  },
+  "insightsWeekTitle": "{start} – {end} {year}",
+  "@insightsWeekTitle": {
+    "description": "Title of a week in the period stepper, e.g. \"28 Sep – 4 Oct 2026\".",
+    "placeholders": {
+      "start": {
+        "type": "String",
+        "example": "28 Sep"
+      },
+      "end": {
+        "type": "String",
+        "example": "4 Oct"
+      },
+      "year": {
+        "type": "String",
+        "example": "2026"
+      }
+    }
+  },
+  "insightsStatHours": "Hours",
+  "@insightsStatHours": {
+    "description": "Stat card: worked hours in the period."
+  },
+  "insightsStatEarned": "Earned",
+  "@insightsStatEarned": {
+    "description": "Stat card: wage earned in the period (without tips)."
+  },
+  "insightsStatOpen": "Unpaid",
+  "@insightsStatOpen": {
+    "description": "Stat card: unpaid wage of the shifts in the period."
+  },
+  "insightsStatAverage": "Avg. per hour incl. tips",
+  "@insightsStatAverage": {
+    "description": "Stat card: (wage + tips) per worked hour."
+  },
+  "insightsStatTips": "Tips",
+  "@insightsStatTips": {
+    "description": "Stat card: tips in the period (shown only if > 0)."
+  },
+  "insightsShiftCount": "{count, plural, =0{No shifts} =1{1 shift} other{{count} shifts}}",
+  "@insightsShiftCount": {
+    "description": "Caption of the hours card: number of shifts.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "insightsNoValue": "–",
+  "@insightsNoValue": {
+    "description": "Placeholder value when there is nothing to average."
+  },
+  "insightsChartDays": "Earnings per day",
+  "@insightsChartDays": {
+    "description": "Title of the bar chart in week and month view."
+  },
+  "insightsChartMonths": "Earnings per month",
+  "@insightsChartMonths": {
+    "description": "Title of the bar chart in year view."
+  },
+  "insightsChartHint": "Tap a bar for details",
+  "@insightsChartHint": {
+    "description": "Hint below the chart title."
+  },
+  "insightsChartSelection": "{label}: {amount} · {hours}",
+  "@insightsChartSelection": {
+    "description": "Details of the tapped bar, e.g. \"Wed 30 Sep: €116.25 · 7:45 h\".",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Wed 30 Sep"
+      },
+      "amount": {
+        "type": "String",
+        "example": "€116.25"
+      },
+      "hours": {
+        "type": "String",
+        "example": "7:45 h"
+      }
+    }
+  },
+  "insightsChartBar": "{label}: {amount}, {hours}",
+  "@insightsChartBar": {
+    "description": "Screen-reader text of one bar.",
+    "placeholders": {
+      "label": {
+        "type": "String",
+        "example": "Wednesday, September 30, 2026"
+      },
+      "amount": {
+        "type": "String",
+        "example": "€116.25"
+      },
+      "hours": {
+        "type": "String",
+        "example": "7 hours 45 minutes"
+      }
+    }
+  },
+  "insightsChartEmpty": "No shifts in this period yet.",
+  "@insightsChartEmpty": {
+    "description": "Shown instead of the chart when the period is empty."
+  },
+  "insightsAxisEuros": "€{value}",
+  "@insightsAxisEuros": {
+    "description": "Y-axis label of the chart: whole euros.",
+    "placeholders": {
+      "value": {
+        "type": "String",
+        "example": "100"
+      }
+    }
+  },
+  "insightsGoalTitle": "Monthly goal",
+  "@insightsGoalTitle": {
+    "description": "Title of the progress card when a monthly goal is set."
+  },
+  "insightsLimitTitle": "Monthly limit",
+  "@insightsLimitTitle": {
+    "description": "Title of the progress card when a monthly limit is set (e.g. Minijob)."
+  },
+  "insightsGoalProgress": "{earned} / {target}",
+  "@insightsGoalProgress": {
+    "description": "Progress of the current month, e.g. \"€438.00 / €603.00\".",
+    "placeholders": {
+      "earned": {
+        "type": "String",
+        "example": "€438.00"
+      },
+      "target": {
+        "type": "String",
+        "example": "€603.00"
+      }
+    }
+  },
+  "insightsGoalRemaining": "{amount} to go",
+  "@insightsGoalRemaining": {
+    "description": "Monthly goal: amount still missing.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€165.00"
+      }
+    }
+  },
+  "insightsGoalReached": "Goal reached",
+  "@insightsGoalReached": {
+    "description": "Monthly goal reached."
+  },
+  "insightsLimitRemaining": "{amount} left until the limit",
+  "@insightsLimitRemaining": {
+    "description": "Monthly limit: amount left.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€165.00"
+      }
+    }
+  },
+  "insightsLimitWarning": "Almost at the limit – {amount} left",
+  "@insightsLimitWarning": {
+    "description": "Monthly limit reached 80 % or more.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€45.00"
+      }
+    }
+  },
+  "insightsLimitExceeded": "Limit exceeded by {amount}",
+  "@insightsLimitExceeded": {
+    "description": "Monthly limit exceeded.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€12.50"
+      }
+    }
+  },
+  "insightsGoalMonth": "Current month: {month}",
+  "@insightsGoalMonth": {
+    "description": "Caption of the goal card; the goal always refers to the current month.",
+    "placeholders": {
+      "month": {
+        "type": "String",
+        "example": "September 2026"
+      }
+    }
+  },
+  "insightsGoalSetUp": "Set a monthly goal or limit",
+  "@insightsGoalSetUp": {
+    "description": "Link shown when no monthly goal is configured."
+  },
+  "insightsByJob": "By job",
+  "@insightsByJob": {
+    "description": "Section title: totals per job."
+  },
+  "insightsJobLine": "{hours} · {amount}",
+  "@insightsJobLine": {
+    "description": "Totals of one job in the period.",
+    "placeholders": {
+      "hours": {
+        "type": "String",
+        "example": "52 h"
+      },
+      "amount": {
+        "type": "String",
+        "example": "€780.00"
+      }
+    }
+  },
+  "insightsPayouts": "Payouts",
+  "@insightsPayouts": {
+    "description": "Section title: recorded payouts in the period."
+  },
+  "insightsPayoutsEmpty": "No payouts in this period.",
+  "@insightsPayoutsEmpty": {
+    "description": "Shown when the period has no payouts."
+  },
+  "insightsPayoutMore": "{amount} more than expected",
+  "@insightsPayoutMore": {
+    "description": "Payout difference: received more than expected.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€5.00"
+      }
+    }
+  },
+  "insightsPayoutLess": "{amount} less than expected",
+  "@insightsPayoutLess": {
+    "description": "Payout difference: received less than expected.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€2.50"
+      }
+    }
+  },
+  "insightsPayoutExact": "As expected",
+  "@insightsPayoutExact": {
+    "description": "Payout received exactly the expected amount."
+  },
+  "insightsExport": "Export this period",
+  "@insightsExport": {
+    "description": "Button: opens the export sheet for the shown period."
+  },
+  "settingsSectionGeneral": "General",
+  "@settingsSectionGeneral": {
+    "description": "Settings section: language and theme."
+  },
+  "settingsLanguage": "Language",
+  "@settingsLanguage": {
+    "description": "Setting: app language."
+  },
+  "settingsLanguageSystem": "System",
+  "@settingsLanguageSystem": {
+    "description": "Language option: follow the device language."
+  },
+  "settingsLanguageGerman": "Deutsch",
+  "@settingsLanguageGerman": {
+    "description": "Language option German, written in German (self-name, do not translate)."
+  },
+  "settingsLanguageEnglish": "English",
+  "@settingsLanguageEnglish": {
+    "description": "Language option English, written in English (self-name, do not translate)."
+  },
+  "settingsTheme": "Theme",
+  "@settingsTheme": {
+    "description": "Setting: light/dark appearance."
+  },
+  "settingsThemeSystem": "System",
+  "@settingsThemeSystem": {
+    "description": "Theme option: follow the device setting."
+  },
+  "settingsThemeLight": "Light",
+  "@settingsThemeLight": {
+    "description": "Theme option: always light."
+  },
+  "settingsThemeDark": "Dark",
+  "@settingsThemeDark": {
+    "description": "Theme option: always dark."
+  },
+  "settingsSectionWork": "Work",
+  "@settingsSectionWork": {
+    "description": "Settings section: jobs, monthly goal, reminder."
+  },
+  "settingsJobs": "Jobs & hourly wage",
+  "@settingsJobs": {
+    "description": "Settings entry and screen title: manage jobs and their wages."
+  },
+  "settingsJobsOne": "{name} · {rate}",
+  "@settingsJobsOne": {
+    "description": "Subtitle of the jobs entry when there is one job.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Catering"
+      },
+      "rate": {
+        "type": "String",
+        "example": "€15.00/h"
+      }
+    }
+  },
+  "settingsJobsCount": "{count, plural, =0{No jobs yet} =1{1 job} other{{count} jobs}}",
+  "@settingsJobsCount": {
+    "description": "Subtitle of the jobs entry: number of active jobs.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsGoal": "Monthly goal or limit",
+  "@settingsGoal": {
+    "description": "Settings entry: monthly earnings goal or limit (e.g. Minijob)."
+  },
+  "settingsGoalOff": "Off",
+  "@settingsGoalOff": {
+    "description": "Monthly goal is switched off."
+  },
+  "settingsGoalGoalValue": "Goal: {amount}",
+  "@settingsGoalGoalValue": {
+    "description": "Monthly goal summary.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€800.00"
+      }
+    }
+  },
+  "settingsGoalLimitValue": "Limit: {amount}",
+  "@settingsGoalLimitValue": {
+    "description": "Monthly limit summary.",
+    "placeholders": {
+      "amount": {
+        "type": "String",
+        "example": "€603.00"
+      }
+    }
+  },
+  "settingsGoalTypeGoal": "Goal",
+  "@settingsGoalTypeGoal": {
+    "description": "Monthly goal type: a target to reach. Short."
+  },
+  "settingsGoalTypeLimit": "Limit",
+  "@settingsGoalTypeLimit": {
+    "description": "Monthly goal type: a ceiling not to exceed. Short."
+  },
+  "settingsGoalAmount": "Amount per month",
+  "@settingsGoalAmount": {
+    "description": "Money field in the monthly goal dialog."
+  },
+  "settingsGoalHelpOff": "No progress bar in Insights.",
+  "@settingsGoalHelpOff": {
+    "description": "Explains the \"off\" option of the monthly goal."
+  },
+  "settingsGoalHelpGoal": "Shows how close you are to your monthly target.",
+  "@settingsGoalHelpGoal": {
+    "description": "Explains the \"goal\" option."
+  },
+  "settingsGoalHelpLimit": "Warns from 80 % – e.g. for the €603 Minijob limit.",
+  "@settingsGoalHelpLimit": {
+    "description": "Explains the \"limit\" option."
+  },
+  "settingsReminder": "“Still working?” reminder",
+  "@settingsReminder": {
+    "description": "Settings entry: reminder after a shift has been running for X hours."
+  },
+  "settingsReminderOff": "Off",
+  "@settingsReminderOff": {
+    "description": "Reminder switched off."
+  },
+  "settingsReminderHours": "After {hours} h",
+  "@settingsReminderHours": {
+    "description": "Reminder after this many hours.",
+    "placeholders": {
+      "hours": {
+        "type": "int"
+      }
+    }
+  },
+  "settingsReminderHelp": "Reminds you when a shift is still running after this time.",
+  "@settingsReminderHelp": {
+    "description": "Explanation in the reminder dialog."
+  },
+  "settingsSectionNotifications": "Notifications",
+  "@settingsSectionNotifications": {
+    "description": "Settings section and entry: notification permission."
+  },
+  "settingsNotificationsOn": "Allowed",
+  "@settingsNotificationsOn": {
+    "description": "Notification status: allowed."
+  },
+  "settingsNotificationsOnHint": "The running shift and reminders appear in the status bar",
+  "@settingsNotificationsOnHint": {
+    "description": "Explanation when notifications are allowed."
+  },
+  "settingsNotificationsOffTitle": "Turned off",
+  "@settingsNotificationsOffTitle": {
+    "description": "Notification status: blocked."
+  },
+  "settingsNotificationsOff": "The running shift is not shown in the status bar. Tap to allow notifications.",
+  "@settingsNotificationsOff": {
+    "description": "Explanation when notifications are blocked."
+  },
+  "settingsNotificationsOpen": "Open system settings",
+  "@settingsNotificationsOpen": {
+    "description": "Screen-reader hint: tapping opens the Android notification settings."
+  },
+  "settingsSectionData": "Data",
+  "@settingsSectionData": {
+    "description": "Settings section: export, backup, delete."
+  },
+  "dataExport": "Export",
+  "@dataExport": {
+    "description": "Settings entry: export a PDF timesheet or CSV."
+  },
+  "dataExportSubtitle": "PDF timesheet or CSV table",
+  "@dataExportSubtitle": {
+    "description": "Subtitle of the export entry."
+  },
+  "dataBackupCreate": "Create backup",
+  "@dataBackupCreate": {
+    "description": "Settings entry: save all data as a JSON file."
+  },
+  "dataBackupCreateSubtitle": "Save all data as a file",
+  "@dataBackupCreateSubtitle": {
+    "description": "Subtitle of \"Create backup\"."
+  },
+  "dataBackupSubject": "Chronos backup {date}",
+  "@dataBackupSubject": {
+    "description": "E-mail subject when sharing a backup.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "9/30/2026"
+      }
+    }
+  },
+  "dataBackupRestore": "Restore backup",
+  "@dataBackupRestore": {
+    "description": "Settings entry: import a backup file."
+  },
+  "dataBackupRestoreSubtitle": "From a Chronos backup file",
+  "@dataBackupRestoreSubtitle": {
+    "description": "Subtitle of \"Restore backup\"."
+  },
+  "dataBackupPickTitle": "Choose a Chronos backup",
+  "@dataBackupPickTitle": {
+    "description": "Title of the file picker."
+  },
+  "dataRestoreTitle": "Restore this backup?",
+  "@dataRestoreTitle": {
+    "description": "Title of the restore summary dialog."
+  },
+  "dataRestoreCreated": "Created on {date}",
+  "@dataRestoreCreated": {
+    "description": "When the backup was written.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "9/12/2026"
+      }
+    }
+  },
+  "dataRestoreRange": "Shifts from {start} to {end}",
+  "@dataRestoreRange": {
+    "description": "Date range of the shifts in the backup.",
+    "placeholders": {
+      "start": {
+        "type": "String",
+        "example": "1/1/2026"
+      },
+      "end": {
+        "type": "String",
+        "example": "9/12/2026"
+      }
+    }
+  },
+  "dataCountShifts": "{count, plural, =1{1 shift} other{{count} shifts}}",
+  "@dataCountShifts": {
+    "description": "Number of shifts.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataCountJobs": "{count, plural, =1{1 job} other{{count} jobs}}",
+  "@dataCountJobs": {
+    "description": "Number of jobs.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataCountPayouts": "{count, plural, =1{1 payout} other{{count} payouts}}",
+  "@dataCountPayouts": {
+    "description": "Number of payouts.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataRestoreExplain": "Replace deletes your current data first. Merge only adds what is missing.",
+  "@dataRestoreExplain": {
+    "description": "Explains the two restore modes."
+  },
+  "dataRestoreReplace": "Replace",
+  "@dataRestoreReplace": {
+    "description": "Restore mode: delete current data, then import."
+  },
+  "dataRestoreMerge": "Merge",
+  "@dataRestoreMerge": {
+    "description": "Restore mode: keep current data and add missing entries."
+  },
+  "dataRestoreDone": "{count, plural, =0{Backup restored} =1{Backup restored · 1 shift} other{Backup restored · {count} shifts}}",
+  "@dataRestoreDone": {
+    "description": "Snackbar after a restore in replace mode.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataMergeDone": "{count, plural, =0{Nothing new – everything was already there} =1{1 shift added} other{{count} shifts added}}",
+  "@dataMergeDone": {
+    "description": "Snackbar after a restore in merge mode.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "dataRestoreInvalid": "This file isn't a valid Chronos backup.",
+  "@dataRestoreInvalid": {
+    "description": "Error: the chosen file cannot be read as a backup."
+  },
+  "dataRestoreNewer": "This backup is from a newer Chronos version. Please update the app first.",
+  "@dataRestoreNewer": {
+    "description": "Error: the backup format is newer than this app."
+  },
+  "dataRestoreTooLarge": "This file is too large for a backup.",
+  "@dataRestoreTooLarge": {
+    "description": "Error: the chosen file is too large."
+  },
+  "dataDeleteAll": "Delete all data",
+  "@dataDeleteAll": {
+    "description": "Settings entry: delete all shifts, jobs and payouts."
+  },
+  "dataDeleteAllSubtitle": "A backup is saved on the device first",
+  "@dataDeleteAllSubtitle": {
+    "description": "Subtitle of \"Delete all data\"."
+  },
+  "dataDeleteTitle": "Delete {shifts} and {jobs}?",
+  "@dataDeleteTitle": {
+    "description": "Title of the delete-all confirmation; the parts come from dataCountShifts/dataCountJobs.",
+    "placeholders": {
+      "shifts": {
+        "type": "String",
+        "example": "214 shifts"
+      },
+      "jobs": {
+        "type": "String",
+        "example": "2 jobs"
+      }
+    }
+  },
+  "dataDeleteMessage": "Payouts are deleted too. A backup is saved on the device first, and you can undo right afterwards.",
+  "@dataDeleteMessage": {
+    "description": "Message of the delete-all confirmation."
+  },
+  "dataDeleted": "All data deleted",
+  "@dataDeleted": {
+    "description": "Snackbar after deleting all data (with Undo)."
+  },
+  "dataNothingToDelete": "There is no data to delete.",
+  "@dataNothingToDelete": {
+    "description": "Snackbar when \"Delete all data\" finds nothing."
+  },
+  "settingsSectionAbout": "About",
+  "@settingsSectionAbout": {
+    "description": "Settings section: version, privacy, licenses, error report."
+  },
+  "aboutVersion": "Version",
+  "@aboutVersion": {
+    "description": "About entry: app version."
+  },
+  "aboutVersionValue": "{version} (build {build})",
+  "@aboutVersionValue": {
+    "description": "App version and build number.",
+    "placeholders": {
+      "version": {
+        "type": "String",
+        "example": "2.0.0"
+      },
+      "build": {
+        "type": "String",
+        "example": "2"
+      }
+    }
+  },
+  "aboutPrivacy": "Privacy policy",
+  "@aboutPrivacy": {
+    "description": "About entry and screen title: privacy policy."
+  },
+  "aboutLicenses": "Open-source licenses",
+  "@aboutLicenses": {
+    "description": "About entry: licenses of the libraries used."
+  },
+  "aboutErrorReport": "Share error report",
+  "@aboutErrorReport": {
+    "description": "About entry: share the local error log."
+  },
+  "aboutErrorReportSubtitle": "Local error log – only sent if you share it",
+  "@aboutErrorReportSubtitle": {
+    "description": "Subtitle of the error report entry."
+  },
+  "aboutErrorReportEmpty": "No errors logged",
+  "@aboutErrorReportEmpty": {
+    "description": "Snackbar when the error log is empty."
+  },
+  "aboutErrorReportSubject": "Chronos error report",
+  "@aboutErrorReportSubject": {
+    "description": "E-mail subject of the shared error report."
+  },
+  "aboutFileBase": "error-report",
+  "@aboutFileBase": {
+    "description": "Part of the error report file name. Lowercase, no spaces."
+  },
+  "jobsRateSince": "{rate} since {date}",
+  "@jobsRateSince": {
+    "description": "Current wage of a job and since when it applies.",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "€15.00/h"
+      },
+      "date": {
+        "type": "String",
+        "example": "1/1/2026"
+      }
+    }
+  },
+  "jobsAdd": "Add job",
+  "@jobsAdd": {
+    "description": "Button: create a new job."
+  },
+  "jobsActiveSection": "Active",
+  "@jobsActiveSection": {
+    "description": "Section of the jobs list: active jobs."
+  },
+  "jobsArchivedSection": "Archived",
+  "@jobsArchivedSection": {
+    "description": "Section of the jobs list: archived jobs."
+  },
+  "jobsNewTitle": "New job",
+  "@jobsNewTitle": {
+    "description": "Title of the job editor for a new job."
+  },
+  "jobsEditTitle": "Edit job",
+  "@jobsEditTitle": {
+    "description": "Title of the job editor for an existing job."
+  },
+  "jobsName": "Name",
+  "@jobsName": {
+    "description": "Job editor field: name of the job/employer."
+  },
+  "jobsNameHint": "e.g. Café Müller",
+  "@jobsNameHint": {
+    "description": "Hint in the job name field."
+  },
+  "jobsColor": "Colour",
+  "@jobsColor": {
+    "description": "Job editor: colour of the job."
+  },
+  "jobsColorBlue": "Blue",
+  "@jobsColorBlue": {
+    "description": "Job colour name."
+  },
+  "jobsColorTeal": "Teal",
+  "@jobsColorTeal": {
+    "description": "Job colour name."
+  },
+  "jobsColorOchre": "Ochre",
+  "@jobsColorOchre": {
+    "description": "Job colour name."
+  },
+  "jobsColorRaspberry": "Raspberry",
+  "@jobsColorRaspberry": {
+    "description": "Job colour name."
+  },
+  "jobsColorViolet": "Violet",
+  "@jobsColorViolet": {
+    "description": "Job colour name."
+  },
+  "jobsColorGreen": "Green",
+  "@jobsColorGreen": {
+    "description": "Job colour name."
+  },
+  "jobsRate": "Hourly wage",
+  "@jobsRate": {
+    "description": "Money field: hourly wage."
+  },
+  "jobsRateNewHelp": "You can add later wage changes with a start date.",
+  "@jobsRateNewHelp": {
+    "description": "Helper below the wage field of a new job."
+  },
+  "jobsRounding": "Rounding of timer shifts",
+  "@jobsRounding": {
+    "description": "Job editor: rounding rule."
+  },
+  "jobsRoundingOff": "Off",
+  "@jobsRoundingOff": {
+    "description": "Rounding option: none."
+  },
+  "jobsRoundingHelp": "Start and end are rounded to the nearest step when you finish a shift. Shifts you enter yourself are never rounded.",
+  "@jobsRoundingHelp": {
+    "description": "Explains the rounding rule."
+  },
+  "jobsRateHistory": "Wage history",
+  "@jobsRateHistory": {
+    "description": "Job editor section: wage changes with start dates."
+  },
+  "jobsRateFrom": "from {date}",
+  "@jobsRateFrom": {
+    "description": "Start date of a wage in the history.",
+    "placeholders": {
+      "date": {
+        "type": "String",
+        "example": "1/1/2026"
+      }
+    }
+  },
+  "jobsRateCurrent": "Current",
+  "@jobsRateCurrent": {
+    "description": "Badge on the wage that applies today."
+  },
+  "jobsRateAdd": "New wage from …",
+  "@jobsRateAdd": {
+    "description": "Button: add a wage change valid from a date."
+  },
+  "jobsRateDelete": "Delete wage",
+  "@jobsRateDelete": {
+    "description": "Tooltip of the delete button of a wage entry."
+  },
+  "jobsRateDeleteLast": "The last wage can't be deleted.",
+  "@jobsRateDeleteLast": {
+    "description": "Shown when only one wage exists."
+  },
+  "jobsRateDeleted": "Wage deleted",
+  "@jobsRateDeleted": {
+    "description": "Snackbar after deleting a wage (with Undo)."
+  },
+  "jobsRateDialogTitle": "New hourly wage",
+  "@jobsRateDialogTitle": {
+    "description": "Title of the \"new wage from\" dialog."
+  },
+  "jobsRateValidFrom": "Valid from",
+  "@jobsRateValidFrom": {
+    "description": "Label of the date of a new wage."
+  },
+  "jobsRateRecalc": "Recalculate unpaid shifts from this date",
+  "@jobsRateRecalc": {
+    "description": "Checkbox in the new-wage dialog."
+  },
+  "jobsRateRecalcHelp": "Paid shifts always keep their wage.",
+  "@jobsRateRecalcHelp": {
+    "description": "Helper below the recalculate checkbox."
+  },
+  "jobsRateSaved": "{count, plural, =0{Wage saved} =1{Wage saved · 1 shift recalculated} other{Wage saved · {count} shifts recalculated}}",
+  "@jobsRateSaved": {
+    "description": "Snackbar after adding a wage.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "jobsArchive": "Archive job",
+  "@jobsArchive": {
+    "description": "Button: archive the job."
+  },
+  "jobsUnarchive": "Restore job",
+  "@jobsUnarchive": {
+    "description": "Button: make an archived job active again."
+  },
+  "jobsArchiveHelp": "Archived jobs keep their shifts but are no longer offered when you start or add a shift.",
+  "@jobsArchiveHelp": {
+    "description": "Explains archiving."
+  },
+  "jobsArchiveLastActive": "At least one job must stay active.",
+  "@jobsArchiveLastActive": {
+    "description": "Why the only active job cannot be archived."
+  },
+  "jobsArchived": "{name} archived",
+  "@jobsArchived": {
+    "description": "Snackbar after archiving a job (with Undo).",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Catering"
+      }
+    }
+  },
+  "jobsUnarchived": "{name} is active again",
+  "@jobsUnarchived": {
+    "description": "Snackbar after restoring a job.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Catering"
+      }
+    }
+  },
+  "jobsDiscardTitle": "Discard changes?",
+  "@jobsDiscardTitle": {
+    "description": "Dialog when leaving the job editor with unsaved changes."
+  },
+  "privacyUpdated": "Last updated: 30 September 2026 (applies from version 2.0)",
+  "@privacyUpdated": {
+    "description": "Privacy policy: date line."
+  },
+  "privacyIntro": "This privacy policy applies to the Android app Chronos – Stundenlohn Tracker, developed by Paul Hübner.",
+  "@privacyIntro": {
+    "description": "Privacy policy: scope. Keep the app name as is."
+  },
+  "privacyShortTitle": "In short",
+  "@privacyShortTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyShortBody": "Everything you enter in Chronos stays on your device. There is no account, no advertising, no analytics and no tracking. The app has no internet permission and sends nothing to the developer or to third parties.",
+  "@privacyShortBody": {
+    "description": "Privacy policy: summary."
+  },
+  "privacyStoredTitle": "What the app stores",
+  "@privacyStoredTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyStoredIntro": "Chronos stores data only in the app's private storage on your device:",
+  "@privacyStoredIntro": {
+    "description": "Privacy policy: intro of the list of stored data."
+  },
+  "privacyStoredShifts": "shifts with start, end, breaks, tips, notes and their “open/paid” status,",
+  "@privacyStoredShifts": {
+    "description": "Privacy policy list item."
+  },
+  "privacyStoredJobs": "jobs with name, colour, hourly wage and wage history,",
+  "@privacyStoredJobs": {
+    "description": "Privacy policy list item."
+  },
+  "privacyStoredPayouts": "recorded payouts,",
+  "@privacyStoredPayouts": {
+    "description": "Privacy policy list item."
+  },
+  "privacyStoredSettings": "settings (e.g. language, theme, monthly goal, reminder),",
+  "@privacyStoredSettings": {
+    "description": "Privacy policy list item."
+  },
+  "privacyStoredErrorLog": "a local error log with technical error messages for troubleshooting.",
+  "@privacyStoredErrorLog": {
+    "description": "Privacy policy list item."
+  },
+  "privacyStoredNoAccess": "The developer has no access to this data.",
+  "@privacyStoredNoAccess": {
+    "description": "Privacy policy sentence."
+  },
+  "privacyExceptionsTitle": "Exceptions you control",
+  "@privacyExceptionsTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyAutoBackupTitle": "Android backup (Auto Backup)",
+  "@privacyAutoBackupTitle": {
+    "description": "Privacy policy sub-heading."
+  },
+  "privacyAutoBackupBody": "If backup is switched on in your device's Android settings, Android automatically backs up Chronos' data (database and settings) to your own Google account and restores it when you reinstall the app or move to a new device. This is an operating-system feature provided to you by Google; the developer cannot see these backups. On Android 9 and later they are end-to-end encrypted with your screen lock. You can switch backup off in the Android settings (usually under “System” or “Google” → “Backup”) and delete existing backups from your Google account. A direct transfer to a new device (cable or Wi-Fi) takes the same data along.",
+  "@privacyAutoBackupBody": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyExportTitle": "Export, backup file and error report",
+  "@privacyExportTitle": {
+    "description": "Privacy policy sub-heading."
+  },
+  "privacyExportBody": "Only when you explicitly ask for it, Chronos creates a file (PDF timesheet, CSV, JSON backup or the error log) and opens the Android share sheet. You decide which app or recipient receives the file (e.g. e-mail, messenger, cloud storage). From then on, that service's terms apply.",
+  "@privacyExportBody": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyRestoreTitle": "Restoring a backup",
+  "@privacyRestoreTitle": {
+    "description": "Privacy policy sub-heading."
+  },
+  "privacyRestoreBody": "Using the Android file picker, Chronos reads only the single file you select.",
+  "@privacyRestoreBody": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyPermissionsTitle": "Notifications and permissions",
+  "@privacyPermissionsTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyPermissionNotifications": "Show notifications (optional): for the running shift with a stopwatch and the “Still working?” reminder. Notifications are created on the device; no push service is used. Without this permission the app keeps working normally.",
+  "@privacyPermissionNotifications": {
+    "description": "Privacy policy list item."
+  },
+  "privacyPermissionBoot": "Run at startup: so that a scheduled reminder is scheduled again after a restart.",
+  "@privacyPermissionBoot": {
+    "description": "Privacy policy list item."
+  },
+  "privacyPermissionsNone": "Chronos does not request permissions for the internet, location, contacts, camera or shared storage.",
+  "@privacyPermissionsNone": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyNoSharingTitle": "No sharing, no advertising, no tracking",
+  "@privacyNoSharingTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyNoSharingBody": "Chronos contains no advertising, no analytics tools, no tracking SDKs and no crash reporting to external servers. No data is sold or passed on to third parties.",
+  "@privacyNoSharingBody": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyDeleteTitle": "Deleting your data",
+  "@privacyDeleteTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyDeleteBody": "In the app via “Settings → Data → Delete all data”, or by uninstalling the app or clearing its storage in the Android settings. Backups in your Google account are managed in your Google or Android settings.",
+  "@privacyDeleteBody": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyChangesTitle": "Changes",
+  "@privacyChangesTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyChangesBody": "If this policy changes, this page will be updated. The date at the top applies.",
+  "@privacyChangesBody": {
+    "description": "Privacy policy paragraph."
+  },
+  "privacyContactTitle": "Contact",
+  "@privacyContactTitle": {
+    "description": "Privacy policy heading."
+  },
+  "privacyContactBody": "If you have questions about privacy, you can reach me at: paulvincent.huebner@gmail.com",
+  "@privacyContactBody": {
+    "description": "Privacy policy paragraph with the contact e-mail (same as privacy.html)."
+  },
   "todayEarnedToday": "Earned today",
   "@todayEarnedToday": {
     "description": "Label of the big amount on the Today card: wage of today's shifts including the running one (without tips)."
