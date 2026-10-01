@@ -1249,6 +1249,474 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'The received amount is not valid.'**
   String get payoutErrorAmount;
+
+  /// Screen-reader label of the splash screen shown while the database and the migration load.
+  ///
+  /// In en, this message translates to:
+  /// **'Starting Chronos…'**
+  String get startupLoading;
+
+  /// One-time snackbar after the data of the old app version (1.x) was imported.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 entry taken over from Chronos 1} other{{count} entries taken over from Chronos 1}}'**
+  String startupMigratedNotice(int count);
+
+  /// Snackbar action next to startupMigratedNotice that opens the list of imported entries to check.
+  ///
+  /// In en, this message translates to:
+  /// **'Review'**
+  String get startupMigratedReview;
+
+  /// Name of the first job when the user leaves the name empty (also used for the job created from old data).
+  ///
+  /// In en, this message translates to:
+  /// **'My job'**
+  String get onboardingDefaultJobName;
+
+  /// Headline of the first onboarding step.
+  ///
+  /// In en, this message translates to:
+  /// **'Track shifts. Watch your pay grow live.'**
+  String get onboardingWelcomeTitle;
+
+  /// Text below the welcome headline.
+  ///
+  /// In en, this message translates to:
+  /// **'Works offline. Your data stays on your phone.'**
+  String get onboardingWelcomeBody;
+
+  /// Button on the welcome step that moves to the job step.
+  ///
+  /// In en, this message translates to:
+  /// **'Get started'**
+  String get onboardingStart;
+
+  /// Screen-reader label of the onboarding progress dots.
+  ///
+  /// In en, this message translates to:
+  /// **'Step {step} of {total}'**
+  String onboardingStepLabel(int step, int total);
+
+  /// Headline of the second onboarding step (name and hourly rate).
+  ///
+  /// In en, this message translates to:
+  /// **'Your job'**
+  String get onboardingJobTitle;
+
+  /// Text below the job step headline.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your hourly rate. You can change everything later.'**
+  String get onboardingJobSubtitle;
+
+  /// Label of the job name field in onboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Name (optional)'**
+  String get onboardingNameLabel;
+
+  /// Label of the required hourly rate field in onboarding.
+  ///
+  /// In en, this message translates to:
+  /// **'Hourly rate'**
+  String get onboardingRateLabel;
+
+  /// Helper text below the hourly rate field.
+  ///
+  /// In en, this message translates to:
+  /// **'Gross per hour'**
+  String get onboardingRateHelper;
+
+  /// Hint below the Done button of the job step.
+  ///
+  /// In en, this message translates to:
+  /// **'You can add more jobs later in Settings.'**
+  String get onboardingMoreJobsLater;
+
+  /// Question after importing old data whose hourly rate looks implausible. {rate} is a formatted rate such as '€1,250.00/h'.
+  ///
+  /// In en, this message translates to:
+  /// **'{rate} taken over – is that right?'**
+  String wageCheckTitle(String rate);
+
+  /// Explanation when the imported hourly rate is above 100 €/h.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s unusually high. The old version sometimes lost the decimal separator, so 12.50 became 1250.'**
+  String get wageCheckTooHigh;
+
+  /// Explanation when an hourly rate is below 5 €/h (imported or newly entered).
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s unusually low for an hourly rate.'**
+  String get wageCheckTooLow;
+
+  /// Explanation when a newly entered hourly rate is above 100 €/h.
+  ///
+  /// In en, this message translates to:
+  /// **'That\'s unusually high for an hourly rate.'**
+  String get wageCheckUnusuallyHigh;
+
+  /// Label of the field for the corrected hourly rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Correct hourly rate'**
+  String get wageCheckFieldLabel;
+
+  /// Helper text below the corrected hourly rate field.
+  ///
+  /// In en, this message translates to:
+  /// **'Applies to the job and to all shifts taken over.'**
+  String get wageCheckFieldHelper;
+
+  /// Primary button that saves the corrected hourly rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Use this rate'**
+  String get wageCheckFix;
+
+  /// Button that confirms the imported rate is correct.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep {rate}'**
+  String wageCheckKeep(String rate);
+
+  /// Snackbar after the imported hourly rate was corrected.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{Hourly rate corrected} =1{Hourly rate corrected · 1 shift updated} other{Hourly rate corrected · {count} shifts updated}}'**
+  String wageCheckFixed(int count);
+
+  /// Dialog title when a newly entered hourly rate looks implausible (below 5 or above 100 €/h).
+  ///
+  /// In en, this message translates to:
+  /// **'{rate} – is that right?'**
+  String wageCheckConfirmTitle(String rate);
+
+  /// Dialog button that keeps an unusual hourly rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, that\'s right'**
+  String get wageCheckConfirmYes;
+
+  /// Dialog button that goes back to correct the hourly rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get wageCheckConfirmEdit;
+
+  /// Title of the recovery screen shown when loading the data failed at start.
+  ///
+  /// In en, this message translates to:
+  /// **'Chronos couldn\'t start'**
+  String get recoveryTitle;
+
+  /// Explanation on the recovery screen.
+  ///
+  /// In en, this message translates to:
+  /// **'Your data couldn\'t be loaded. Nothing has been deleted. Try again, or share the raw data and an error report so the problem can be fixed.'**
+  String get recoveryMessage;
+
+  /// Button that shares the raw data of the old app version as a JSON file.
+  ///
+  /// In en, this message translates to:
+  /// **'Share raw data'**
+  String get recoveryShareRawData;
+
+  /// Button that shares the local error log as a text file.
+  ///
+  /// In en, this message translates to:
+  /// **'Share error report'**
+  String get recoveryShareErrorReport;
+
+  /// Expandable section with the technical error message.
+  ///
+  /// In en, this message translates to:
+  /// **'Technical details'**
+  String get recoveryDetails;
+
+  /// Subject of the shared raw data file.
+  ///
+  /// In en, this message translates to:
+  /// **'Chronos raw data'**
+  String get recoveryRawDataSubject;
+
+  /// Subject of the shared error report.
+  ///
+  /// In en, this message translates to:
+  /// **'Chronos error report'**
+  String get recoveryErrorReportSubject;
+
+  /// Snackbar when the raw data or error report could not be read or shared.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t prepare the file.'**
+  String get recoveryShareFailed;
+
+  /// Title of the screen listing imported entries that look unusual.
+  ///
+  /// In en, this message translates to:
+  /// **'Review entries'**
+  String get reviewTitle;
+
+  /// Explanation at the top of the review screen.
+  ///
+  /// In en, this message translates to:
+  /// **'These entries from the old version look unusual. Check them and fix them if needed – nothing was changed automatically.'**
+  String get reviewIntro;
+
+  /// Section header above the shifts to review.
+  ///
+  /// In en, this message translates to:
+  /// **'Shifts to check ({count})'**
+  String reviewSectionShifts(int count);
+
+  /// Title of a shift in the review list: time range and worked time.
+  ///
+  /// In en, this message translates to:
+  /// **'{times} · {duration}'**
+  String reviewShiftSummary(String times, String duration);
+
+  /// Why a shift is listed: it lasts 16 hours or more.
+  ///
+  /// In en, this message translates to:
+  /// **'Longer than 16 hours'**
+  String get reviewReasonTooLong;
+
+  /// Why a shift is listed: the old version turned an end before the start into a 23/24 h shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Exactly 23 or 24 hours – the end may be wrong'**
+  String get reviewReasonExactly23or24h;
+
+  /// Why a shift is listed: another shift has exactly the same start and end.
+  ///
+  /// In en, this message translates to:
+  /// **'Same times as another shift'**
+  String get reviewReasonDuplicateTimes;
+
+  /// Why a shift is listed: the old version stored two entries with the same id.
+  ///
+  /// In en, this message translates to:
+  /// **'Duplicate entry from the old version'**
+  String get reviewReasonDuplicateLegacyId;
+
+  /// Why a shift is listed: it overlaps another shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Overlaps another shift'**
+  String get reviewReasonOverlap;
+
+  /// Why a shift is listed: it starts or ends on the day the clocks change.
+  ///
+  /// In en, this message translates to:
+  /// **'On a daylight saving time switch day – check the times'**
+  String get reviewReasonDstDay;
+
+  /// Button that removes one shift from the review list without changes.
+  ///
+  /// In en, this message translates to:
+  /// **'Looks fine'**
+  String get reviewDismiss;
+
+  /// Button that removes every shift from the review list.
+  ///
+  /// In en, this message translates to:
+  /// **'Mark all as checked'**
+  String get reviewDismissAll;
+
+  /// Confirmation dialog title for reviewDismissAll.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{Mark 1 entry as checked?} other{Mark {count} entries as checked?}}'**
+  String reviewDismissAllTitle(int count);
+
+  /// Confirmation dialog text for reviewDismissAll.
+  ///
+  /// In en, this message translates to:
+  /// **'The shifts stay as they are; only the hints disappear.'**
+  String get reviewDismissAllMessage;
+
+  /// Shown in the review list instead of a shift that no longer exists.
+  ///
+  /// In en, this message translates to:
+  /// **'This shift was deleted.'**
+  String get reviewShiftDeleted;
+
+  /// Section header above old entries that could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'Not taken over ({count})'**
+  String reviewSectionFailures(int count);
+
+  /// Explanation above the entries that could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'These entries couldn\'t be read. They\'re not lost: the original data stays on your phone and can be shared.'**
+  String get reviewFailuresIntro;
+
+  /// Why an old entry could not be imported: invalid JSON.
+  ///
+  /// In en, this message translates to:
+  /// **'The stored data is unreadable'**
+  String get reviewFailureInvalidJson;
+
+  /// Why old entries could not be imported: the stored value is not a list.
+  ///
+  /// In en, this message translates to:
+  /// **'The list of entries is unreadable'**
+  String get reviewFailureNotAList;
+
+  /// Why an old entry could not be imported: not an object.
+  ///
+  /// In en, this message translates to:
+  /// **'The entry is unreadable'**
+  String get reviewFailureNotAnObject;
+
+  /// Why an old entry could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'Start time is missing'**
+  String get reviewFailureMissingStart;
+
+  /// Why an old entry could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'Start time is unreadable'**
+  String get reviewFailureInvalidStart;
+
+  /// Why an old entry could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'End time is missing'**
+  String get reviewFailureMissingEnd;
+
+  /// Why an old entry could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'End time is unreadable'**
+  String get reviewFailureInvalidEnd;
+
+  /// Why an old entry could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'The end is not after the start'**
+  String get reviewFailureEndNotAfterStart;
+
+  /// Why the running session of the old version could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'The running session is unreadable'**
+  String get reviewFailureInvalidActiveSession;
+
+  /// Why the running session of the old version could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'Another shift was already running'**
+  String get reviewFailureRunningShiftExists;
+
+  /// Why the old settings could not be imported.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings were unreadable – defaults are used'**
+  String get reviewFailureInvalidSettings;
+
+  /// Why an old entry could not be imported: the database refused it.
+  ///
+  /// In en, this message translates to:
+  /// **'The entry couldn\'t be saved'**
+  String get reviewFailureInsertFailed;
+
+  /// Empty state title of the review screen.
+  ///
+  /// In en, this message translates to:
+  /// **'All checked'**
+  String get reviewEmptyTitle;
+
+  /// Empty state text of the review screen.
+  ///
+  /// In en, this message translates to:
+  /// **'There are no entries from the old version left to check.'**
+  String get reviewEmptyMessage;
+
+  /// Name of the Android notification channel for the ongoing shift (shown in system settings).
+  ///
+  /// In en, this message translates to:
+  /// **'Running shift'**
+  String get notificationChannelRunningName;
+
+  /// Description of the running shift notification channel.
+  ///
+  /// In en, this message translates to:
+  /// **'Shows the running shift with a stopwatch.'**
+  String get notificationChannelRunningDescription;
+
+  /// Name of the Android notification channel for reminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminders'**
+  String get notificationChannelRemindersName;
+
+  /// Description of the reminders notification channel.
+  ///
+  /// In en, this message translates to:
+  /// **'Asks whether you\'re still working after a long shift.'**
+  String get notificationChannelRemindersDescription;
+
+  /// Title of the ongoing notification while a shift runs.
+  ///
+  /// In en, this message translates to:
+  /// **'Shift running'**
+  String get notificationRunningTitle;
+
+  /// Title of the ongoing notification when the user has more than one job.
+  ///
+  /// In en, this message translates to:
+  /// **'Shift running · {job}'**
+  String notificationRunningTitleWithJob(String job);
+
+  /// Text of the ongoing notification: start time and hourly rate.
+  ///
+  /// In en, this message translates to:
+  /// **'since {time} · {rate}'**
+  String notificationRunningBody(String time, String rate);
+
+  /// Text of the ongoing notification while the shift is paused.
+  ///
+  /// In en, this message translates to:
+  /// **'Paused since {time}'**
+  String notificationPausedBody(String time);
+
+  /// Notification action that pauses the running shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get notificationActionPause;
+
+  /// Notification action that resumes the paused shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get notificationActionResume;
+
+  /// Notification action that opens the app to finish the shift.
+  ///
+  /// In en, this message translates to:
+  /// **'Finish'**
+  String get notificationActionFinish;
+
+  /// Title of the reminder some hours after a shift started.
+  ///
+  /// In en, this message translates to:
+  /// **'Still working?'**
+  String get notificationReminderTitle;
+
+  /// Text of the still-working reminder.
+  ///
+  /// In en, this message translates to:
+  /// **'Your shift has been running since {time}. Tap Finish when you\'re done.'**
+  String notificationReminderBody(String time);
 }
 
 class _AppLocalizationsDelegate

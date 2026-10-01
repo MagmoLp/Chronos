@@ -1121,5 +1121,406 @@
   "payoutErrorAmount": "The received amount is not valid.",
   "@payoutErrorAmount": {
     "description": "Error when the received amount was refused."
+  },
+  "startupLoading": "Starting Chronos…",
+  "@startupLoading": {
+    "description": "Screen-reader label of the splash screen shown while the database and the migration load."
+  },
+  "startupMigratedNotice": "{count, plural, =1{1 entry taken over from Chronos 1} other{{count} entries taken over from Chronos 1}}",
+  "@startupMigratedNotice": {
+    "description": "One-time snackbar after the data of the old app version (1.x) was imported.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "startupMigratedReview": "Review",
+  "@startupMigratedReview": {
+    "description": "Snackbar action next to startupMigratedNotice that opens the list of imported entries to check."
+  },
+  "onboardingDefaultJobName": "My job",
+  "@onboardingDefaultJobName": {
+    "description": "Name of the first job when the user leaves the name empty (also used for the job created from old data)."
+  },
+  "onboardingWelcomeTitle": "Track shifts. Watch your pay grow live.",
+  "@onboardingWelcomeTitle": {
+    "description": "Headline of the first onboarding step."
+  },
+  "onboardingWelcomeBody": "Works offline. Your data stays on your phone.",
+  "@onboardingWelcomeBody": {
+    "description": "Text below the welcome headline."
+  },
+  "onboardingStart": "Get started",
+  "@onboardingStart": {
+    "description": "Button on the welcome step that moves to the job step."
+  },
+  "onboardingStepLabel": "Step {step} of {total}",
+  "@onboardingStepLabel": {
+    "description": "Screen-reader label of the onboarding progress dots.",
+    "placeholders": {
+      "step": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "onboardingJobTitle": "Your job",
+  "@onboardingJobTitle": {
+    "description": "Headline of the second onboarding step (name and hourly rate)."
+  },
+  "onboardingJobSubtitle": "Enter your hourly rate. You can change everything later.",
+  "@onboardingJobSubtitle": {
+    "description": "Text below the job step headline."
+  },
+  "onboardingNameLabel": "Name (optional)",
+  "@onboardingNameLabel": {
+    "description": "Label of the job name field in onboarding."
+  },
+  "onboardingRateLabel": "Hourly rate",
+  "@onboardingRateLabel": {
+    "description": "Label of the required hourly rate field in onboarding."
+  },
+  "onboardingRateHelper": "Gross per hour",
+  "@onboardingRateHelper": {
+    "description": "Helper text below the hourly rate field."
+  },
+  "onboardingMoreJobsLater": "You can add more jobs later in Settings.",
+  "@onboardingMoreJobsLater": {
+    "description": "Hint below the Done button of the job step."
+  },
+  "wageCheckTitle": "{rate} taken over – is that right?",
+  "@wageCheckTitle": {
+    "description": "Question after importing old data whose hourly rate looks implausible. {rate} is a formatted rate such as '€1,250.00/h'.",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "€1,250.00/h"
+      }
+    }
+  },
+  "wageCheckTooHigh": "That's unusually high. The old version sometimes lost the decimal separator, so 12.50 became 1250.",
+  "@wageCheckTooHigh": {
+    "description": "Explanation when the imported hourly rate is above 100 €/h."
+  },
+  "wageCheckTooLow": "That's unusually low for an hourly rate.",
+  "@wageCheckTooLow": {
+    "description": "Explanation when an hourly rate is below 5 €/h (imported or newly entered)."
+  },
+  "wageCheckUnusuallyHigh": "That's unusually high for an hourly rate.",
+  "@wageCheckUnusuallyHigh": {
+    "description": "Explanation when a newly entered hourly rate is above 100 €/h."
+  },
+  "wageCheckFieldLabel": "Correct hourly rate",
+  "@wageCheckFieldLabel": {
+    "description": "Label of the field for the corrected hourly rate."
+  },
+  "wageCheckFieldHelper": "Applies to the job and to all shifts taken over.",
+  "@wageCheckFieldHelper": {
+    "description": "Helper text below the corrected hourly rate field."
+  },
+  "wageCheckFix": "Use this rate",
+  "@wageCheckFix": {
+    "description": "Primary button that saves the corrected hourly rate."
+  },
+  "wageCheckKeep": "Keep {rate}",
+  "@wageCheckKeep": {
+    "description": "Button that confirms the imported rate is correct.",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "€1,250.00/h"
+      }
+    }
+  },
+  "wageCheckFixed": "{count, plural, =0{Hourly rate corrected} =1{Hourly rate corrected · 1 shift updated} other{Hourly rate corrected · {count} shifts updated}}",
+  "@wageCheckFixed": {
+    "description": "Snackbar after the imported hourly rate was corrected.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wageCheckConfirmTitle": "{rate} – is that right?",
+  "@wageCheckConfirmTitle": {
+    "description": "Dialog title when a newly entered hourly rate looks implausible (below 5 or above 100 €/h).",
+    "placeholders": {
+      "rate": {
+        "type": "String",
+        "example": "€1,250.00/h"
+      }
+    }
+  },
+  "wageCheckConfirmYes": "Yes, that's right",
+  "@wageCheckConfirmYes": {
+    "description": "Dialog button that keeps an unusual hourly rate."
+  },
+  "wageCheckConfirmEdit": "Change",
+  "@wageCheckConfirmEdit": {
+    "description": "Dialog button that goes back to correct the hourly rate."
+  },
+  "recoveryTitle": "Chronos couldn't start",
+  "@recoveryTitle": {
+    "description": "Title of the recovery screen shown when loading the data failed at start."
+  },
+  "recoveryMessage": "Your data couldn't be loaded. Nothing has been deleted. Try again, or share the raw data and an error report so the problem can be fixed.",
+  "@recoveryMessage": {
+    "description": "Explanation on the recovery screen."
+  },
+  "recoveryShareRawData": "Share raw data",
+  "@recoveryShareRawData": {
+    "description": "Button that shares the raw data of the old app version as a JSON file."
+  },
+  "recoveryShareErrorReport": "Share error report",
+  "@recoveryShareErrorReport": {
+    "description": "Button that shares the local error log as a text file."
+  },
+  "recoveryDetails": "Technical details",
+  "@recoveryDetails": {
+    "description": "Expandable section with the technical error message."
+  },
+  "recoveryRawDataSubject": "Chronos raw data",
+  "@recoveryRawDataSubject": {
+    "description": "Subject of the shared raw data file."
+  },
+  "recoveryErrorReportSubject": "Chronos error report",
+  "@recoveryErrorReportSubject": {
+    "description": "Subject of the shared error report."
+  },
+  "recoveryShareFailed": "Couldn't prepare the file.",
+  "@recoveryShareFailed": {
+    "description": "Snackbar when the raw data or error report could not be read or shared."
+  },
+  "reviewTitle": "Review entries",
+  "@reviewTitle": {
+    "description": "Title of the screen listing imported entries that look unusual."
+  },
+  "reviewIntro": "These entries from the old version look unusual. Check them and fix them if needed – nothing was changed automatically.",
+  "@reviewIntro": {
+    "description": "Explanation at the top of the review screen."
+  },
+  "reviewSectionShifts": "Shifts to check ({count})",
+  "@reviewSectionShifts": {
+    "description": "Section header above the shifts to review.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewShiftSummary": "{times} · {duration}",
+  "@reviewShiftSummary": {
+    "description": "Title of a shift in the review list: time range and worked time.",
+    "placeholders": {
+      "times": {
+        "type": "String",
+        "example": "8:00 AM–4:15 PM"
+      },
+      "duration": {
+        "type": "String",
+        "example": "8:15 h"
+      }
+    }
+  },
+  "reviewReasonTooLong": "Longer than 16 hours",
+  "@reviewReasonTooLong": {
+    "description": "Why a shift is listed: it lasts 16 hours or more."
+  },
+  "reviewReasonExactly23or24h": "Exactly 23 or 24 hours – the end may be wrong",
+  "@reviewReasonExactly23or24h": {
+    "description": "Why a shift is listed: the old version turned an end before the start into a 23/24 h shift."
+  },
+  "reviewReasonDuplicateTimes": "Same times as another shift",
+  "@reviewReasonDuplicateTimes": {
+    "description": "Why a shift is listed: another shift has exactly the same start and end."
+  },
+  "reviewReasonDuplicateLegacyId": "Duplicate entry from the old version",
+  "@reviewReasonDuplicateLegacyId": {
+    "description": "Why a shift is listed: the old version stored two entries with the same id."
+  },
+  "reviewReasonOverlap": "Overlaps another shift",
+  "@reviewReasonOverlap": {
+    "description": "Why a shift is listed: it overlaps another shift."
+  },
+  "reviewReasonDstDay": "On a daylight saving time switch day – check the times",
+  "@reviewReasonDstDay": {
+    "description": "Why a shift is listed: it starts or ends on the day the clocks change."
+  },
+  "reviewDismiss": "Looks fine",
+  "@reviewDismiss": {
+    "description": "Button that removes one shift from the review list without changes."
+  },
+  "reviewDismissAll": "Mark all as checked",
+  "@reviewDismissAll": {
+    "description": "Button that removes every shift from the review list."
+  },
+  "reviewDismissAllTitle": "{count, plural, =1{Mark 1 entry as checked?} other{Mark {count} entries as checked?}}",
+  "@reviewDismissAllTitle": {
+    "description": "Confirmation dialog title for reviewDismissAll.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewDismissAllMessage": "The shifts stay as they are; only the hints disappear.",
+  "@reviewDismissAllMessage": {
+    "description": "Confirmation dialog text for reviewDismissAll."
+  },
+  "reviewShiftDeleted": "This shift was deleted.",
+  "@reviewShiftDeleted": {
+    "description": "Shown in the review list instead of a shift that no longer exists."
+  },
+  "reviewSectionFailures": "Not taken over ({count})",
+  "@reviewSectionFailures": {
+    "description": "Section header above old entries that could not be imported.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "reviewFailuresIntro": "These entries couldn't be read. They're not lost: the original data stays on your phone and can be shared.",
+  "@reviewFailuresIntro": {
+    "description": "Explanation above the entries that could not be imported."
+  },
+  "reviewFailureInvalidJson": "The stored data is unreadable",
+  "@reviewFailureInvalidJson": {
+    "description": "Why an old entry could not be imported: invalid JSON."
+  },
+  "reviewFailureNotAList": "The list of entries is unreadable",
+  "@reviewFailureNotAList": {
+    "description": "Why old entries could not be imported: the stored value is not a list."
+  },
+  "reviewFailureNotAnObject": "The entry is unreadable",
+  "@reviewFailureNotAnObject": {
+    "description": "Why an old entry could not be imported: not an object."
+  },
+  "reviewFailureMissingStart": "Start time is missing",
+  "@reviewFailureMissingStart": {
+    "description": "Why an old entry could not be imported."
+  },
+  "reviewFailureInvalidStart": "Start time is unreadable",
+  "@reviewFailureInvalidStart": {
+    "description": "Why an old entry could not be imported."
+  },
+  "reviewFailureMissingEnd": "End time is missing",
+  "@reviewFailureMissingEnd": {
+    "description": "Why an old entry could not be imported."
+  },
+  "reviewFailureInvalidEnd": "End time is unreadable",
+  "@reviewFailureInvalidEnd": {
+    "description": "Why an old entry could not be imported."
+  },
+  "reviewFailureEndNotAfterStart": "The end is not after the start",
+  "@reviewFailureEndNotAfterStart": {
+    "description": "Why an old entry could not be imported."
+  },
+  "reviewFailureInvalidActiveSession": "The running session is unreadable",
+  "@reviewFailureInvalidActiveSession": {
+    "description": "Why the running session of the old version could not be imported."
+  },
+  "reviewFailureRunningShiftExists": "Another shift was already running",
+  "@reviewFailureRunningShiftExists": {
+    "description": "Why the running session of the old version could not be imported."
+  },
+  "reviewFailureInvalidSettings": "Settings were unreadable – defaults are used",
+  "@reviewFailureInvalidSettings": {
+    "description": "Why the old settings could not be imported."
+  },
+  "reviewFailureInsertFailed": "The entry couldn't be saved",
+  "@reviewFailureInsertFailed": {
+    "description": "Why an old entry could not be imported: the database refused it."
+  },
+  "reviewEmptyTitle": "All checked",
+  "@reviewEmptyTitle": {
+    "description": "Empty state title of the review screen."
+  },
+  "reviewEmptyMessage": "There are no entries from the old version left to check.",
+  "@reviewEmptyMessage": {
+    "description": "Empty state text of the review screen."
+  },
+  "notificationChannelRunningName": "Running shift",
+  "@notificationChannelRunningName": {
+    "description": "Name of the Android notification channel for the ongoing shift (shown in system settings)."
+  },
+  "notificationChannelRunningDescription": "Shows the running shift with a stopwatch.",
+  "@notificationChannelRunningDescription": {
+    "description": "Description of the running shift notification channel."
+  },
+  "notificationChannelRemindersName": "Reminders",
+  "@notificationChannelRemindersName": {
+    "description": "Name of the Android notification channel for reminders."
+  },
+  "notificationChannelRemindersDescription": "Asks whether you're still working after a long shift.",
+  "@notificationChannelRemindersDescription": {
+    "description": "Description of the reminders notification channel."
+  },
+  "notificationRunningTitle": "Shift running",
+  "@notificationRunningTitle": {
+    "description": "Title of the ongoing notification while a shift runs."
+  },
+  "notificationRunningTitleWithJob": "Shift running · {job}",
+  "@notificationRunningTitleWithJob": {
+    "description": "Title of the ongoing notification when the user has more than one job.",
+    "placeholders": {
+      "job": {
+        "type": "String",
+        "example": "Catering"
+      }
+    }
+  },
+  "notificationRunningBody": "since {time} · {rate}",
+  "@notificationRunningBody": {
+    "description": "Text of the ongoing notification: start time and hourly rate.",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "8:02 AM"
+      },
+      "rate": {
+        "type": "String",
+        "example": "€15.00/h"
+      }
+    }
+  },
+  "notificationPausedBody": "Paused since {time}",
+  "@notificationPausedBody": {
+    "description": "Text of the ongoing notification while the shift is paused.",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "2:32 PM"
+      }
+    }
+  },
+  "notificationActionPause": "Pause",
+  "@notificationActionPause": {
+    "description": "Notification action that pauses the running shift."
+  },
+  "notificationActionResume": "Resume",
+  "@notificationActionResume": {
+    "description": "Notification action that resumes the paused shift."
+  },
+  "notificationActionFinish": "Finish",
+  "@notificationActionFinish": {
+    "description": "Notification action that opens the app to finish the shift."
+  },
+  "notificationReminderTitle": "Still working?",
+  "@notificationReminderTitle": {
+    "description": "Title of the reminder some hours after a shift started."
+  },
+  "notificationReminderBody": "Your shift has been running since {time}. Tap Finish when you're done.",
+  "@notificationReminderBody": {
+    "description": "Text of the still-working reminder.",
+    "placeholders": {
+      "time": {
+        "type": "String",
+        "example": "8:02 AM"
+      }
+    }
   }
 }

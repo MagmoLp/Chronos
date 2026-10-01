@@ -737,4 +737,305 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get payoutErrorAmount => 'The received amount is not valid.';
+
+  @override
+  String get startupLoading => 'Starting Chronos…';
+
+  @override
+  String startupMigratedNotice(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count entries taken over from Chronos 1',
+      one: '1 entry taken over from Chronos 1',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get startupMigratedReview => 'Review';
+
+  @override
+  String get onboardingDefaultJobName => 'My job';
+
+  @override
+  String get onboardingWelcomeTitle =>
+      'Track shifts. Watch your pay grow live.';
+
+  @override
+  String get onboardingWelcomeBody =>
+      'Works offline. Your data stays on your phone.';
+
+  @override
+  String get onboardingStart => 'Get started';
+
+  @override
+  String onboardingStepLabel(int step, int total) {
+    return 'Step $step of $total';
+  }
+
+  @override
+  String get onboardingJobTitle => 'Your job';
+
+  @override
+  String get onboardingJobSubtitle =>
+      'Enter your hourly rate. You can change everything later.';
+
+  @override
+  String get onboardingNameLabel => 'Name (optional)';
+
+  @override
+  String get onboardingRateLabel => 'Hourly rate';
+
+  @override
+  String get onboardingRateHelper => 'Gross per hour';
+
+  @override
+  String get onboardingMoreJobsLater =>
+      'You can add more jobs later in Settings.';
+
+  @override
+  String wageCheckTitle(String rate) {
+    return '$rate taken over – is that right?';
+  }
+
+  @override
+  String get wageCheckTooHigh =>
+      'That\'s unusually high. The old version sometimes lost the decimal separator, so 12.50 became 1250.';
+
+  @override
+  String get wageCheckTooLow => 'That\'s unusually low for an hourly rate.';
+
+  @override
+  String get wageCheckUnusuallyHigh =>
+      'That\'s unusually high for an hourly rate.';
+
+  @override
+  String get wageCheckFieldLabel => 'Correct hourly rate';
+
+  @override
+  String get wageCheckFieldHelper =>
+      'Applies to the job and to all shifts taken over.';
+
+  @override
+  String get wageCheckFix => 'Use this rate';
+
+  @override
+  String wageCheckKeep(String rate) {
+    return 'Keep $rate';
+  }
+
+  @override
+  String wageCheckFixed(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Hourly rate corrected · $count shifts updated',
+      one: 'Hourly rate corrected · 1 shift updated',
+      zero: 'Hourly rate corrected',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String wageCheckConfirmTitle(String rate) {
+    return '$rate – is that right?';
+  }
+
+  @override
+  String get wageCheckConfirmYes => 'Yes, that\'s right';
+
+  @override
+  String get wageCheckConfirmEdit => 'Change';
+
+  @override
+  String get recoveryTitle => 'Chronos couldn\'t start';
+
+  @override
+  String get recoveryMessage =>
+      'Your data couldn\'t be loaded. Nothing has been deleted. Try again, or share the raw data and an error report so the problem can be fixed.';
+
+  @override
+  String get recoveryShareRawData => 'Share raw data';
+
+  @override
+  String get recoveryShareErrorReport => 'Share error report';
+
+  @override
+  String get recoveryDetails => 'Technical details';
+
+  @override
+  String get recoveryRawDataSubject => 'Chronos raw data';
+
+  @override
+  String get recoveryErrorReportSubject => 'Chronos error report';
+
+  @override
+  String get recoveryShareFailed => 'Couldn\'t prepare the file.';
+
+  @override
+  String get reviewTitle => 'Review entries';
+
+  @override
+  String get reviewIntro =>
+      'These entries from the old version look unusual. Check them and fix them if needed – nothing was changed automatically.';
+
+  @override
+  String reviewSectionShifts(int count) {
+    return 'Shifts to check ($count)';
+  }
+
+  @override
+  String reviewShiftSummary(String times, String duration) {
+    return '$times · $duration';
+  }
+
+  @override
+  String get reviewReasonTooLong => 'Longer than 16 hours';
+
+  @override
+  String get reviewReasonExactly23or24h =>
+      'Exactly 23 or 24 hours – the end may be wrong';
+
+  @override
+  String get reviewReasonDuplicateTimes => 'Same times as another shift';
+
+  @override
+  String get reviewReasonDuplicateLegacyId =>
+      'Duplicate entry from the old version';
+
+  @override
+  String get reviewReasonOverlap => 'Overlaps another shift';
+
+  @override
+  String get reviewReasonDstDay =>
+      'On a daylight saving time switch day – check the times';
+
+  @override
+  String get reviewDismiss => 'Looks fine';
+
+  @override
+  String get reviewDismissAll => 'Mark all as checked';
+
+  @override
+  String reviewDismissAllTitle(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: 'Mark $count entries as checked?',
+      one: 'Mark 1 entry as checked?',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get reviewDismissAllMessage =>
+      'The shifts stay as they are; only the hints disappear.';
+
+  @override
+  String get reviewShiftDeleted => 'This shift was deleted.';
+
+  @override
+  String reviewSectionFailures(int count) {
+    return 'Not taken over ($count)';
+  }
+
+  @override
+  String get reviewFailuresIntro =>
+      'These entries couldn\'t be read. They\'re not lost: the original data stays on your phone and can be shared.';
+
+  @override
+  String get reviewFailureInvalidJson => 'The stored data is unreadable';
+
+  @override
+  String get reviewFailureNotAList => 'The list of entries is unreadable';
+
+  @override
+  String get reviewFailureNotAnObject => 'The entry is unreadable';
+
+  @override
+  String get reviewFailureMissingStart => 'Start time is missing';
+
+  @override
+  String get reviewFailureInvalidStart => 'Start time is unreadable';
+
+  @override
+  String get reviewFailureMissingEnd => 'End time is missing';
+
+  @override
+  String get reviewFailureInvalidEnd => 'End time is unreadable';
+
+  @override
+  String get reviewFailureEndNotAfterStart => 'The end is not after the start';
+
+  @override
+  String get reviewFailureInvalidActiveSession =>
+      'The running session is unreadable';
+
+  @override
+  String get reviewFailureRunningShiftExists =>
+      'Another shift was already running';
+
+  @override
+  String get reviewFailureInvalidSettings =>
+      'Settings were unreadable – defaults are used';
+
+  @override
+  String get reviewFailureInsertFailed => 'The entry couldn\'t be saved';
+
+  @override
+  String get reviewEmptyTitle => 'All checked';
+
+  @override
+  String get reviewEmptyMessage =>
+      'There are no entries from the old version left to check.';
+
+  @override
+  String get notificationChannelRunningName => 'Running shift';
+
+  @override
+  String get notificationChannelRunningDescription =>
+      'Shows the running shift with a stopwatch.';
+
+  @override
+  String get notificationChannelRemindersName => 'Reminders';
+
+  @override
+  String get notificationChannelRemindersDescription =>
+      'Asks whether you\'re still working after a long shift.';
+
+  @override
+  String get notificationRunningTitle => 'Shift running';
+
+  @override
+  String notificationRunningTitleWithJob(String job) {
+    return 'Shift running · $job';
+  }
+
+  @override
+  String notificationRunningBody(String time, String rate) {
+    return 'since $time · $rate';
+  }
+
+  @override
+  String notificationPausedBody(String time) {
+    return 'Paused since $time';
+  }
+
+  @override
+  String get notificationActionPause => 'Pause';
+
+  @override
+  String get notificationActionResume => 'Resume';
+
+  @override
+  String get notificationActionFinish => 'Finish';
+
+  @override
+  String get notificationReminderTitle => 'Still working?';
+
+  @override
+  String notificationReminderBody(String time) {
+    return 'Your shift has been running since $time. Tap Finish when you\'re done.';
+  }
 }
