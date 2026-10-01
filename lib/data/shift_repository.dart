@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:clock/clock.dart';
 import 'package:drift/drift.dart';
 import 'package:uuid/uuid.dart';
@@ -371,6 +373,12 @@ class ShiftRepository {
     if (newDate != running.localStartDate) {
       rate = await _jobs.rateFor(running.jobId, newDate) ?? rate;
     }
+    // Only the total of finished pauses is stored, not when they happened.
+    // If the start moves past (part of) them, they cannot be longer than the
+    // time from the new start until now / the current pause began; clamp so
+    // finishing is never blocked by a break the shift cannot contain.
+    final breakSpanMs = (pausedAt ?? now).difference(start).inMilliseconds;
+    final breakMs = math.min(running.breakMs, math.max(0, breakSpanMs));
     await _write(
       running.id,
       ShiftsCompanion(
@@ -378,6 +386,7 @@ class ShiftRepository {
         rawStartUtc: Value(start.millisecondsSinceEpoch),
         startOffsetMin: Value(offsetMinutesAt(start)),
         rateCentsPerHour: Value(rate),
+        breakMs: Value(breakMs),
         updatedAt: Value(now.millisecondsSinceEpoch),
       ),
     );

@@ -157,6 +157,28 @@ void main() {
     );
 
     test(
+      'adjustStart past finished pauses clamps the break to the new span',
+      () async {
+        // Started 06:00, paused 06:30 until now (08:02): 92 min of breaks.
+        await h.shifts.start(job.id, startUtc: local(2026, 9, 30, 6));
+        await h.shifts.pause(atUtc: local(2026, 9, 30, 6, 30));
+        final resumed = await h.shifts.resume();
+        expect(resumed.breakMs, 92 * msPerMinute);
+        // The real start was 07:45: only 17 min remain, so the stored break
+        // cannot be longer than that.
+        final moved = await h.shifts.adjustStart(local(2026, 9, 30, 7, 45));
+        expect(moved.breakMs, 17 * msPerMinute);
+        // A start before the pauses keeps them untouched.
+        final back = await h.shifts.adjustStart(local(2026, 9, 30, 6));
+        expect(back.breakMs, 17 * msPerMinute);
+        // Finishing works with a corrected break.
+        h.clock.advance(const Duration(hours: 1));
+        final done = await h.shifts.finish(breakMs: 0);
+        expect(done.after.isDone, isTrue);
+      },
+    );
+
+    test(
       'adjustStart rejects the future and a start after the pause',
       () async {
         await h.shifts.start(job.id, startUtc: local(2026, 9, 30, 7));

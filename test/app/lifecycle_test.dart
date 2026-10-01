@@ -47,6 +47,48 @@ void main() {
     expect(h.read(currentDateProvider), LocalDate(2026, 10, 1));
   });
 
+  testWidgets('today switches at midnight while the app stays visible', (
+    tester,
+  ) async {
+    final h = AppHarness(now: DateTime(2026, 9, 30, 23, 59, 30).toUtc());
+    await h.job();
+    await pumpChronosApp(tester, h);
+    expect(h.read(currentDateProvider), LocalDate(2026, 9, 30));
+
+    h.clock.advance(const Duration(seconds: 31));
+    await tester.pump(const Duration(seconds: 32));
+    await settleApp(tester);
+    expect(h.read(currentDateProvider), LocalDate(2026, 10, 1));
+  });
+
+  testWidgets('the midnight timer is not armed while the app is hidden', (
+    tester,
+  ) async {
+    final h = AppHarness(now: DateTime(2026, 9, 30, 23, 59, 30).toUtc());
+    await h.job();
+    await pumpChronosApp(tester, h);
+    for (final state in const [
+      AppLifecycleState.inactive,
+      AppLifecycleState.hidden,
+    ]) {
+      tester.binding.handleAppLifecycleStateChanged(state);
+      await tester.pump();
+    }
+    h.clock.advance(const Duration(seconds: 31));
+    await tester.pump(const Duration(seconds: 32));
+    // Still the old day: nothing ran while hidden (resume refreshes it).
+    expect(h.read(currentDateProvider), LocalDate(2026, 9, 30));
+    for (final state in const [
+      AppLifecycleState.inactive,
+      AppLifecycleState.resumed,
+    ]) {
+      tester.binding.handleAppLifecycleStateChanged(state);
+      await tester.pump();
+    }
+    await settleApp(tester);
+    expect(h.read(currentDateProvider), LocalDate(2026, 10, 1));
+  });
+
   testWidgets('resume without a running shift clears stale notifications', (
     tester,
   ) async {
