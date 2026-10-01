@@ -415,6 +415,24 @@ class _ShiftEditorState extends ConsumerState<ShiftEditor> {
   ShiftDraft? get _draft {
     final jobId = _jobId;
     if (jobId == null) return null;
+    // Editing keeps the stored instants of fields the user did not change
+    // (a shift over more than one midnight must not shrink, v1 bug D11).
+    if (_existing case final existing?) {
+      return ShiftDraft.fromLocalEdit(
+        original: existing,
+        jobId: jobId,
+        date: _date,
+        startHour: _start.hour,
+        startMinute: _start.minute,
+        endHour: _end.hour,
+        endMinute: _end.minute,
+        endsNextDay: _endsNextDay,
+        breakMinutes: _breakMinutes,
+        tipsCents: _tipsCents ?? 0,
+        note: _note.text,
+        paid: _paid,
+      );
+    }
     return ShiftDraft.fromLocal(
       jobId: jobId,
       date: _date,

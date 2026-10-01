@@ -207,9 +207,14 @@ class _TodayPageState extends ConsumerState<TodayPage> {
   Future<void> _start() async {
     final job = ref.read(todayStartJobProvider).value;
     if (job == null) return;
+    // The shift starts when the button was tapped, not after the user has
+    // read the permission explanation and answered the system dialog.
+    final tappedAt = ref.read(clockProvider).nowUtc();
     await _primeNotifications();
     if (!mounted) return;
-    final started = await _guard(() => _active.start(job.id));
+    final started = await _guard(
+      () => _active.start(job.id, startUtc: tappedAt),
+    );
     if (started != null) unawaited(HapticFeedback.mediumImpact());
   }
 

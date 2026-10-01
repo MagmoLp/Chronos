@@ -906,6 +906,24 @@ void main() {
       );
     });
 
+    testWidgets('the shift starts when "Schicht starten" was tapped, not '
+        'after the permission questions', (tester) async {
+      final (f, _) = await pumpToday(
+        tester,
+        seed: seedFirstStart,
+        notificationsEnabled: false,
+      );
+      final tappedAt = f.data.clock.now;
+      await tester.tap(find.text(l10n.todayStartShift));
+      await tester.pumpAndSettle();
+      expect(find.byType(NotificationPrimerSheet), findsOneWidget);
+      // Reading the explanation and answering the system dialog takes time.
+      f.data.clock.advance(const Duration(minutes: 2));
+      await tester.tap(find.text(l10n.todayPrimerAllow));
+      await settleData(tester);
+      expect((await running(f))!.startUtc, tappedAt);
+    });
+
     testWidgets('denied: the shift still starts, a hint opens the settings; '
         'resume re-checks', (tester) async {
       final (f, _) = await pumpToday(
