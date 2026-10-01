@@ -8,6 +8,7 @@ import 'package:chronos/domain/shift_draft.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../fixtures/shifts.dart';
+import '../fixtures/tz.dart';
 
 void main() {
   group('Job', () {
@@ -186,6 +187,78 @@ void main() {
         ),
         isTrue,
       );
+    });
+
+    group('fromLocalEdit', () {
+      ShiftDraft edit(
+        Shift original, {
+        LocalDate? date,
+        ({int h, int m})? start,
+        ({int h, int m})? end,
+        bool? endsNextDay,
+        int? breakMinutes,
+      }) {
+        final s = original.startUtc.toLocal();
+        final e = original.endUtc!.toLocal();
+        return ShiftDraft.fromLocalEdit(
+          original: original,
+          jobId: original.jobId,
+          date: date ?? original.localStartDate,
+          startHour: start?.h ?? s.hour,
+          startMinute: start?.m ?? s.minute,
+          endHour: end?.h ?? e.hour,
+          endMinute: end?.m ?? e.minute,
+          endsNextDay: endsNextDay ?? original.endsOnLaterDay,
+          breakMinutes:
+              breakMinutes ?? ShiftDraft.roundedBreakMinutes(original.breakMs),
+        );
+      }
+
+      test('unchanged fields keep a shift over two midnights (D11)', () {
+        final s = doneShift(
+          start: local(2026, 9, 28, 20),
+          end: local(2026, 9, 30, 2),
+        );
+        final d = edit(s);
+        expect(d.startUtc, s.startUtc);
+        expect(d.endUtc, s.endUtc);
+        expect(d.durationMs, 30 * msPerHour);
+        // A new start keeps the stored end.
+        final earlier = edit(s, start: (h: 19, m: 0));
+        expect(earlier.startUtc, local(2026, 9, 28, 19));
+        expect(earlier.endUtc, s.endUtc);
+        // A new end is taken from the fields.
+        final changed = edit(s, end: (h: 3, m: 0));
+        expect(changed.endUtc, local(2026, 9, 29, 3));
+      });
+
+      test('unchanged fields keep seconds and the exact break', () {
+        final s = doneShift(
+          start: local(2026, 9, 28, 8, 0, 40),
+          end: local(2026, 9, 28, 16, 15, 10),
+          breakMs: 30 * msPerMinute + 20 * msPerSecond,
+        );
+        final d = edit(s);
+        expect(d.startUtc, s.startUtc);
+        expect(d.endUtc, s.endUtc);
+        expect(d.breakMs, s.breakMs);
+        expect(edit(s, breakMinutes: 31).breakMs, 31 * msPerMinute);
+        // Another date rebuilds both instants from the fields.
+        final moved = edit(s, date: LocalDate(2026, 9, 29));
+        expect(moved.startUtc, local(2026, 9, 29, 8));
+        expect(moved.endUtc, local(2026, 9, 29, 16, 15));
+      });
+
+      test('an end in the repeated hour of the DST change stays put', () {
+        // 25 Oct 2026: 02:30 CET (the second 02:30) = 01:30 UTC.
+        final s = doneShift(
+          start: local(2026, 10, 24, 22),
+          end: DateTime.utc(2026, 10, 25, 1, 30),
+        );
+        final d = edit(s);
+        expect(d.endUtc, DateTime.utc(2026, 10, 25, 1, 30));
+        expect(d.durationMs, s.durationMs);
+      }, skip: skipUnlessBerlin);
     });
 
     test('fromShift / worked / copyWith / equality', () {

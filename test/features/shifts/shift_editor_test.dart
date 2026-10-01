@@ -1,6 +1,7 @@
 import 'package:chronos/app/providers/providers.dart';
 import 'package:chronos/core/local_date.dart';
 import 'package:chronos/domain/shift.dart';
+import 'package:chronos/domain/shift_draft.dart';
 import 'package:chronos/features/shifts/shift_editor.dart';
 import 'package:chronos/features/shifts/shifts_page.dart';
 import 'package:flutter/material.dart';
@@ -565,6 +566,80 @@ void main() {
       await settle(tester);
       expect(find.text('Änderungen verwerfen?'), findsNothing);
       expect(find.byKey(ShiftEditorKeys.editor), findsNothing);
+    });
+
+    testWidgets('saving unchanged keeps a shift longer than a day (v1 D11)', (
+      tester,
+    ) async {
+      late Shift shift;
+      final f = await _pumpPage(
+        tester,
+        seed: (h) async {
+          final job = await h.job();
+          shift = await h
+              .read(shiftRepositoryProvider)
+              .insertManual(
+                ShiftDraft(
+                  jobId: job.id,
+                  startUtc: DateTime(2026, 9, 28, 18).toUtc(),
+                  endUtc: DateTime(2026, 9, 30, 10).toUtc(),
+                ),
+              );
+        },
+      );
+      await _openRow(tester, '18:00–10:00$_nb+2 · 40:00 h');
+      expect(
+        _previewText('40:00 h × 15,00$_nb€/h = 600,00$_nb€'),
+        findsOneWidget,
+      );
+      // Only the note changes.
+      await tester.enterText(inputOf(ShiftEditorKeys.note), 'Messe');
+      await _tapKey(tester, ShiftEditorKeys.save);
+      await tester.tap(find.text('Trotzdem speichern'));
+      await settle(tester);
+      final saved = (await _byId(f, shift.id))!;
+      expect(saved.note, 'Messe');
+      expect(saved.startUtc, shift.startUtc);
+      expect(saved.endUtc, shift.endUtc);
+      expect(saved.amountCents, 60000);
+    });
+
+    testWidgets('saving unchanged keeps the seconds of a timer shift', (
+      tester,
+    ) async {
+      late Shift shift;
+      final f = await _pumpPage(
+        tester,
+        seed: (h) async {
+          final job = await h.job();
+          shift = await h
+              .read(shiftRepositoryProvider)
+              .insertManual(
+                ShiftDraft(
+                  jobId: job.id,
+                  startUtc: DateTime(2026, 9, 28, 8, 0, 40).toUtc(),
+                  endUtc: DateTime(2026, 9, 28, 16, 15, 10).toUtc(),
+                ),
+              );
+        },
+      );
+      await _openRow(tester, '08:00–16:15 · 8:15 h');
+      await tester.ensureVisible(find.byKey(ShiftEditorKeys.status));
+      await tester.pumpAndSettle();
+      await tester.tap(
+        find.descendant(
+          of: find.byKey(ShiftEditorKeys.status),
+          matching: find.text('Bezahlt'),
+        ),
+      );
+      await settle(tester);
+      await _tapKey(tester, ShiftEditorKeys.save);
+      final saved = (await _byId(f, shift.id))!;
+      expect(saved.isPaid, isTrue);
+      expect(saved.startUtc, shift.startUtc);
+      expect(saved.rawStartUtc, shift.rawStartUtc);
+      expect(saved.endUtc, shift.endUtc);
+      expect(saved.amountCents, shift.amountCents);
     });
 
     testWidgets('night of the clock change counts the extra hour', (

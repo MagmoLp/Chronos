@@ -61,6 +61,64 @@ final class ShiftDraft {
     );
   }
 
+  /// [ShiftDraft.fromLocal] for editing the finished [original].
+  ///
+  /// The editor shows start and end only as date, hours, minutes and "ends
+  /// next day". Rebuilding the instants from that would silently change a
+  /// shift the user did not touch: a shift spanning more than one midnight
+  /// would shrink below 24 h (v1 bug D11), seconds of timer shifts would be
+  /// dropped and an end in the repeated hour of a DST change would move by
+  /// an hour. So the start keeps its stored instant while date and start
+  /// time are unchanged, and the end keeps its stored instant while date,
+  /// end time and "ends next day" are unchanged. Likewise the break keeps
+  /// its exact length (pauses of the timer have seconds) while
+  /// [breakMinutes] equals its rounded minutes ([roundedBreakMinutes]).
+  factory ShiftDraft.fromLocalEdit({
+    required Shift original,
+    required int jobId,
+    required LocalDate date,
+    required int startHour,
+    required int startMinute,
+    required int endHour,
+    required int endMinute,
+    required bool endsNextDay,
+    int breakMinutes = 0,
+    int tipsCents = 0,
+    String? note,
+    bool paid = false,
+    int? rateCentsPerHour,
+  }) {
+    final rebuilt = ShiftDraft.fromLocal(
+      jobId: jobId,
+      date: date,
+      startHour: startHour,
+      startMinute: startMinute,
+      endHour: endHour,
+      endMinute: endMinute,
+      endsNextDay: endsNextDay,
+      breakMs: breakMinutes == roundedBreakMinutes(original.breakMs)
+          ? original.breakMs
+          : breakMinutes * msPerMinute,
+      tipsCents: tipsCents,
+      note: note,
+      paid: paid,
+      rateCentsPerHour: rateCentsPerHour,
+    );
+    final originalEnd = original.endUtc;
+    if (originalEnd == null || date != original.localStartDate) return rebuilt;
+    final start = original.startUtc.toLocal();
+    final end = originalEnd.toLocal();
+    final keepStart = start.hour == startHour && start.minute == startMinute;
+    final keepEnd =
+        end.hour == endHour &&
+        end.minute == endMinute &&
+        endsNextDay == original.endsOnLaterDay;
+    return rebuilt.copyWith(
+      startUtc: keepStart ? original.startUtc : null,
+      endUtc: keepEnd ? originalEnd : null,
+    );
+  }
+
   /// The editable fields of an existing finished [shift].
   factory ShiftDraft.fromShift(Shift shift) => ShiftDraft(
     jobId: shift.jobId,
@@ -72,6 +130,10 @@ final class ShiftDraft {
     paid: shift.isPaid,
     rateCentsPerHour: shift.rateCentsPerHour,
   );
+
+  /// [breakMs] in whole minutes as the editor shows it (half-up).
+  static int roundedBreakMinutes(int breakMs) =>
+      (breakMs + msPerMinute ~/ 2) ~/ msPerMinute;
 
   /// Whether a wall-clock end at or before the start means "ends next day".
   static bool endsNextDayFor({
